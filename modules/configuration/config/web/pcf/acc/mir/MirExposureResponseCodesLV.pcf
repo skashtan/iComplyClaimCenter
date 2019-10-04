@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirExposureResponseCodesLV">
+    <Require
+      name="anMIRReportableHist_Acc"
+      type="MIRReportableHist_Acc"/>
+    <RowIterator
+      editable="false"
+      elementName="MirResponseCodeIterator"
+      value="anMIRReportableHist_Acc.MIRResponseCodes"
+      valueType="MIRReportableRespCode_Acc[]">
+      <Row>
+        <TextCell
+          id="mirResponseCode"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.ResponseCode&quot;)"
+          value="MirResponseCodeIterator.CMSCode"/>
+        <TextCell
+          id="mirResponseDescription"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.ResponseDesc&quot;)"
+          value="MirResponseCodeIterator.ResponseDescription"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

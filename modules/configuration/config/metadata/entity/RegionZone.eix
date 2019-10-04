@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="RegionZone">
+  <index
+    desc="Covering Index to find groups in a region zone"
+    name="GroupsInRegionZone"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="CodeDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="ZoneType"/>
+    <indexcol
+      keyposition="3"
+      name="Country"/>
+    <indexcol
+      keyposition="4"
+      name="RegionID"/>
+  </index>
+</internalExtension>

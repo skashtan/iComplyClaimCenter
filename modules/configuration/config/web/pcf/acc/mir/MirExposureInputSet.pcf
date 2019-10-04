@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="MirExposureInputSet">
+    <Require
+      name="anExposure"
+      type="Exposure"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="mirFirstName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.FirstName&quot;)"
+      required="true"
+      value="(anExposure.Claimant as Person).FirstName"
+      visible="true"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="MiddleName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.MiddleName&quot;)"
+      required="false"
+      value="(anExposure.Claimant as Person).MiddleName"
+      visible="true"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="LastName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.LastName&quot;)"
+      required="true"
+      value="(anExposure.Claimant as Person).LastName"
+      visible="true"/>
+    <DateInput
+      editable="true"
+      id="mirDateOfBirth"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth&quot;)"
+      required="true"
+      validationExpression="((anExposure.Claimant as Person).DateOfBirth == null or (anExposure.Claimant as Person).DateOfBirth &lt;= gw.api.upgrade.Coercions.makeDateFrom(&quot;today&quot;)) ? null : DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth.FutureError&quot;)"
+      value="(anExposure.Claimant as Person).DateOfBirth"/>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="(anExposure.Claimant as Person).maskTaxId(VALUE)"
+      id="mirTaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
+      required="true"
+      value="(anExposure.Claimant as Person).Person.TaxID"/>
+    <TypeKeyInput
+      editable="true"
+      id="mirGender"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.Gender&quot;)"
+      required="true"
+      value="(anExposure.Claimant as Person).Gender"
+      valueType="typekey.GenderType"/>
+  </InputSet>
+</PCF>

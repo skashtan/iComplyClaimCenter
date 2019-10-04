@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="MirClaimantInformationInputSet">
+    <Require
+      name="anMIRReportable_Acc"
+      type="MIRReportable_Acc"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="mirRRE"
+      label="DisplayKey.get(&quot;Accelerator.mir.labels.rreid&quot;)"
+      required="true"
+      value="anMIRReportable_Acc.RREID"/>
+    <TextInput
+      editable="true"
+      id="mirICN"
+      label="DisplayKey.get(&quot;Accelerator.mir.labels.icn&quot;)"
+      value="anMIRReportable_Acc.ICN"/>
+    <TextInput
+      id="mirHicn"
+      label="DisplayKey.get(&quot;Accelerator.mir.labels.hicn&quot;)"
+      value="anMIRReportable_Acc.HICNOrMBI"/>
+    <DateInput
+      dateFormat="medium"
+      editable="true"
+      id="mirCmsDate"
+      label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
+      required="true"
+      value="anMIRReportable_Acc.CMSDateOfIncident"/>
+  </InputSet>
+</PCF>

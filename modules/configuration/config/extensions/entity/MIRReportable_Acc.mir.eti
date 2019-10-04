@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MIRReportable_Acc"
+  table="mirreportable_acc"
+  type="retireable">
+  <column
+    allowInitialValueForUpgrade="true"
+    desc="Internal Control Number - Unique identifier in MIR System"
+    name="ICN"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    columnName="HicnOrMbi"
+    desc="Medicare Health Insurance Claim Number or Medicare Beneficiary Identifier"
+    name="HICNOrMBI"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="12"/>
+  </column>
+  <column
+    columnName="CmsDateOfIncident"
+    desc="Date of Incident as defined by CMS"
+    name="CMSDateOfIncident"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    columnName="OrmTermDate"
+    desc="Date ongoing responsibility for medicals ended, where applicable"
+    name="ORMTermDate"
+    nullok="true"
+    type="dateonly"/>
+
+  <array
+    arrayentity="MIRReportableHist_Acc"
+    desc="Array of each time this claim was reported"
+    name="MIRReportingHistorys"/>
+  <column
+    desc="The RRE ID corresponding to the claim"
+    name="RREID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="9"/>
+  </column>
+  <column
+    desc="Identifies add/update or delete"
+    name="LastSubmitAction"
+    nullok="true"
+    type="text"></column>
+  <column
+    default="0"
+    desc="Allows the claim to be placed on “Hold” (prevents this file from being transmitted to CMS)"
+    name="HoldStatus"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="MIRReportableTPOC_Acc"
+    desc="Total Payment Obligation to Claimant"
+    name="TPOC"/>
+  <column
+    desc="Indication of whether there is on-going responsibility for medicals (ORM)"
+    name="HasORM"
+    nullok="true"
+    type="text"/>
+  <column
+    name="TotalPropsedSettlementAmount"
+    nullok="true"
+    type="currencyamount"/>
+</entity>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MIRReportableHist_Acc"
+  table="mirreportablehist_accmit"
+  type="retireable">
+  <column
+    desc="Date and time of submission to MIR"
+    name="SubmitDateTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Shows if submission was ok or if there are reporting errors"
+    name="Status"
+    nullok="true"
+    type="text"/>
+  <column
+    desc="Details of the error if Status = ERROR"
+    name="StatusDetail"
+    nullok="true"
+    type="text"/>
+  <column
+    desc="Returns the beneficiary status"
+    name="BeneficiaryStatus"
+    nullok="true"
+    type="text"/>
+  <column
+    desc="whether or not the claim has passed all validation checks and is ready for reporting"
+    name="IsReadyForCMS"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date this claim was last submitted to CMS, if any"
+    name="LastCMSSubmit"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Next scheduled reporting date for this claim"
+    name="NextCMSSubmit"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Next scheduled query date for this claim"
+    name="NextCMSQuery"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="whether or not the diagnosis codes have been locked by Franco Signor"
+    name="DiagnosisCodeLock"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    desc="Reverse foreign key to MIRReportable"
+    fkentity="MIRReportable_Acc"
+    name="MIRReportable"
+    nullok="true"/>
+  <array
+    arrayentity="MIRReportableRespCode_Acc"
+    desc="Array of MIRReportableResponseCodes"
+    name="MIRResponseCodes"/>
+  <column
+    desc="Yes/No flag indicating the reportable status of the "
+    name="IsCMSReportable"
+    nullok="true"
+    type="bit"/>
+</entity>

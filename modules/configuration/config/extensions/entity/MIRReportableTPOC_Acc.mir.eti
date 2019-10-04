@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MIRReportableTPOC_Acc"
+  table="mirreportabletpoc_accmir"
+  type="retireable">
+<column
+columnName="Tpoc1Date"
+desc="Date of associated Total Payment Obligation to the Claimant (TPOC)"
+name="TpocDate"
+nullok="true"
+type="dateonly"/>
+<column
+columnName="TpocAmount"
+desc="Dollar amount of the total payment obligation to the claimant."
+name="TpocAmount"
+nullok="true"
+type="currencyamount"></column>
+<column
+columnName="Tpoc1DelayedFunding"
+desc="If funding for the TPOC Amount is delayed, provide actual or estimated date of funding"
+name="TpocDelayedFunding"
+nullok="true"
+type="dateonly"/>
+  <foreignkey
+    desc="Reverse foreign key to MIRReportable"
+    fkentity="MIRReportable_Acc"
+    name="MIRReportable"
+    nullok="true"/>
+</entity>

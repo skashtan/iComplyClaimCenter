@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<DataTypeDef xmlns="http://guidewire.com/datatype" type="com.guidewire.pl.metadata.datatype2.impl.SpatialPolygonDataTypeDef" valueType="gw.api.database.spatial.SpatialPolygon">
+  <ParameterDef name="createSpatialIndex"
+                desc="By default, Guidewire generates an index for spatial searches based on columns of this type. In cases when a spatial search will never be performed, this behavior can be changed by setting this paremeter to false"
+                required="false"
+                type="java.lang.Boolean"/>
+</DataTypeDef>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="MirORMInputSet">
+    <Require
+      name="anMIRReportable__Acc"
+      type="MIRReportable_Acc"/>
+    <DateInput
+      editable="true"
+      id="OrmTermDate"
+      label="DisplayKey.get(&quot;Accelerator.mir.label.ormterm&quot;)"
+      required="anMIRReportable__Acc.HasORM == acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState.Yes.toString()"
+      value="anMIRReportable__Acc.ORMTermDate"/>
+  </InputSet>
+</PCF>
