@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<wsdl:definitions targetNamespace="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns0="http://tempuri.org/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy">
+  <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:schema>
+      <xsd:import namespace="http://tempuri.org/" schemaLocation="xmlsoap_xsd1.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitToISOISOLogin">
+    <wsdl:part name="ISOLogin" element="xsns:ISOLogin" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitToISOSoapIn">
+    <wsdl:part name="parameters" element="xsns:SubmitToISO" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitToISOSoapOut">
+    <wsdl:part name="parameters" element="xsns:SubmitToISOResponse" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:message name="VaildateSchemaISOLogin">
+    <wsdl:part name="ISOLogin" element="xsns:ISOLogin" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:message name="VaildateSchemaSoapIn">
+    <wsdl:part name="parameters" element="xsns:VaildateSchema" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:message name="VaildateSchemaSoapOut">
+    <wsdl:part name="parameters" element="xsns:VaildateSchemaResponse" xmlns:xsns="http://tempuri.org/"/>
+  </wsdl:message>
+  <wsdl:portType name="ISOXmlWebServiceSoap">
+    <wsdl:operation name="SubmitToISO">
+      <wsdl:input name="SubmitToISORequest" message="ns0:SubmitToISOSoapIn"/>
+      <wsdl:output name="SubmitToISOResponse" message="ns0:SubmitToISOSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="VaildateSchema">
+      <wsdl:input name="VaildateSchemaRequest" message="ns0:VaildateSchemaSoapIn"/>
+      <wsdl:output name="VaildateSchemaResponse" message="ns0:VaildateSchemaSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ISOXmlWebServiceSoap" type="ns0:ISOXmlWebServiceSoap">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="SubmitToISO">
+      <soap11:operation soapAction="http://tempuri.org/SubmitToISO" style="document"/>
+      <wsdl:input name="SubmitToISORequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:SubmitToISOISOLogin" part="ISOLogin" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SubmitToISOResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VaildateSchema">
+      <soap11:operation soapAction="http://tempuri.org/VaildateSchema" style="document"/>
+      <wsdl:input name="VaildateSchemaRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:VaildateSchemaISOLogin" part="ISOLogin" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="VaildateSchemaResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ISOXmlWebService">
+    <wsdl:port name="ISOXmlWebServiceSoap" binding="ns0:ISOXmlWebServiceSoap">
+      <soap11:address location="https://claimsearchgwa.iso.com/xmlsoap"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

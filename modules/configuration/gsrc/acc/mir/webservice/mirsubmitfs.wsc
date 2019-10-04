@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<webservice-collection xmlns="http://guidewire.com/config/webservicecollection">
+  <resources>
+    <resource>
+      <url>file:/ClaimCenter2/DataService.xml</url>
+    </resource>
+  </resources>
+  <settings>
+    <configuration-provider>
+      <env></env>
+      <server></server>
+      <service>
+        <serviceName
+          xmlns:ns0="http://icomply.francosignor.com/services/">ns0:DataService</serviceName>
+        <portName
+          xmlns:ns0="http://icomply.francosignor.com/services/">ns0:BasicHttpBinding_DataService</portName>
+      </service>
+      <type-name>acc.mir.submitclaims.MirSubmitAuthProvider</type-name>
+    </configuration-provider>
+  </settings>
+</webservice-collection>
