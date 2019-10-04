@@ -1,0 +1,9 @@
+/**
+ * Generic LoadMask styles for all Guidewire themes
+ */
+
+// PLWEB-275 - Explicitly set a width and height on the div for the mask spinner; without those, the image doesn't show up
+.#{$prefix}mask-msg-text {
+  width: 16px;
+  height: 16px;
+}

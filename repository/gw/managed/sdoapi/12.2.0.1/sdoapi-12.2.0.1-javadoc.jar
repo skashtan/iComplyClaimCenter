@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>Forbidden</title>
+<style type="text/css">
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+#top {
+    position: absolute;
+}
+h1, p {
+    margin: 0;
+    padding: 0.4em 0.5em;
+}
+#container {
+    min-height: 100%;
+    margin-bottom: -46px;
+}
+* html #container {
+    height: 100%;
+}
+#footer-spacer {
+    height: 46px;
+}
+#footer {
+    border-top: 1px solid #AAA;
+    padding-top: 10px;
+    height: 35px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+	<div id="top"></div>
+	<div id="container">
+
+    <p> <b>Access to the Central Repository has been temporarily blocked</b> </p>
+
+    <p>
+    You've been identified as running a version of Nexus Repository Manager
+    that is <a href="https://community.sonatype.com/t/botnet-exploitation-of-nxrm-up-to-3-14-0/1993">vulnerable to botnet exploitation</a>.
+    </p>
+    
+    <p>
+    It is strongly advised that you upgrade Nexus Repository Manager to the latest version, currently 3.16.2. Please visit the <a href="https://help.sonatype.com/repomanager3/download">Sonatype NXRM download page</a>.
+    </p>
+    
+    <p>
+    For further information on the vulnerability, affected versions, and
+    remediation paths, please our official announcement at
+    <a href="https://community.sonatype.com/t/botnet-exploitation-of-nxrm-up-to-3-14-0/1993">https://community.sonatype.com/t/botnet-exploitation-of-nxrm-up-to-3-14-0/1993</a>.
+    </p>
+
+  </div> <div id="footer">
+    <a href="/terms.html">Terms of Service</a>
+  </div>
+</body> </html>
+

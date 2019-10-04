@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="MirClaimDetailsDV">
+    <Require
+      name="anExposure"
+      type="Exposure"/>
+    <InputColumn>
+      <ButtonInput
+        action="acc.mir.submitclaims.MirSubmitToFS_Acc.submitClaim(anExposure)"
+        align="left"
+        boldValue="true"
+        id="mirSubmitNow"
+        value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>
+      <Label
+        id="mirResponseHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "/>
+      <ListViewInput
+        def="MirExposureResponseCodesLV(anExposure.mirReportable_Acc.getMIRReportingHistorys().maxBy(\h -&gt; h.SubmitDateTime))">
+        <Toolbar></Toolbar>
+      </ListViewInput>
+      <Label
+        id="mirClaimantDetailHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.clmDtl&quot;)"/>
+      <InputSetRef
+        def="MirExposureInputSet(anExposure)"
+        id="mirExposureRef"/>
+      <InputSetRef
+        def="MirClaimantInformationInputSet(anExposure.mirReportable_Acc)"
+        id="mirClaimantInformationInputSetref"/>
+      <InputDivider/>
+      <Label
+        id="mirORMHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.orm&quot;)"/>
+      <InputSetRef
+        def="MirORMInputSet(anExposure.mirReportable_Acc)"
+        editable="true"
+        id="OrmRef"/>
+      <InputDivider/>
+      <Label
+        id="mirTPOCHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.tpoc&quot;)"/>
+      <ListViewInput
+        def="MirTPOCLV(anExposure.mirReportable_Acc)"
+        id="mirTpocLv">
+        <Toolbar>
+          <IteratorButtons
+            id="mirTpocIterator"
+            iterator="mirTpocLv.MirTPOCLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,23 @@
+/**
+ * Generic Form Field Display styles for all Guidewire themes
+ */
+
+// Fixing the From/To labels on Check Search in CC correctly.  Add a 5px padding around 'form-display-field' elements
+// that are contained inside of a 'form-fieldcontainer', except for the first 'field' element inside of the container.
+// For that one we want to only pad the right side.
+.#{$prefix}form-fieldcontainer {
+  .#{$prefix}form-display-field {
+    margin: 4px 5px 0;
+  }
+  .#{$prefix}field:first-of-type {
+    .#{$prefix}form-display-field {
+      margin: 4px 5px 0 0;
+    }
+  }
+}
+
+// @UpgradedSencha - the var/form/field/Base.scss definition of the form height of 25px
+// restricts this display, so set the height to auto here.
+.#{$prefix}table-form-item .#{$prefix}form-display-field-default {
+  height: auto;
+}
