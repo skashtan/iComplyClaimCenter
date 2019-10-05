@@ -29,9 +29,6 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MIRSubmitWork
     var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.YYYY"))
     var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.MM"))
     var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.DD"))
-    /*var minReportingYear = 2009
-    var minReportingMonth = 12
-    var minReportingDay = 31*/
     var minReportingDate = DateUtil.createDateInstance(minReportingDay, minReportingYear, minReportingMonth)
 
     // get exposures to process
@@ -46,7 +43,7 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MIRSubmitWork
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_BODILYINJURYDAMAGE)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_EMPLOYERLIABILITY)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_GENERALDAMAGE)
-      criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_LOSSOFUSEDAMAGE)
+      //criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_LOSSOFUSEDAMAGE)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_MEDPAY)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_WCINJURYDAMAGE)
     })
