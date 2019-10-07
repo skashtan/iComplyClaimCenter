@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="DataService" targetNamespace="http://icomply.francosignor.com/services/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://icomply.francosignor.com/services/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+  <wsp:Policy wsu:Id="BasicHttpBinding_DataService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false"/>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Lax/>
+              </wsp:Policy>
+            </sp:Layout>
+            <sp:IncludeTimestamp/>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+              <wsp:Policy>
+                <sp:WssUsernameToken10/>
+              </wsp:Policy>
+            </sp:UsernameToken>
+          </wsp:Policy>
+        </sp:SignedSupportingTokens>
+        <sp:Wss10 xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy/>
+        </sp:Wss10>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://icomply.francosignor.com/services/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:element name="SubmitClaim">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="claim" nillable="true" type="q1:ClaimData" xmlns:q1="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitClaimResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SubmitClaimResult" nillable="true" type="q2:ClaimResult" xmlns:q2="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitClaims">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="claims" nillable="true" type="q3:ArrayOfClaimData" xmlns:q3="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitClaimsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SubmitClaimsResult" nillable="true" type="q4:ArrayOfClaimResult" xmlns:q4="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetClaimStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="rreId" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="icns" nillable="true" type="q5:ArrayOfstring" xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetClaimStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="GetClaimStatusResult" nillable="true" type="q6:ArrayOfClaimResult" xmlns:q6="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitTinRefs">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="tinRefs" nillable="true" type="q7:ArrayOfTinRefData" xmlns:q7="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SubmitTinRefsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SubmitTinRefsResult" nillable="true" type="q8:TinRefResult" xmlns:q8="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+      <xs:element name="anyType" nillable="true" type="xs:anyType"/>
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+      <xs:element name="boolean" nillable="true" type="xs:boolean"/>
+      <xs:element name="byte" nillable="true" type="xs:byte"/>
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+      <xs:element name="decimal" nillable="true" type="xs:decimal"/>
+      <xs:element name="double" nillable="true" type="xs:double"/>
+      <xs:element name="float" nillable="true" type="xs:float"/>
+      <xs:element name="int" nillable="true" type="xs:int"/>
+      <xs:element name="long" nillable="true" type="xs:long"/>
+      <xs:element name="QName" nillable="true" type="xs:QName"/>
+      <xs:element name="short" nillable="true" type="xs:short"/>
+      <xs:element name="string" nillable="true" type="xs:string"/>
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+      <xs:element name="char" nillable="true" type="tns:char"/>
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int"/>
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration"/>
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid"/>
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName"/>
+      <xs:attribute name="Id" type="xs:ID"/>
+      <xs:attribute name="Ref" type="xs:IDREF"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/AppTech.MMSEA.DataExchange.WebServices">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+      <xs:complexType name="ClaimData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="C1Address1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1Address2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1City" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1Ext" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1FirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1LastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1MiddleInitial" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1Organization" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1Phone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1Relation" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepFirmName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepTIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1RepZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1State" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1ZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C1ZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Address1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Address2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2City" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Ext" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2FirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2LastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2MiddleInitial" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Organization" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Phone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2Relation" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepFirmName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepTIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2RepZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2State" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2ZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C2ZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Address1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Address2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3City" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Ext" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3FirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3LastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3MiddleInitial" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Organization" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Phone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3Relation" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepFirmName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepTIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3RepZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3State" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3ZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C3ZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Address1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Address2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4City" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Ext" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4FirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4LastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4MiddleInitial" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Organization" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Phone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4Relation" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepFirmName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepTIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4RepZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4State" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4ZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="C4ZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="CauseCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ClaimStatus" type="tns:ClaimStatusCode"/>
+          <xs:element minOccurs="0" name="CmsDateOfIncident" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="DOB" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="DateClosed" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="DateOfIncident" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="DbaName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode01" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode02" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode03" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode04" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode05" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode06" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode07" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode08" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode09" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode10" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode11" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode12" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode13" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode14" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode15" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode16" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode17" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode18" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagCode19" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagnosisCodeHelp" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Gender" type="tns:Gender"/>
+          <xs:element minOccurs="0" name="HICN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Hold" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="ICN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="IcdIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="LegalName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="MiddleInitial" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="NoFaultExhaust" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="NoFaultLimit" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="ORM" type="tns:TripleState"/>
+          <xs:element minOccurs="0" name="OfficeCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="OrmTermDate" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="PlanClaimNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactDept" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactEmail" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanContactPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PlanType" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PolicyHolderFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PolicyHolderLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="PolicyNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RREID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepCity" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepExt" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepFirmName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepFirstName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepIndicator" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepLastName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepPhone" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepState" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepTIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RepZipPlus4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="SelfInsured" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="SelfInsuredType" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ServiceRequested" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="SettlementStatus" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="StateOfVenue" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="SubmitAction" type="tns:Action"/>
+          <xs:element minOccurs="0" name="TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="TotalProposedSettlementAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocAmount2" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocAmount3" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocAmount4" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocAmount5" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="TpocDate" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDate2" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDate3" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDate4" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDate5" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDelayedFunding" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDelayedFunding2" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDelayedFunding3" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDelayedFunding4" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="TpocDelayedFunding5" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="UserDefined1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined3" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserRefNumber" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ClaimData" nillable="true" type="tns:ClaimData"/>
+      <xs:simpleType name="ClaimStatusCode">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Open"/>
+          <xs:enumeration value="Closed"/>
+          <xs:enumeration value="Reopened"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ClaimStatusCode" nillable="true" type="tns:ClaimStatusCode"/>
+      <xs:simpleType name="Gender">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown"/>
+          <xs:enumeration value="Male"/>
+          <xs:enumeration value="Female"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Gender" nillable="true" type="tns:Gender"/>
+      <xs:simpleType name="TripleState">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Unknown"/>
+          <xs:enumeration value="Yes"/>
+          <xs:enumeration value="No"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="TripleState" nillable="true" type="tns:TripleState"/>
+      <xs:simpleType name="Action">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Upsert"/>
+          <xs:enumeration value="Delete"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="Action" nillable="true" type="tns:Action"/>
+      <xs:complexType name="ClaimResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="StatusDetail" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="StatusObject" nillable="true" type="tns:ClaimStatus"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ClaimResult" nillable="true" type="tns:ClaimResult"/>
+      <xs:complexType name="ClaimStatus">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BeneficiaryStatus" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="CPActionDates" nillable="true" type="q1:ArrayOfdateTime" xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xs:element minOccurs="0" name="CPInterimAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="CPStatus" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="DiagnosisCodeLock" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="DiagnosisCodes" nillable="true" type="q2:ArrayOfKeyValueOfintstring" xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xs:element minOccurs="0" name="FinalDemandAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="HICN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ICN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="IcdVersion" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="IsReady" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="LastCmsSubmitDate" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="MSAActionDates" nillable="true" type="q3:ArrayOfdateTime" xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xs:element minOccurs="0" name="MSAApprovedAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="MSAStatus" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="MSPRecommendedAmount" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="NextQueryDate" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="NextReportDate" nillable="true" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="RREID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Reportable" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="ResponseCodes" nillable="true" type="tns:ArrayOfResponseCode"/>
+          <xs:element minOccurs="0" name="UserDefined1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined3" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDefined4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserRefNumber" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ClaimStatus" nillable="true" type="tns:ClaimStatus"/>
+      <xs:complexType name="ArrayOfResponseCode">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ResponseCode" nillable="true" type="tns:ResponseCode"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfResponseCode" nillable="true" type="tns:ArrayOfResponseCode"/>
+      <xs:complexType name="ResponseCode">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CmsCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="CodeType" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Origin" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ResponseCode" nillable="true" type="tns:ResponseCode"/>
+      <xs:complexType name="ArrayOfClaimData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ClaimData" nillable="true" type="tns:ClaimData"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfClaimData" nillable="true" type="tns:ArrayOfClaimData"/>
+      <xs:complexType name="ArrayOfClaimResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ClaimResult" nillable="true" type="tns:ClaimResult"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfClaimResult" nillable="true" type="tns:ArrayOfClaimResult"/>
+      <xs:complexType name="ArrayOfTinRefData">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TinRefData" nillable="true" type="tns:TinRefData"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTinRefData" nillable="true" type="tns:ArrayOfTinRefData"/>
+      <xs:complexType name="TinRefData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="City" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ForeignAddress1" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ForeignAddress2" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ForeignAddress3" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ForeignAddress4" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="IsForeignAddress" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="OfficeCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="RREID" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="State" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="TIN" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ZipPlus4" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TinRefData" nillable="true" type="tns:TinRefData"/>
+      <xs:complexType name="TinRefResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="StatusDetail" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TinRefResult" nillable="true" type="tns:TinRefResult"/>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+      <xs:complexType name="ArrayOfdateTime">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="dateTime" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfdateTime" nillable="true" type="tns:ArrayOfdateTime"/>
+      <xs:complexType name="ArrayOfKeyValueOfintstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfintstring">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" type="xs:int"/>
+                <xs:element name="Value" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfintstring" nillable="true" type="tns:ArrayOfKeyValueOfintstring"/>
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="DataService_SubmitClaim_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaim"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_SubmitClaim_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaimResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_SubmitClaims_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaims"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_SubmitClaims_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitClaimsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_GetClaimStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClaimStatus"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_GetClaimStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClaimStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_SubmitTinRefs_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitTinRefs"/>
+  </wsdl:message>
+  <wsdl:message name="DataService_SubmitTinRefs_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitTinRefsResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="DataService">
+    <wsdl:operation name="SubmitClaim">
+      <wsdl:input wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitClaim" message="tns:DataService_SubmitClaim_InputMessage"/>
+      <wsdl:output wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitClaimResponse" message="tns:DataService_SubmitClaim_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitClaims">
+      <wsdl:input wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitClaims" message="tns:DataService_SubmitClaims_InputMessage"/>
+      <wsdl:output wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitClaimsResponse" message="tns:DataService_SubmitClaims_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetClaimStatus">
+      <wsdl:input wsaw:Action="http://icomply.francosignor.com/services/DataService/GetClaimStatus" message="tns:DataService_GetClaimStatus_InputMessage"/>
+      <wsdl:output wsaw:Action="http://icomply.francosignor.com/services/DataService/GetClaimStatusResponse" message="tns:DataService_GetClaimStatus_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitTinRefs">
+      <wsdl:input wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitTinRefs" message="tns:DataService_SubmitTinRefs_InputMessage"/>
+      <wsdl:output wsaw:Action="http://icomply.francosignor.com/services/DataService/SubmitTinRefsResponse" message="tns:DataService_SubmitTinRefs_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_DataService" type="tns:DataService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_DataService_policy"/>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SubmitClaim">
+      <soap:operation soapAction="http://icomply.francosignor.com/services/DataService/SubmitClaim" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitClaims">
+      <soap:operation soapAction="http://icomply.francosignor.com/services/DataService/SubmitClaims" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClaimStatus">
+      <soap:operation soapAction="http://icomply.francosignor.com/services/DataService/GetClaimStatus" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitTinRefs">
+      <soap:operation soapAction="http://icomply.francosignor.com/services/DataService/SubmitTinRefs" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataService">
+    <wsdl:port name="BasicHttpBinding_DataService" binding="tns:BasicHttpBinding_DataService">
+      <soap:address location="https://icomply.francosignor.com/api/DataService.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
