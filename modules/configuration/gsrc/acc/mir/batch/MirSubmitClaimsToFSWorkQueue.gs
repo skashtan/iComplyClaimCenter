@@ -1,14 +1,12 @@
 package acc.mir.batch
 
 uses acc.mir.submitclaims.MirReqBuilder
+uses acc.mir.submitclaims.MirRespProcessor
 uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
-uses acc.mir.webservice.mirsubmitfs.dataservice.elements.SubmitClaim
-uses gw.api.database.InOperation
 uses gw.api.database.Query
 uses gw.api.database.Relop
 uses gw.api.util.DateUtil
 uses gw.pl.persistence.core.Bundle
-uses gw.processes.BulkInsertWorkQueueBase
 uses gw.processes.WorkQueueBase
 uses gw.util.PropertiesFileAccess
 
@@ -57,26 +55,20 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MIRSubmitWork
   //protected override function buildBulkInsertSelect(o : Object, list : List<Object>) {}
 
   override function createWorkItem(exposure : Exposure, safeBundle : Bundle) : MIRSubmitWorkItem_Acc {
-    //print("in create work item *******************************************************************************")
     var mirSubmitWorkItem_Acc = new MIRSubmitWorkItem_Acc(safeBundle)
     mirSubmitWorkItem_Acc.Exposure = exposure
-    //print("leaving create work item *******************************************************************************")
     return mirSubmitWorkItem_Acc
-
   }
 
   override function processWorkItem(mirSubmitWorkItem_Acc : MIRSubmitWorkItem_Acc) {
-    print("in process work item *******************************************************************************")
     print(mirSubmitWorkItem_Acc.Exposure.Claim.ClaimNumber)
     if (mirSubmitWorkItem_Acc.Exposure.Claim.IncidentReport || mirSubmitWorkItem_Acc.Exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
       return
     }
     var service = new DataService()
-    var reqXml = MirReqBuilder.buildClaimSubmitXML(mirSubmitWorkItem_Acc.Exposure)
+    var reqXml = MirReqBuilder.buildMirSubmitXML(mirSubmitWorkItem_Acc.Exposure)
     var resp = service.SubmitClaim(reqXml)
-    print(resp.asUTFString())
-    //TODO process response******************************************************
-    print("leaving process work item *******************************************************************************")
+    MirRespProcessor.processMirSubmitResp(mirSubmitWorkItem_Acc.Exposure, resp)
     return
   }
 }

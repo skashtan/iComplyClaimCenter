@@ -11,6 +11,7 @@ enhancement MirDateConversionEnhancement : XmlDateTime {
    * Converts java.util.date into XmlDateTime
    */
   static  function toXmlDateTime(date : java.util.Date) : XmlDateTime {
+
     var _year = date.YearOfDate
     var _month = date.MonthOfYear
     var _day = date.DayOfMonth
@@ -27,5 +28,14 @@ enhancement MirDateConversionEnhancement : XmlDateTime {
     xmlDateTime.Second = _second
 
     return xmlDateTime
+  }
+  /**
+   * Converts XmlDateTime into java.util.date
+   */
+  static  function toJavaDate(date : XmlDateTime) : java.util.Date {
+
+    var javaDate = date.toCalendar().getInstance().getTime()
+
+    return javaDate
   }
 }
