@@ -79,7 +79,7 @@ class MirRespProcessor {
         //activity.Claim = exposure.Claim
         //activity.Priority = Priority.TC_NORMAL
         //activity.AssignedUser = exposure.AssignedUser
-
+        print(exposure.Claim.Activities.toString())
         //activity.setActivityPattern(ActivityPattern. .finder.getActivityPatternByCode("MirInfoRequestActivity").getSubject() )
         //activity.Description = props.getProperty("ICOMPLY.ACTIVITY.DESCRIPTION.TEXT") + respCodesDisplay
         //exposure.addToActivities(activity)
