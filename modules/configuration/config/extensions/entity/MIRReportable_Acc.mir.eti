@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <entity
   xmlns="http://guidewire.com/datamodel"
-  entity="MIRReportable_Acc"
+  entity="MirReportable_Acc"
   table="mirreportable_acc"
   type="retireable">
   <column
@@ -38,18 +38,9 @@
     type="dateonly"/>
 
   <array
-    arrayentity="MIRReportableHist_Acc"
+    arrayentity="MirReportableHist_Acc"
     desc="Array of each time this claim was reported"
-    name="MIRReportingHistorys"/>
-  <column
-    desc="The RRE ID corresponding to the claim"
-    name="RREID"
-    nullok="true"
-    type="varchar">
-    <columnParam
-      name="size"
-      value="9"/>
-  </column>
+    name="MirReportingHistorys"/>
   <column
     desc="Identifies add/update or delete"
     name="LastSubmitAction"
@@ -62,7 +53,7 @@
     nullok="true"
     type="bit"/>
   <array
-    arrayentity="MIRReportableTPOC_Acc"
+    arrayentity="MirReportableTPOC_Acc"
     desc="Total Payment Obligation to Claimant"
     name="TPOC"/>
   <column
@@ -74,4 +65,23 @@
     name="TotalPropsedSettlementAmount"
     nullok="true"
     type="currencyamount"/>
+  <foreignkey
+    desc="The RRE ID corresponding to the claim"
+    fkentity="MirRREID_Acc"
+    name="RREID"
+    nullok="false"/>
+  <foreignkey
+    fkentity="MirOfficeCode_Acc"
+    name="OfficeCode"
+    nullok="true"/>
+  <typekey
+    desc="identifies settlement status"
+    name="SettlementStatus"
+    nullok="true"
+    typelist="MirSettlementStatus_Acc"/>
+  <typekey
+    desc="type of representative"
+    name="RepresentativeType"
+    nullok="true"
+    typelist="MirRepType_Acc"/>
 </entity>

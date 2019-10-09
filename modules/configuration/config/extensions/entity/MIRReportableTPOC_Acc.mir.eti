@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <entity
   xmlns="http://guidewire.com/datamodel"
-  entity="MIRReportableTPOC_Acc"
+  entity="MirReportableTPOC_Acc"
   table="mirreportabletpoc_accmir"
   type="retireable">
 <column
@@ -24,7 +24,7 @@ nullok="true"
 type="dateonly"/>
   <foreignkey
     desc="Reverse foreign key to MIRReportable"
-    fkentity="MIRReportable_Acc"
+    fkentity="MirReportable_Acc"
     name="MIRReportable"
     nullok="true"/>
 </entity>

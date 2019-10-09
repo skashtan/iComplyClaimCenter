@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MirRelation_Acc"
+  table="mirrelation_acc"
+  type="retireable">
+  <foreignkey
+    desc="reverse foreign key to Mir Reportable"
+    fkentity="MIRReportable_Acc"
+    name="MirReportable_Acc"
+    nullok="false"/>
+  <typekey
+    name="RelationType"
+    nullok="false"
+    typelist="MirRelationType_Acc"/>
+</entity>

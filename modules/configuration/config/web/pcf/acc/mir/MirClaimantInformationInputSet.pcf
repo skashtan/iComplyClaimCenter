@@ -6,14 +6,14 @@
     id="MirClaimantInformationInputSet">
     <Require
       name="anMIRReportable_Acc"
-      type="MIRReportable_Acc"/>
+      type="MirReportable_Acc"/>
     <TextInput
       available="true"
       editable="true"
       id="mirRRE"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.rreid&quot;)"
       required="true"
-      value="anMIRReportable_Acc.RREID"/>
+      value="anMIRReportable_Acc.RREID.RREID"/>
     <TextInput
       editable="true"
       id="mirICN"

@@ -7,7 +7,7 @@
     id="MirORMInputSet">
     <Require
       name="anMIRReportable__Acc"
-      type="MIRReportable_Acc"/>
+      type="MirReportable_Acc"/>
     <DateInput
       editable="true"
       id="OrmTermDate"

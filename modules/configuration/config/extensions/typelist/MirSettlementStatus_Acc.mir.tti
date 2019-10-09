@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="MirSettlementStatus_Acc" desc="">
+  <typecode
+    code="Open"
+    name="Open"></typecode>
+  <typecode
+    code="Proposed"
+    name="Proposed"/>
+  <typecode
+    code="Settled"
+    name="Settled"/>
+</typelist>

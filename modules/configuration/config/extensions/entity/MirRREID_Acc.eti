@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MirRREID_Acc"
+  table="mirrreid_acc"
+  type="retireable">
+  <column
+    name="RREID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="9"/>
+  </column>
+</entity>

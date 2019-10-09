@@ -14,10 +14,10 @@ uses gw.util.PropertiesFileAccess
  * Created by Sara.Kashtan on 9/30/2019.
  */
 //TODO change to BulkInsertWorkQueueBase **********************************************************************
-class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MIRSubmitWorkItem_Acc> {
+class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWorkItem_Acc> {
 
   construct() {
-    super(BatchProcessType.TC_MIRSUBMITCLAIMSTOFS, MIRSubmitWorkItem_Acc, Exposure)
+    super(BatchProcessType.TC_MIRSUBMITCLAIMSTOFS, MirSubmitWorkItem_Acc, Exposure)
   }
 
 
@@ -54,14 +54,14 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MIRSubmitWork
 
   //protected override function buildBulkInsertSelect(o : Object, list : List<Object>) {}
 
-  override function createWorkItem(exposure : Exposure, safeBundle : Bundle) : MIRSubmitWorkItem_Acc {
-    var mirSubmitWorkItem_Acc = new MIRSubmitWorkItem_Acc(safeBundle)
+  override function createWorkItem(exposure : Exposure, safeBundle : Bundle) : MirSubmitWorkItem_Acc {
+    var mirSubmitWorkItem_Acc = new MirSubmitWorkItem_Acc(safeBundle)
     mirSubmitWorkItem_Acc.Exposure = exposure
     return mirSubmitWorkItem_Acc
   }
 
-  override function processWorkItem(mirSubmitWorkItem_Acc : MIRSubmitWorkItem_Acc) {
-    print(mirSubmitWorkItem_Acc.Exposure.Claim.ClaimNumber)
+  override function processWorkItem(mirSubmitWorkItem_Acc : MirSubmitWorkItem_Acc) {
+    //print(mirSubmitWorkItem_Acc.Exposure.Claim.ClaimNumber)
     if (mirSubmitWorkItem_Acc.Exposure.Claim.IncidentReport || mirSubmitWorkItem_Acc.Exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
       return
     }

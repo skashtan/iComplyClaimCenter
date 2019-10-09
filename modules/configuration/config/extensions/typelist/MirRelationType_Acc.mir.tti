@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="MirRelationType_Acc" desc="">
+
+  <typecode
+    code="Other"
+    name="Other"/>
+  <typecode
+    code="FamilyMember"
+    name="Family Member"/>
+  <typecode
+    code="Estate"
+    name="Estate"/>
+</typelist>

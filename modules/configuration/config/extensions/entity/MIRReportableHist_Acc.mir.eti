@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <entity
   xmlns="http://guidewire.com/datamodel"
-  entity="MIRReportableHist_Acc"
+  entity="MirReportableHist_Acc"
   table="mirreportablehist_accmit"
   type="retireable">
   <column
@@ -51,11 +51,11 @@
     type="bit"/>
   <foreignkey
     desc="Reverse foreign key to MIRReportable"
-    fkentity="MIRReportable_Acc"
+    fkentity="MirReportable_Acc"
     name="MIRReportable"
     nullok="true"/>
   <array
-    arrayentity="MIRReportableRespCode_Acc"
+    arrayentity="MirReportableRespCode_Acc"
     desc="Array of MIRReportableResponseCodes"
     name="MIRResponseCodes"/>
   <column

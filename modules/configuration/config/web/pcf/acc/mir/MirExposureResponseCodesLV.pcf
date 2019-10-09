@@ -6,12 +6,12 @@
     id="MirExposureResponseCodesLV">
     <Require
       name="anMIRReportableHist_Acc"
-      type="MIRReportableHist_Acc"/>
+      type="MirReportableHist_Acc"/>
     <RowIterator
       editable="false"
       elementName="MirResponseCodeIterator"
       value="anMIRReportableHist_Acc.MIRResponseCodes"
-      valueType="MIRReportableRespCode_Acc[]">
+      valueType="MirReportableRespCode_Acc[]">
       <Row>
         <TextCell
           id="mirResponseCode"

@@ -19,7 +19,7 @@
         id="mirResponseHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "/>
       <ListViewInput
-        def="MirExposureResponseCodesLV(anExposure.mirReportable_Acc.getMIRReportingHistorys().maxBy(\h -&gt; h.SubmitDateTime))">
+        def="MirExposureResponseCodesLV(anExposure.mirReportable_Acc.getMirReportingHistorys().maxBy(\h -&gt; h.SubmitDateTime))">
         <Toolbar></Toolbar>
       </ListViewInput>
       <Label

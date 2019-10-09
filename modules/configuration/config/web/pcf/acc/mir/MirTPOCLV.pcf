@@ -5,19 +5,19 @@
   <ListViewPanel
     id="MirTPOCLV">
     <Require
-      name="anMIRReportable_Acc"
-      type="MIRReportable_Acc"/>
+      name="anMirReportable_Acc"
+      type="MirReportable_Acc"/>
     <ExposeIterator
-      valueType="MIRReportableTPOC_Acc"
+      valueType="MirReportableTPOC_Acc"
       widget="MirTPOCLV"/>
     <RowIterator
       editable="true"
       elementName="TPOCDetail"
       pageSize="10"
-      toAdd="anMIRReportable_Acc.addToTPOC(TPOCDetail)"
-      toRemove="anMIRReportable_Acc.removeFromTPOC(TPOCDetail)"
-      value="anMIRReportable_Acc.TPOC"
-      valueType="MIRReportableTPOC_Acc[]">
+      toAdd="anMirReportable_Acc.addToTPOC(TPOCDetail)"
+      toRemove="anMirReportable_Acc.removeFromTPOC(TPOCDetail)"
+      value="anMirReportable_Acc.TPOC"
+      valueType="entity.MirReportableTPOC_Acc[]">
       <Row>
         <DateCell
           dateFormat="medium"
