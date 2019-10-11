@@ -50,7 +50,7 @@ class MirRespProcessor {
         history.NextCMSQuery = MirDateConversionEnhancement.toJavaDate(claimStatus.NextQueryDate)
       }
 
-      var respCodesDisplay = ""
+      // respCodesDisplay = ""
       respCodes.forEach(\c -> {
         var respCode = new MirReportableRespCode_Acc()
 
@@ -77,9 +77,8 @@ class MirRespProcessor {
         print("Claim Number: " + exposure.Claim.ClaimNumber)
         print("Exposure: " + exposure.ID)
         print("Exposure Assigned User: " + exposure.AssignedUser)
-        var test = ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity")
         var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
-        exposure.addToActivities(activity)
+        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
         print("added activity")
       }
 
