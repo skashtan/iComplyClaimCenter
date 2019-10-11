@@ -69,7 +69,7 @@
     desc="The RRE ID corresponding to the claim"
     fkentity="MirRREID_Acc"
     name="RREID"
-    nullok="false"/>
+    nullok="true"/>
   <foreignkey
     fkentity="MirOfficeCode_Acc"
     name="OfficeCode"
@@ -84,4 +84,7 @@
     name="RepresentativeType"
     nullok="true"
     typelist="MirRepType_Acc"/>
+  <array
+    arrayentity="MirRelation_Acc"
+    name="Relation"/>
 </entity>

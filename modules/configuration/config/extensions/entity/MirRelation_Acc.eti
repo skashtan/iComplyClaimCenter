@@ -13,4 +13,8 @@
     name="RelationType"
     nullok="false"
     typelist="MirRelationType_Acc"/>
+  <column
+    name="Contact"
+    nullok="false"
+    type="softentityreference"/>
 </entity>
