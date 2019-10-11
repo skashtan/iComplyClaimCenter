@@ -74,14 +74,10 @@ class MirRespProcessor {
 
       // maybe create activity for adjuster
       if (respCodes.size() > 0) {
-        print("Claim Number: " + exposure.Claim.ClaimNumber)
-        print("Exposure: " + exposure.ID)
-        print("Exposure Assigned User: " + exposure.AssignedUser)
         var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
+        activity = bundle.add(activity)
         activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
-        print("added activity")
       }
-
       mirReportable.addToMirReportingHistorys(history)
 
     })
