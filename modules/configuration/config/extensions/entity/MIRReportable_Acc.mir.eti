@@ -87,4 +87,8 @@
   <array
     arrayentity="MirRelation_Acc"
     name="Relation"/>
+  <column
+    name="Representative"
+    nullok="true"
+    type="softentityreference"/>
 </entity>

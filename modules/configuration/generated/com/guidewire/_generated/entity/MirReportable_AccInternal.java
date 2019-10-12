@@ -10,6 +10,12 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
+   * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
+   */
+  public void addToRelation(entity.MirRelation_Acc element);
+  
+  
+  /**
    * Adds the given element to the TPOC array. This is achieved by setting the parent foreign key to this entity instance.
    */
   public void addToTPOC(entity.MirReportableTPOC_Acc element);
@@ -101,6 +107,20 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
+   * Gets the value of the Relation field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public entity.MirRelation_Acc[] getRelation();
+  
+  
+  /**
+   * Gets the value of the Representative field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Long getRepresentative();
+  
+  
+  /**
    * Gets the value of the RepresentativeType field.
    * type of representative
    */
@@ -151,6 +171,20 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    */
   @java.lang.Deprecated
   public void removeFromMirReportingHistorys(gw.pl.persistence.core.Key elementID);
+  
+  
+  /**
+   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+   */
+  public void removeFromRelation(entity.MirRelation_Acc element);
+  
+  
+  /**
+   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+   * @deprecated Please use the version that takes an entity instead.
+   */
+  @java.lang.Deprecated
+  public void removeFromRelation(gw.pl.persistence.core.Key elementID);
   
   
   /**
@@ -237,6 +271,18 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   public void setRREIDID(gw.pl.persistence.core.Key value);
+  
+  
+  /**
+   * Sets the value of the Relation field.
+   */
+  public void setRelation(entity.MirRelation_Acc[] value);
+  
+  
+  /**
+   * Sets the value of the Representative field.
+   */
+  public void setRepresentative(java.lang.Long value);
   
   
   /**

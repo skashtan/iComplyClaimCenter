@@ -74,9 +74,8 @@ class MirRespProcessor {
 
       // maybe create activity for adjuster
       if (respCodes.size() > 0) {
-        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
+        var activity = MirActivityEnhancement.createActivity(exposure)
         activity = bundle.add(activity)
-        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
       }
       mirReportable.addToMirReportingHistorys(history)
 

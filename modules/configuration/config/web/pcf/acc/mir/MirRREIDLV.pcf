@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirRREIDLV">
+    <Require
+      name="MirRREIDList"
+      type="gw.api.database.IQueryBeanResult&lt;MirRREID_Acc&gt;"/>
+    <ExposeIterator
+      valueType="MirRREID_Acc"
+      widget="MirRREIDLV"/>
+    <RowIterator
+      checkBoxVisible="CurrentLocation.InEditMode ? true : false"
+      editable="true"
+      elementName="MirRREID"
+      toCreateAndAdd="new MirRREID_Acc()"
+      toRemove="MirRREID.remove()"
+      value="MirRREIDList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.MirRREID_Acc&gt;">
+      <Row>
+        <TextCell
+          editable="true"
+          id="MirRREIDLV"
+          label="DisplayKey.get(&quot;Accelerator.mir.label.RREID&quot;)"
+          sortOrder="1"
+          value="MirRREID.RREID"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

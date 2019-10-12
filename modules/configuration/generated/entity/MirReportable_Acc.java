@@ -43,6 +43,10 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> RREID_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "RREID");
   
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IArrayPropertyInfo> RELATION_PROP = new com.guidewire.commons.metadata.types.ArrayPropertyInfoCache(TYPE, "Relation");
+  
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> REPRESENTATIVE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "Representative");
+  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ITypekeyPropertyInfo> REPRESENTATIVETYPE_PROP = new com.guidewire.commons.metadata.types.TypekeyPropertyInfoCache(TYPE, "RepresentativeType");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> RETIREDVALUE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "RetiredValue");
@@ -112,6 +116,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
    */
   public void addToMirReportingHistorys(entity.MirReportableHist_Acc element) {
     __getInternalInterface().addArrayElement(MIRREPORTINGHISTORYS_PROP.get(), element);
+  }
+  
+  /**
+   * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
+   */
+  public void addToRelation(entity.MirRelation_Acc element) {
+    __getInternalInterface().addArrayElement(RELATION_PROP.get(), element);
   }
   
   /**
@@ -255,6 +266,22 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
+   * Gets the value of the Relation field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public entity.MirRelation_Acc[] getRelation() {
+    return (entity.MirRelation_Acc[])__getInternalInterface().getFieldValue(RELATION_PROP.get());
+  }
+  
+  /**
+   * Gets the value of the Representative field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Long getRepresentative() {
+    return (java.lang.Long)__getInternalInterface().getFieldValue(REPRESENTATIVE_PROP.get());
+  }
+  
+  /**
    * Gets the value of the RepresentativeType field.
    * type of representative
    */
@@ -395,6 +422,22 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
+   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+   */
+  public void removeFromRelation(entity.MirRelation_Acc element) {
+    __getInternalInterface().removeArrayElement(RELATION_PROP.get(), element);
+  }
+  
+  /**
+   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+   * @deprecated Please use the version that takes an entity instead.
+   */
+  @java.lang.Deprecated
+  public void removeFromRelation(gw.pl.persistence.core.Key elementID) {
+    __getInternalInterface().removeArrayElement(RELATION_PROP.get(), elementID);
+  }
+  
+  /**
    * Removes the given element from the TPOC array. This is achieved by marking the element for removal.
    */
   public void removeFromTPOC(entity.MirReportableTPOC_Acc element) {
@@ -530,6 +573,20 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
+   * Sets the value of the Relation field.
+   */
+  public void setRelation(entity.MirRelation_Acc[] value) {
+    __getInternalInterface().setFieldValue(RELATION_PROP.get(), value);
+  }
+  
+  /**
+   * Sets the value of the Representative field.
+   */
+  public void setRepresentative(java.lang.Long value) {
+    __getInternalInterface().setFieldValue(REPRESENTATIVE_PROP.get(), value);
+  }
+  
+  /**
    * Sets the value of the RepresentativeType field.
    */
   public void setRepresentativeType(typekey.MirRepType_Acc value) {
@@ -600,6 +657,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
      */
     public void addToMirReportingHistorys(entity.MirReportableHist_Acc element) {
       __getInternalInterface().addArrayElement(MIRREPORTINGHISTORYS_PROP.get(), element);
+    }
+    
+    /**
+     * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
+     */
+    public void addToRelation(entity.MirRelation_Acc element) {
+      __getInternalInterface().addArrayElement(RELATION_PROP.get(), element);
     }
     
     /**
@@ -795,6 +859,22 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     }
     
     /**
+     * Gets the value of the Relation field.
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public entity.MirRelation_Acc[] getRelation() {
+      return (entity.MirRelation_Acc[])__getInternalInterface().getFieldValue(RELATION_PROP.get());
+    }
+    
+    /**
+     * Gets the value of the Representative field.
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public java.lang.Long getRepresentative() {
+      return (java.lang.Long)__getInternalInterface().getFieldValue(REPRESENTATIVE_PROP.get());
+    }
+    
+    /**
      * Gets the value of the RepresentativeType field.
      * type of representative
      */
@@ -963,6 +1043,22 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     }
     
     /**
+     * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+     */
+    public void removeFromRelation(entity.MirRelation_Acc element) {
+      __getInternalInterface().removeArrayElement(RELATION_PROP.get(), element);
+    }
+    
+    /**
+     * Removes the given element from the Relation array. This is achieved by marking the element for removal.
+     * @deprecated Please use the version that takes an entity instead.
+     */
+    @java.lang.Deprecated
+    public void removeFromRelation(gw.pl.persistence.core.Key elementID) {
+      __getInternalInterface().removeArrayElement(RELATION_PROP.get(), elementID);
+    }
+    
+    /**
      * Removes the given element from the TPOC array. This is achieved by marking the element for removal.
      */
     public void removeFromTPOC(entity.MirReportableTPOC_Acc element) {
@@ -1115,6 +1211,20 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     
     public void setRREIDID(gw.pl.persistence.core.Key value) {
       setFieldValue(RREID_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the Relation field.
+     */
+    public void setRelation(entity.MirRelation_Acc[] value) {
+      __getInternalInterface().setFieldValue(RELATION_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the Representative field.
+     */
+    public void setRepresentative(java.lang.Long value) {
+      __getInternalInterface().setFieldValue(REPRESENTATIVE_PROP.get(), value);
     }
     
     /**

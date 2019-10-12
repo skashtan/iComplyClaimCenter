@@ -4,6 +4,13 @@ package com.guidewire._generated.entity;
 @java.lang.SuppressWarnings(value = {"deprecation", "unchecked"})
 public interface MirRelation_AccInternal extends com.guidewire._generated.entity.RetireableInternal {
   /**
+   * Gets the value of the Contact field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Long getContact();
+  
+  
+  /**
    * Gets the value of the LoadCommandID field.
    * LoadCommand for load where row was created. If not null this object was loaded via the loader.
    */
@@ -27,6 +34,12 @@ public interface MirRelation_AccInternal extends com.guidewire._generated.entity
    */
   @gw.internal.gosu.parser.ExtendedProperty
   public typekey.MirRelationType_Acc getRelationType();
+  
+  
+  /**
+   * Sets the value of the Contact field.
+   */
+  public void setContact(java.lang.Long value);
   
   
   /**

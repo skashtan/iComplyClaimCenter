@@ -1,13 +1,16 @@
 package acc.mir.batch
 
+uses acc.mir.submitclaims.MirActivityEnhancement
 uses acc.mir.submitclaims.MirReqBuilder
 uses acc.mir.submitclaims.MirRespProcessor
 uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
 uses gw.api.database.Query
 uses gw.api.database.Relop
+uses gw.api.locale.DisplayKey
 uses gw.api.util.DateUtil
 uses gw.pl.persistence.core.Bundle
 uses gw.processes.WorkQueueBase
+uses gw.transaction.Transaction
 uses gw.util.PropertiesFileAccess
 
 /**
@@ -65,6 +68,18 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
     if (mirSubmitWorkItem_Acc.Exposure.Claim.IncidentReport || mirSubmitWorkItem_Acc.Exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
       return
     }
+
+    var hasRREID = mirSubmitWorkItem_Acc.Exposure.mirReportable_Acc.RREID == null
+    var multiRREIDS = Boolean.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MULTI.RREIDS"))
+
+    if(!hasRREID && !multiRREIDS){
+      //mirSubmitWorkItem_Acc.Exposure.mirReportable_Acc.RREID =
+    } else if(!hasRREID && multiRREIDS) {
+      var activity = MirActivityEnhancement.createActivityWithBundle(mirSubmitWorkItem_Acc.Exposure)
+      activity.Description = activity.Description + "\n" + DisplayKey.get("Accelerator.mir.messages.RREID")
+    }
+
+
     var service = new DataService()
     var reqXml = MirReqBuilder.buildMirSubmitXML(mirSubmitWorkItem_Acc.Exposure)
     var resp = service.SubmitClaim(reqXml)

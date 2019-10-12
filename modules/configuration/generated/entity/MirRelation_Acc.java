@@ -13,6 +13,8 @@ public class MirRelation_Acc extends com.guidewire.pl.persistence.code.BeanBase 
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> BEANVERSION_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "BeanVersion");
   
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CONTACT_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "Contact");
+  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CREATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "CreateTime");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> CREATEUSER_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "CreateUser");
@@ -95,6 +97,14 @@ public class MirRelation_Acc extends com.guidewire.pl.persistence.code.BeanBase 
   @gw.internal.gosu.parser.ExtendedProperty
   public java.lang.Integer getBeanVersion() {
     return ((com.guidewire.pl.domain.persistence.core.VersionablePublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.VersionablePublicMethods")).getBeanVersion();
+  }
+  
+  /**
+   * Gets the value of the Contact field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Long getContact() {
+    return (java.lang.Long)__getInternalInterface().getFieldValue(CONTACT_PROP.get());
   }
   
   /**
@@ -241,6 +251,13 @@ public class MirRelation_Acc extends com.guidewire.pl.persistence.code.BeanBase 
   }
   
   /**
+   * Sets the value of the Contact field.
+   */
+  public void setContact(java.lang.Long value) {
+    __getInternalInterface().setFieldValue(CONTACT_PROP.get(), value);
+  }
+  
+  /**
    * Sets the value of the CreateTime field.
    */
   private void setCreateTime(java.util.Date value) {
@@ -382,6 +399,14 @@ public class MirRelation_Acc extends com.guidewire.pl.persistence.code.BeanBase 
     @gw.internal.gosu.parser.ExtendedProperty
     public java.lang.Integer getBeanVersion() {
       return ((com.guidewire.pl.domain.persistence.core.VersionablePublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.VersionablePublicMethods")).getBeanVersion();
+    }
+    
+    /**
+     * Gets the value of the Contact field.
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public java.lang.Long getContact() {
+      return (java.lang.Long)__getInternalInterface().getFieldValue(CONTACT_PROP.get());
     }
     
     /**
@@ -569,6 +594,13 @@ public class MirRelation_Acc extends com.guidewire.pl.persistence.code.BeanBase 
      */
     public void setBeanVersion(java.lang.Integer value) {
       __getInternalInterface().setFieldValue(BEANVERSION_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the Contact field.
+     */
+    public void setContact(java.lang.Long value) {
+      __getInternalInterface().setFieldValue(CONTACT_PROP.get(), value);
     }
     
     /**

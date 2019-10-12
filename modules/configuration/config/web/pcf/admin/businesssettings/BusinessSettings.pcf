@@ -25,6 +25,9 @@
     <LocationRef
       location="KeyMetrics()"/>
     <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.mir.screen.iComplyAdmin&quot;)"
+      location="MirAdmin()"/>
+    <LocationRef
       location="ReinsuranceThresholds()"/>
     <LocationRef
       location="WCParms()"/>

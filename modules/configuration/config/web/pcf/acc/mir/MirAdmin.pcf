@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="true"
+    id="MirAdmin"
+    title="DisplayKey.get(&quot;Accelerator.mir.screen.iComplyAdmin&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.MirRREID_Acc).select()"
+      name="MirRREIDS"
+      type="gw.api.database.IQueryBeanResult&lt;MirRREID_Acc&gt;"/>
+    <Screen
+      id="MirAdminScreen">
+      <PanelRef
+        def="MirRREIDLV(MirRREIDS)">
+        <Toolbar>
+          <EditButtons/>
+          <IteratorButtons
+            addVisible="true"
+            iterator="MirRREIDLV.MirRREIDLV"
+            removeVisible="true"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

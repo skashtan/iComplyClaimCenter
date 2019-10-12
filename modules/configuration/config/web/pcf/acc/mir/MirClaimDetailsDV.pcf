@@ -10,7 +10,6 @@
       type="Exposure"/>
     <InputColumn>
       <ButtonInput
-        action="acc.mir.submitclaims.MirSubmitToFS_Acc.submitClaim(anExposure)"
         align="left"
         boldValue="true"
         id="mirSubmitNow"
