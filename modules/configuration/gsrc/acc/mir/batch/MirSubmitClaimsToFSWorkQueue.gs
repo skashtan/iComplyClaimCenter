@@ -70,10 +70,10 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
     }
 
     var hasRREID = mirSubmitWorkItem_Acc.Exposure.mirReportable_Acc.RREID == null
-    var multiRREIDS = Boolean.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MULTI.RREIDS"))
+    var multiRREIDS = gw.api.database.Query.make(MirRREID_Acc).select().Count > 1
 
     if(!hasRREID && !multiRREIDS){
-      //mirSubmitWorkItem_Acc.Exposure.mirReportable_Acc.RREID =
+      mirSubmitWorkItem_Acc.Exposure.mirReportable_Acc.RREID.RREID = gw.api.database.Query.make(MirRREID_Acc).select().AtMostOneRow.RREID
     } else if(!hasRREID && multiRREIDS) {
       var activity = MirActivityEnhancement.createActivityWithBundle(mirSubmitWorkItem_Acc.Exposure)
       activity.Description = activity.Description + "\n" + DisplayKey.get("Accelerator.mir.messages.RREID")
