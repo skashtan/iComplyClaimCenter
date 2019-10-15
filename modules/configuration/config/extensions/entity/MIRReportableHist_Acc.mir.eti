@@ -5,11 +5,6 @@
   table="mirreportablehist_accmit"
   type="retireable">
   <column
-    desc="Date and time of submission to MIR"
-    name="SubmitDateTime"
-    nullok="true"
-    type="datetime"/>
-  <column
     desc="Shows if submission was ok or if there are reporting errors"
     name="Status"
     nullok="true"

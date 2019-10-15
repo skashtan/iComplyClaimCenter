@@ -1,4 +1,4 @@
-package acc.mir.submitclaims
+package acc.mir.helper
 
 uses gw.xml.date.XmlDateTime
 

@@ -85,14 +85,6 @@ public interface MirReportableHist_AccInternal extends com.guidewire._generated.
   
   
   /**
-   * Gets the value of the SubmitDateTime field.
-   * Date and time of submission to MIR
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public java.util.Date getSubmitDateTime();
-  
-  
-  /**
    * Gets the value of the DiagnosisCodeLock field.
    * whether or not the diagnosis codes have been locked by Franco Signor
    */
@@ -203,12 +195,6 @@ public interface MirReportableHist_AccInternal extends com.guidewire._generated.
    * Sets the value of the StatusDetail field.
    */
   public void setStatusDetail(java.lang.String value);
-  
-  
-  /**
-   * Sets the value of the SubmitDateTime field.
-   */
-  public void setSubmitDateTime(java.util.Date value);
   
   
   

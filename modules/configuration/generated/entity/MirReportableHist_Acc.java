@@ -47,8 +47,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> STATUSDETAIL_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "StatusDetail");
   
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> SUBMITDATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "SubmitDateTime");
-  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> UPDATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "UpdateTime");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> UPDATEUSER_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "UpdateUser");
@@ -243,15 +241,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   @gw.internal.gosu.parser.ExtendedProperty
   public java.lang.String getStatusDetail() {
     return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(STATUSDETAIL_PROP.get());
-  }
-  
-  /**
-   * Gets the value of the SubmitDateTime field.
-   * Date and time of submission to MIR
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public java.util.Date getSubmitDateTime() {
-    return (java.util.Date)__getInternalInterface().getFieldValue(SUBMITDATETIME_PROP.get());
   }
   
   /**
@@ -501,13 +490,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   }
   
   /**
-   * Sets the value of the SubmitDateTime field.
-   */
-  public void setSubmitDateTime(java.util.Date value) {
-    __getInternalInterface().setFieldValue(SUBMITDATETIME_PROP.get(), value);
-  }
-  
-  /**
    * Sets the value of the UpdateTime field.
    */
   private void setUpdateTime(java.util.Date value) {
@@ -722,15 +704,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
     @gw.internal.gosu.parser.ExtendedProperty
     public java.lang.String getStatusDetail() {
       return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(STATUSDETAIL_PROP.get());
-    }
-    
-    /**
-     * Gets the value of the SubmitDateTime field.
-     * Date and time of submission to MIR
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public java.util.Date getSubmitDateTime() {
-      return (java.util.Date)__getInternalInterface().getFieldValue(SUBMITDATETIME_PROP.get());
     }
     
     /**
@@ -1029,13 +1002,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
      */
     public void setStatusDetail(java.lang.String value) {
       __getInternalInterface().setFieldValueForCodegen(STATUSDETAIL_PROP.get(), value);
-    }
-    
-    /**
-     * Sets the value of the SubmitDateTime field.
-     */
-    public void setSubmitDateTime(java.util.Date value) {
-      __getInternalInterface().setFieldValue(SUBMITDATETIME_PROP.get(), value);
     }
     
     /**

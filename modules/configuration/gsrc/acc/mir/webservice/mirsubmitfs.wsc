@@ -15,7 +15,7 @@
         <portName
           xmlns:ns0="http://icomply.francosignor.com/services/">ns0:BasicHttpBinding_DataService</portName>
       </service>
-      <type-name>acc.mir.submitclaims.MirSubmitAuthProvider</type-name>
+      <type-name>acc.mir.helper.MirSubmitAuthProvider</type-name>
     </configuration-provider>
   </settings>
 </webservice-collection>
