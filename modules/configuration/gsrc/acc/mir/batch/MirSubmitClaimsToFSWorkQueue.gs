@@ -50,7 +50,7 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_MEDPAY)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_WCINJURYDAMAGE)
     })
-    exposureQuery.compare(Exposure#Claimant#Type, Relop.Equals, Contact.TC_PERSON) //TODO test this
+    //exposureQuery.compare(Exposure#Claimant#Type, Relop.Equals, Contact.TC_PERSON) //TODO test this
     return exposureQuery.select().iterator()
   }
 

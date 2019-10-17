@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_activity.xml -->
+  <ListViewPanel
+    id="MirGroupWorkplanLV">
+    <ExposeIterator
+      flags="CanAssignActivity,CanSkipActivity,CanCompleteActivity,CanApproveActivity"
+      valueType="entity.Activity"
+      widget="MirGroupWorkplanLV"/>
+    <Require
+      name="ActivityList"
+      type="Activity[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Activity"
+      hasCheckBoxes="true"
+      value="ActivityList"
+      valueType="entity.Activity[]">
+      <ToolbarFlag
+        condition="Activity.canAssign() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanAssignActivity"/>
+      <ToolbarFlag
+        condition="Activity.canSkip() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanSkipActivity"/>
+      <ToolbarFlag
+        condition="Activity.canComplete() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanCompleteActivity"/>
+      <ToolbarFlag
+        condition="Activity.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanApproveActivity"/>
+      <Row>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          id="Updated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          value="Activity.UpdatedSinceLastViewed"/>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;escalated.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          id="Escalated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          value="Activity.Escalated"/>
+        <DateCell
+          fontColor="gw.api.activity.ActivityUtil.isOverdue(Activity) ? &quot;Red&quot; : &quot;&quot;"
+          id="DueDate"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.DueDate&quot;)"
+          printWidth="0.1"
+          sortOrder="2"
+          value="Activity.TargetDate"/>
+        <TypeKeyCell
+          id="Priority"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Priority&quot;)"
+          printWidth="0.1"
+          sortOrder="1"
+          value="Activity.Priority"
+          valueType="typekey.Priority"/>
+        <TextCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Status&quot;)"
+          printWidth="0.1"
+          sortBy="Activity.Status"
+          value="Activity.ActivityStatus"/>
+        <TextCell
+          action="if(not gw.api.activity.ActivityUtil.isWorksheetOpen(Activity.ID)) ActivityDetailForward.goInWorkspace(Activity.Claim, Activity)"
+          available="perm.Activity.view(Activity)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Subject&quot;)"
+          printWidth="0.18"
+          sortBy="Activity.Subject"
+          value="String.isEmpty(Activity.Subject) ? DisplayKey.get(&quot;LV.Activity.Activities.NoSubject&quot;) : Activity.Subject"/>
+        <TextCell
+          id="MirDashboardClaim"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.Claim&quot;)"
+          maxChars="120"
+          printWidth="0.18"
+          sortBy="Activity.Exposure"
+          value="Activity.Exposure.Claim.ClaimNumber"/>
+        <TextCell
+          id="MirDashboardExposure"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.Exposure&quot;)"
+          maxChars="120"
+          printWidth="0.18"
+          sortBy="Activity.Exposure"
+          value="Activity.Exposure.FullDescription"/>
+        <TextCell
+          id="Assigner"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Assigner&quot;)"
+          printWidth="0"
+          sortBy="Activity.AssignedByUser.Contact"
+          value="(Activity.AssignedByUser.Contact == null) ? DisplayKey.get(&quot;Java.Activity.AssignedByUser.SystemUser&quot;) : Activity.AssignedByUser.Contact.DisplayName"/>
+        <TextCell
+          id="AssignedUser"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.AssignedUser&quot;)"
+          printWidth="0.10"
+          sortBy="Activity.AssignmentStatus, Activity.AssignedUser, Activity.AssignedQueue"
+          value="Activity.AssigneeDisplayString"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

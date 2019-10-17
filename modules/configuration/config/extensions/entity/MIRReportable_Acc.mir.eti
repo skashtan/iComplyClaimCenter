@@ -91,4 +91,12 @@
     name="Representative"
     nullok="true"
     type="softentityreference"/>
+  <column
+    name="ClaimRREID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="9"/>
+  </column>
 </entity>

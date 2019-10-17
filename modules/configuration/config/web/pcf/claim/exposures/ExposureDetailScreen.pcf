@@ -58,9 +58,16 @@
         id="ExposureDetailScreen_RefreshButton"
         label="DisplayKey.get(&quot;Web.ExposureDetail.Refresh&quot;)"
         visible="Exposure.ISOButtonsVisible"/>
+      <ToolbarButton
+        action="MirClaimDetailsPopup.push(Exposure)"
+        available="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_iComplyScreenButton"
+        label="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)"
+        showConfirmMessage="false"/>
     </Toolbar>
     <PanelRef
       def="ExposureDetailDV(Exposure, unusedServiceRequests)"
-      mode="Exposure.ExposureType"/>
+      mode="Exposure.ExposureType"></PanelRef>
   </Screen>
 </PCF>

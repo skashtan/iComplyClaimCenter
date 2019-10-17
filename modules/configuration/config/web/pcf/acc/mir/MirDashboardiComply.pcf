@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="true"
+    id="MirDashboardiComply"
+    title="DisplayKey.get(&quot;Java.Dashboard.Title&quot;, DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;))">
+    <LocationEntryPoint
+      signature="MirDashboardiComply(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.dashboard.DashboardTreeGroupInfo"/>
+    <Variable
+      initialValue="gw.api.dashboard.DashboardUtil.getMode()"
+      name="ModeSource"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="MirGroupWorkplanLV(GroupInfo.Group.OpenActivities.where(\a -&gt; a.Subject.contains(&quot;iComply&quot;)))">
+            <Toolbar>
+              <CheckedValuesToolbarButton
+                allCheckedRowsAction="pushAssignmentPopup(CheckedValues)"
+                flags="all CanAssignActivity"
+                id="ClaimWorkplan_AssignButton"
+                iterator="MirGroupWorkplanLV.MirGroupWorkplanLV"
+                label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Assign&quot;)"
+                shortcut="G"/>
+            </Toolbar>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code>function pushAssignmentPopup(Activities : Activity[]) {
+      var popup = new gw.api.activity.ActivityAssignmentPopup(Activities);
+      AssignActivitiesPopup.push(popup)
+    }
+    </Code>
+  </Page>
+</PCF>

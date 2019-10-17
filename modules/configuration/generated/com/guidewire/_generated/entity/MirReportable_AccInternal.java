@@ -30,6 +30,13 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
+   * Gets the value of the ClaimRREID field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.String getClaimRREID();
+  
+  
+  /**
    * Gets the value of the HICNOrMBI field.
    * Medicare Health Insurance Claim Number or Medicare Beneficiary Identifier
    */
@@ -205,6 +212,12 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    * Sets the value of the CMSDateOfIncident field.
    */
   public void setCMSDateOfIncident(java.util.Date value);
+  
+  
+  /**
+   * Sets the value of the ClaimRREID field.
+   */
+  public void setClaimRREID(java.lang.String value);
   
   
   /**

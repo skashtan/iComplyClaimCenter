@@ -5,13 +5,14 @@
   <ListViewPanel
     id="MirExposureResponseCodesLV">
     <Require
-      name="anMIRReportableHist_Acc"
-      type="MirReportableHist_Acc"/>
+      name="anMIRReportable_Acc"
+      type="MirReportable_Acc"/>
     <RowIterator
       editable="false"
       elementName="MirResponseCodeIterator"
-      value="anMIRReportableHist_Acc.MIRResponseCodes"
-      valueType="MirReportableRespCode_Acc[]">
+      value="anMIRReportable_Acc.MirReportingHistorys.maxBy(\h -&gt; h.CreateTime).MIRResponseCodes"
+      valueType="MirReportableRespCode_Acc[]"
+      visible="anMIRReportable_Acc.MirReportingHistorys != null">
       <Row>
         <TextCell
           id="mirResponseCode"

@@ -273,6 +273,7 @@
         value="Exposure.ExposureRpt.TotalIncurredNet"
         visible="perm.Claim.viewnettotalincurred(Exposure.Claim)"/>
     </InputColumn>
+    <InputColumn/>
     <Code><![CDATA[
 property get ContactProhibited() : boolean {
     return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited

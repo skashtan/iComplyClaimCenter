@@ -15,6 +15,8 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CMSDATEOFINCIDENT_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "CMSDateOfIncident");
   
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CLAIMRREID_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "ClaimRREID");
+  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CREATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "CreateTime");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> CREATEUSER_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "CreateUser");
@@ -153,6 +155,14 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   @gw.internal.gosu.parser.ExtendedProperty
   public java.util.Date getCMSDateOfIncident() {
     return (java.util.Date)__getInternalInterface().getFieldValue(CMSDATEOFINCIDENT_PROP.get());
+  }
+  
+  /**
+   * Gets the value of the ClaimRREID field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.String getClaimRREID() {
+    return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(CLAIMRREID_PROP.get());
   }
   
   /**
@@ -468,6 +478,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
+   * Sets the value of the ClaimRREID field.
+   */
+  public void setClaimRREID(java.lang.String value) {
+    __getInternalInterface().setFieldValueForCodegen(CLAIMRREID_PROP.get(), value);
+  }
+  
+  /**
    * Sets the value of the CreateTime field.
    */
   private void setCreateTime(java.util.Date value) {
@@ -730,6 +747,14 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     @gw.internal.gosu.parser.ExtendedProperty
     public java.util.Date getCMSDateOfIncident() {
       return (java.util.Date)__getInternalInterface().getFieldValue(CMSDATEOFINCIDENT_PROP.get());
+    }
+    
+    /**
+     * Gets the value of the ClaimRREID field.
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public java.lang.String getClaimRREID() {
+      return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(CLAIMRREID_PROP.get());
     }
     
     /**
@@ -1090,6 +1115,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
      */
     public void setCMSDateOfIncident(java.util.Date value) {
       __getInternalInterface().setFieldValue(CMSDATEOFINCIDENT_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the ClaimRREID field.
+     */
+    public void setClaimRREID(java.lang.String value) {
+      __getInternalInterface().setFieldValueForCodegen(CLAIMRREID_PROP.get(), value);
     }
     
     /**

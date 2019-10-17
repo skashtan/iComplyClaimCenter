@@ -7,13 +7,13 @@
     <Require
       name="anMIRReportable_Acc"
       type="MirReportable_Acc"/>
-    <TextInput
-      available="true"
+    <RangeInput
       editable="true"
-      id="mirRRE"
+      id="MirRREIDDropdown"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.rreid&quot;)"
-      required="true"
-      value="anMIRReportable_Acc.RREID.RREID"/>
+      value="anMIRReportable_Acc.ClaimRREID"
+      valueRange="gw.api.database.Query.make(MirRREID_Acc).select().map(\elt -&gt; elt.RREID).toList()"
+      valueType="java.lang.String"/>
     <TextInput
       editable="true"
       id="mirICN"
@@ -24,11 +24,11 @@
       label="DisplayKey.get(&quot;Accelerator.mir.labels.hicn&quot;)"
       value="anMIRReportable_Acc.HICNOrMBI"/>
     <DateInput
-      dateFormat="medium"
       editable="true"
-      id="mirCmsDate"
+      hideIfReadOnly="true"
+      id="MirCMSDateOfIncident"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
-      required="true"
-      value="anMIRReportable_Acc.CMSDateOfIncident"/>
+      value="anMIRReportable_Acc.CMSDateOfIncident"></DateInput>
   </InputSet>
 </PCF>
+

@@ -26,5 +26,8 @@
       label="DisplayKey.get(&quot;JSP.Dashboard.PeriodFinancials&quot;)"
       location="DashboardPeriodFinancials(GroupInfo)"
       shortcut="R"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)"
+      location="MirDashboardiComply(GroupInfo)"/>
   </LocationGroup>
 </PCF>

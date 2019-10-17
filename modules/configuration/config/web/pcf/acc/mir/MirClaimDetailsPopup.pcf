@@ -3,6 +3,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
   <Popup
+    canEdit="true"
     id="MirClaimDetailsPopup"
     title="DisplayKey.get(&quot;Accelerator.mir.heading.MirCard&quot;)">
     <LocationEntryPoint
@@ -10,9 +11,13 @@
     <Variable
       name="anExposure"
       type="Exposure"/>
-    <Screen>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
       <PanelRef
-        def="MirClaimDetailsDV(anExposure)"/>
+        def="MirClaimDetailsDV(anExposure)"></PanelRef>
     </Screen>
   </Popup>
 </PCF>

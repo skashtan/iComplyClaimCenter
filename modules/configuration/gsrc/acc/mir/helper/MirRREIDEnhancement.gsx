@@ -1,6 +1,9 @@
 package acc.mir.helper
 
+uses gw.api.database.Query
+uses gw.api.database.Relop
 uses gw.api.locale.DisplayKey
+uses gw.pl.persistence.core.Key
 uses gw.transaction.Transaction
 
 /**
@@ -32,4 +35,13 @@ enhancement MirRREIDEnhancement : MirRREID_Acc {
 
     return hasRREID
   }
+
+/*  static function getRREIDEntity(rreid : MirRREID_Acc) : Long {
+    query.compare(MirRREID_Acc#ID, Relop.Equals, rreid)
+    var rreidEntity = query.select().AtMostOneRow
+    return rreidEntity.
+  } var query = Query.make(MirRREID_Acc)
+   */
+
+
 }
