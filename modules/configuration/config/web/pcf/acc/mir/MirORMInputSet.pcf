@@ -8,11 +8,18 @@
     <Require
       name="anMIRReportable__Acc"
       type="MirReportable_Acc"/>
+    <RangeInput
+      editable="true"
+      id="MirHasORmInput"
+      label="DisplayKey.get(&quot;Accelerator.mir.label.orm&quot;)"
+      required="anMIRReportable__Acc.ORMTermDate != null"
+      value="anMIRReportable__Acc.HasORM"
+      valueRange="new String[]{acc.mir.mirsubmitfs.dataservice.enums.TripleState.Yes.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.No.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.Unknown.Code}"
+      valueType="java.lang.String"/>
     <DateInput
       editable="true"
       id="OrmTermDate"
       label="DisplayKey.get(&quot;Accelerator.mir.label.ormterm&quot;)"
-      required="anMIRReportable__Acc.HasORM == acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState.Yes.toString()"
       value="anMIRReportable__Acc.ORMTermDate"/>
   </InputSet>
 </PCF>

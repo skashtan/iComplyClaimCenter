@@ -64,7 +64,8 @@
         hideIfEditable="true"
         id="ExposureDetailScreen_iComplyScreenButton"
         label="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)"
-        showConfirmMessage="false"/>
+        showConfirmMessage="false"
+        visible="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"/>
     </Toolbar>
     <PanelRef
       def="ExposureDetailDV(Exposure, unusedServiceRequests)"

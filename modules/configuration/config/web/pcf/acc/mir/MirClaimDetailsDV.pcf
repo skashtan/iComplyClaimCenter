@@ -8,6 +8,10 @@
     <Require
       name="anExposure"
       type="Exposure"/>
+    <Variable
+      initialValue="anExposure.mirReportable_Acc != null ? anExposure.mirReportable_Acc : acc.mir.helper.MirReportableEnhancement.initMirReportable(anExposure)"
+      name="anMirReportable_Acc"
+      type="MirReportable_Acc"/>
     <InputColumn>
       <ButtonInput
         align="left"
@@ -18,8 +22,8 @@
         id="mirResponseHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "/>
       <ListViewInput
-        available="anExposure.mirReportable_Acc.MirReportingHistorys != null"
-        def="MirExposureResponseCodesLV(anExposure.mirReportable_Acc)">
+        available="anMirReportable_Acc.MirReportingHistorys != null"
+        def="MirExposureResponseCodesLV(anMirReportable_Acc)">
         <Toolbar></Toolbar>
       </ListViewInput>
       <Label
@@ -29,14 +33,14 @@
         def="MirExposureInputSet(anExposure)"
         id="mirExposureRef"/>
       <InputSetRef
-        def="MirClaimantInformationInputSet(anExposure.mirReportable_Acc)"
+        def="MirClaimantInformationInputSet(anMirReportable_Acc)"
         id="mirClaimantInformationInputSetref"/>
       <InputDivider/>
       <Label
         id="mirORMHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.orm&quot;)"/>
       <InputSetRef
-        def="MirORMInputSet(anExposure.mirReportable_Acc)"
+        def="MirORMInputSet(anMirReportable_Acc)"
         editable="true"
         id="OrmRef"/>
       <InputDivider/>
@@ -44,7 +48,7 @@
         id="mirTPOCHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.tpoc&quot;)"/>
       <ListViewInput
-        def="MirTPOCLV(anExposure.mirReportable_Acc)"
+        def="MirTPOCLV(anMirReportable_Acc)"
         id="mirTpocLv">
         <Toolbar>
           <IteratorButtons
@@ -53,5 +57,12 @@
         </Toolbar>
       </ListViewInput>
     </InputColumn>
+    <Code><![CDATA[function maybeInitReportable(){
+  if (CurrentLocation.InEditMode && anExposure.mirReportable_Acc == null) {
+    anExposure.mirReportable_Acc = new MirReportable_Acc()
+  }
+}
+
+]]></Code>
   </DetailViewPanel>
 </PCF>

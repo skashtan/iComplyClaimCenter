@@ -25,7 +25,6 @@
       value="anMIRReportable_Acc.HICNOrMBI"/>
     <DateInput
       editable="true"
-      hideIfReadOnly="true"
       id="MirCMSDateOfIncident"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
       value="anMIRReportable_Acc.CMSDateOfIncident"></DateInput>
