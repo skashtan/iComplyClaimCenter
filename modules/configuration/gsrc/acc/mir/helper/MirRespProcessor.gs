@@ -16,7 +16,7 @@ class MirRespProcessor {
     print(respXml.asUTFString())
     var claimStatus = respXml.SubmitClaimResult.StatusObject
     var respCodes = new ArrayList<ResponseCode>()
-    if (claimStatus.ResponseCodes.ResponseCode != null){
+    if (claimStatus.ResponseCodes.ResponseCode != null) {
       respCodes.addAll(claimStatus.ResponseCodes.ResponseCode)
     }
 
@@ -26,6 +26,9 @@ class MirRespProcessor {
     Transaction.runWithNewBundle(\bundle -> {
 
       var history = new MirReportableHist_Acc()
+      if (claimStatus.ICN != null) {
+        exposure.mirReportable_Acc.ICN = claimStatus.ICN
+      }
       if (claimStatus.HICN != null) {
         exposure.mirReportable_Acc.HICNOrMBI = claimStatus.HICN
       }
@@ -48,40 +51,45 @@ class MirRespProcessor {
         history.NextCMSQuery = MirDateConversionEnhancement.toJavaDate(claimStatus.NextQueryDate)
       }
 
-
-        respCodes.forEach(\c -> {
-          var respCode = new MirReportableRespCode_Acc()
-          if (c.CmsCode != null) {
-            respCode.CMSCode = c.CmsCode
-          }
-          if (c.CodeType != null) {
-            respCode.CodeType = c.CodeType
-          }
-          if (c.Description != null) {
-            respCode.ResponseDescription = c.Description
-          }
-          if (c.Origin != null) {
-            respCode.CodeOrigin = c.Origin
-          }
-          history.addToMIRResponseCodes(respCode)
-        })
-
-      //TODO does this equality work? - does it just use my fields or does it use the createtime etc?
-      if(history.equals(lastHist)){
-        return
-      }
-      // maybe create activity for adjuster
-      if (respCodes.size() > 0) {
-        var respCodesString = respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(","))
-        //if (exposure.Activities.countWhere(\elt -> elt.Status == ActivityStatus.TC_OPEN && elt.Description.contains(respCodesString) && elt.Subject.contains("iComply")) < 1){
-          var activity = MirActivityEnhancement.createActivity(exposure, respCodesString)
-          activity = bundle.add(activity)
-        //}
-
-      }
-
       mirReportable.addToMirReportingHistorys(history)
 
+      if (respCodes.size() > 0) {
+        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
+        activity.Priority = Priority.TC_NORMAL
+        activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(","))
+        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
+
+      }
+
+      for(c in respCodes) {
+        var respCode = new MirReportableRespCode_Acc()
+        bundle.add(respCode)
+        if (c.CmsCode != null) {
+          respCode.CMSCode = c.CmsCode
+        }
+        if (c.CodeType != null) {
+          respCode.CodeType = c.CodeType
+        }
+        if (c.Description != null) {
+          print(c.Description)
+          respCode.ResponseDescription = c.Description
+        }
+        if (c.Origin != null) {
+          respCode.CodeOrigin = c.Origin
+        }
+
+        history.addToMIRResponseCodes(respCode)
+
+      }
+
+     // history.setMIRResponseCodes(array)
+      //TODO does this equality work? - does it just use my fields or does it use the createtime etc?
+      // TODO add and lastHist is not null
+      // if(history.equals(lastHist)){
+      //   return
+      // }
+
+      bundle.add(history)
     })
   }
 }

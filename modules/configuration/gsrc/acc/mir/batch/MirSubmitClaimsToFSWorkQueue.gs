@@ -55,12 +55,14 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
   }
 
   override function createWorkItem(exposure : Exposure, safeBundle : Bundle) : MirSubmitWorkItem_Acc {
+    print("creating work item")
     var mirSubmitWorkItem_Acc = new MirSubmitWorkItem_Acc(safeBundle)
     mirSubmitWorkItem_Acc.Exposure = exposure
     return mirSubmitWorkItem_Acc
   }
 
   override function processWorkItem(mirSubmitWorkItem_Acc : MirSubmitWorkItem_Acc) {
+    print("processing work item")
     if (mirSubmitWorkItem_Acc.Exposure.Claim.IncidentReport || mirSubmitWorkItem_Acc.Exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
       return
     }

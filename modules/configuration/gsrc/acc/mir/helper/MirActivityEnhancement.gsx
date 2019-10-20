@@ -28,4 +28,5 @@ enhancement MirActivityEnhancement : Activity {
 
     return activity
   }
+
 }

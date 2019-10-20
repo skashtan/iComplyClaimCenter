@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirOfficeCodeLV">
+    <Require
+      name="MirOfficeCodeList"
+      type="gw.api.database.IQueryBeanResult&lt;MirOfficeCode_Acc&gt;"/>
+    <ExposeIterator
+      valueType="MirOfficeCode_Acc"
+      widget="MirOfficeCodeLV"/>
+    <RowIterator
+      checkBoxVisible="CurrentLocation.InEditMode ? true : false"
+      editable="true"
+      elementName="MirOfficeCode"
+      toCreateAndAdd="new MirOfficeCode_Acc()"
+      toRemove="MirOfficeCode.remove()"
+      value="MirOfficeCodeList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.MirOfficeCode_Acc&gt;">
+      <Row>
+        <TextCell
+          editable="true"
+          id="MirOfficeCodeLV"
+          label="DisplayKey.get(&quot;Accelerator.mir.label.officecode&quot;)"
+          sortOrder="1"
+          value="MirOfficeCode.OfficeCode"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -11,15 +11,42 @@
       initialValue="gw.api.database.Query.make(entity.MirRREID_Acc).select()"
       name="MirRREIDS"
       type="gw.api.database.IQueryBeanResult&lt;MirRREID_Acc&gt;"/>
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.MirOfficeCode_Acc).select()"
+      name="MirOfficeCodes"
+      type="gw.api.database.IQueryBeanResult&lt;MirOfficeCode_Acc&gt;"/>
     <Screen
       id="MirAdminScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Accelerator.mir.heading.rreidadmin&quot;) "/>
+        </InputColumn>
+      </DetailViewPanel>
       <PanelRef
         def="MirRREIDLV(MirRREIDS)">
         <Toolbar>
-          <EditButtons/>
           <IteratorButtons
             addVisible="true"
             iterator="MirRREIDLV.MirRREIDLV"
+            removeVisible="true"/>
+        </Toolbar>
+      </PanelRef>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Accelerator.mir.heading.officecodeadmin&quot;) "/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="MirOfficeCodeLV(MirOfficeCodes)">
+        <Toolbar>
+          <IteratorButtons
+            addVisible="true"
+            iterator="MirOfficeCodeLV.MirOfficeCodeLV"
             removeVisible="true"/>
         </Toolbar>
       </PanelRef>

@@ -14,16 +14,25 @@
       type="MirReportable_Acc"/>
     <InputColumn>
       <ButtonInput
-        align="left"
+        action="submitNow(anExposure)"
+        align="center"
+        available="InEditMode == false"
         boldValue="true"
         id="mirSubmitNow"
         value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>
       <Label
         id="mirResponseHeading"
-        label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "/>
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "
+        visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0"/>
+      <PreFormattedTextInput
+        id="MirReadyForCMS"
+        value="DisplayKey.get(&quot;Accelerator.mir.label.ReadyForCMS&quot;) "
+        visible="anMirReportable_Acc.MirReportingHistorys.last().IsReadyForCMS"
+        __disabled="true"/>
       <ListViewInput
         available="anMirReportable_Acc.MirReportingHistorys != null"
-        def="MirExposureResponseCodesLV(anMirReportable_Acc)">
+        def="MirExposureResponseCodesLV(anMirReportable_Acc)"
+        visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0">
         <Toolbar></Toolbar>
       </ListViewInput>
       <Label
@@ -33,7 +42,7 @@
         def="MirExposureInputSet(anExposure)"
         id="mirExposureRef"/>
       <InputSetRef
-        def="MirClaimantInformationInputSet(anMirReportable_Acc)"
+        def="MirClaimantInformationInputSet(anExposure)"
         id="mirClaimantInformationInputSetref"/>
       <InputDivider/>
       <Label
@@ -57,12 +66,26 @@
         </Toolbar>
       </ListViewInput>
     </InputColumn>
-    <Code><![CDATA[function maybeInitReportable(){
-  if (CurrentLocation.InEditMode && anExposure.mirReportable_Acc == null) {
-    anExposure.mirReportable_Acc = new MirReportable_Acc()
-  }
-}
+    <InputColumn>
+      <ListViewInput
+        def="MirRelationsLV(anExposure)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="MirRelationsLV.MirRelationsLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <Code><![CDATA[uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue
 
+function submitNow(exposure : Exposure) {
+  gw.transaction.Transaction.runWithNewBundle(\bundle -> {
+    var workQueue = new MirSubmitClaimsToFSWorkQueue()
+    var workItem = workQueue.createWorkItem(exposure, bundle)
+    workItem.initialize()
+    workQueue.processWorkItem(workItem)
+  })
+
+}
 ]]></Code>
   </DetailViewPanel>
 </PCF>
