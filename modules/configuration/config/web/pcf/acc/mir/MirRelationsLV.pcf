@@ -18,31 +18,17 @@
       value="anExposure.mirReportable_Acc.Relation"
       valueType="entity.MirRelation_Acc[]">
       <Row>
-        <ClaimRelatedContactCell
-          claim="anExposure.Claim"
-          editable="true"
-          id="Contact"
-          label="DisplayKey.get(&quot;Web.RelatedContactsLV.Contact&quot;)"
-          required="true"
-          sortBy="contactContact.getOtherContact(Contact).PrimarySortValue,contactContact.getOtherContact(Contact).SecondarySortValue,contactContact.getOtherContact(Contact).TertiarySortValue,contactContact.getOtherContact(Contact).QuaternarySortValue"
-          sortOrder="2"
+        <RangeCell
+          id="thisisatest"
           value="MirRelation.Contact"
-          valueRange="anExposure.Claim.RelatedContacts"/>
-        <ClaimContactCell
-          claim="anExposure.Claim"
-          editable="true"
-          forceContactSubtype="Doctor.Type"
-          id="Provider_name"
-          label="DisplayKey.get(&quot;NVV.Claim.MedCaseMgrDetails.MedicalDiagnosis.Provider&quot;)"
-          onPick="helper.providerOnPick(aMedicalDiagnosis)"
-          required="true"
-          value="gw.transaction.Transaction MirRelation.Contact"
-          valueRange="injury.Claim.RelatedDoctorArray"/>
+          valueRange="anExposure.Claim.Contacts.map(\c -&gt; c.ID.Value).toList()"
+          valueType="java.lang.Long"/>
         <TypeKeyCell
           editable="true"
-          id="MirRelationTypeDropdown2"
+          id="MirRelationTypeDropdown"
           label="&quot;TODO&quot;"
-          valueType="MirRelationType_Acc"/>
+          value="MirRelation.RelationType"
+          valueType="typekey.MirRelationType_Acc"/>
       </Row>
     </RowIterator>
   </ListViewPanel>

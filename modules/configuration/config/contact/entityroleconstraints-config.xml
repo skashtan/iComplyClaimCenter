@@ -50,6 +50,8 @@ ContactRole types. If you are unsure which types are internal, review the Data D
   <ContactRoleTypeConstraint contactRoleCode="venue" contactSubtype="LegalVenue"/>
   <ContactRoleTypeConstraint contactRoleCode="wccarrier" contactSubtype="Company"/>
   <ContactRoleTypeConstraint contactRoleCode="witness" contactSubtype="Person"/>
+
+
   <EntityRoleConstraint>
     <EntityRef entityType="Claim">
       <RoleRef contactRoleCode="FirstIntakeDoctor">
@@ -176,6 +178,13 @@ ContactRole types. If you are unsure which types are internal, review the Data D
       <RoleRef contactRoleCode="venue"/>
     </EntityRef>
     <EntityRef entityType="Exposure">
+      <RoleRef contactRoleCode="MirGuardian_Acc"/>
+      <RoleRef contactRoleCode="MirEstate_Acc"/>
+      <RoleRef contactRoleCode="MirFamilyMember_Acc"/>
+      <RoleRef contactRoleCode="MirOtherRel_Acc"/>
+      <RoleRef contactRoleCode="MirAttorney_Acc"/>
+      <RoleRef contactRoleCode="MirOtherRep_Acc"/>
+      <RoleRef contactRoleCode="MirPowerOfAttorney_Acc"/>
       <RoleRef contactRoleCode="FirstIntakeDoctor">
         <RoleConstraint constraintType="Exclusive"/>
       </RoleRef>

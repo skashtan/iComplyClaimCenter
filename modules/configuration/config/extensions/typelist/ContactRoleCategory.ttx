@@ -8,7 +8,7 @@
     code="primary"
     desc="Primary roles"
     name="Primary roles"
-    priority="1">
+    priority="10">
     <category
       code="insured"
       typelist="ContactRole"/>
@@ -35,7 +35,7 @@
     code="secondary"
     desc="Secondary roles"
     name="Secondary roles"
-    priority="2">
+    priority="20">
     <category
       code="employer"
       typelist="ContactRole"/>
@@ -65,7 +65,7 @@
     code="vendor"
     desc="Vendors"
     name="Vendors"
-    priority="3">
+    priority="30">
     <category
       code="doctor"
       typelist="ContactRole"/>
@@ -149,7 +149,7 @@
     code="litigation"
     desc="Litigation roles"
     name="Litigation roles"
-    priority="4">
+    priority="40">
     <category
       code="mattermanager"
       typelist="ContactRole"/>
@@ -203,7 +203,7 @@
     code="former"
     desc="&quot;Former&quot; roles"
     name="&quot;Former&quot; roles"
-    priority="5">
+    priority="50">
     <category
       code="formeragent"
       typelist="ContactRole"/>
@@ -224,6 +224,37 @@
       typelist="ContactRole"/>
     <category
       code="formerunderwriter"
+      typelist="ContactRole"/>
+  </typecode>
+  <typecode
+    code="iComplyReperesenative"
+    name="iComply Representative"
+    priority="60">
+    <category
+      code="MirAttorney_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirGuardian_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirPowerOfAttorney_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirOtherRep_Acc"
+      typelist="ContactRole"/>
+  </typecode>
+  <typecode
+    code="iComplyRelationship"
+    name="iComply Relationship"
+    priority="70">
+    <category
+      code="MirFamilyMember_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirEstate_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirOtherRel_Acc"
       typelist="ContactRole"/>
   </typecode>
 </typelistextension>

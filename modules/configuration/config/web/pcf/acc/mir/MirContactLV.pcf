@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirContactLV">
+    <Require
+      name="anExposure"
+      type="Exposure"/>
+    <ExposeIterator
+      valueType="entity.Contact"
+      widget="MirContactCLV"/>
+    <Require
+      name="contactRole"
+      type="ContactRole"/>
+    <RowIterator
+      editable="false"
+      elementName="MirContactDetail"
+      pageSize="10"
+      value="anExposure.getContactsByRole(contactRole)"
+      valueType="entity.Contact[]"
+      visible="anExposure.getContactsByRole(contactRole).length &gt; 0">
+      <Row>
+        <TextCell
+          id="MirContactName"
+          label="contactRole.DisplayName"
+          value="MirContactDetail.DisplayName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

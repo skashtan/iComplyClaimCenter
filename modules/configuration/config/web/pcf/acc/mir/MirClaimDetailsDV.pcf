@@ -15,11 +15,12 @@
     <InputColumn>
       <ButtonInput
         action="submitNow(anExposure)"
-        align="center"
+        align="left"
         available="InEditMode == false"
         boldValue="true"
         id="mirSubmitNow"
         value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>
+      <InputDivider/>
       <Label
         id="mirResponseHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "
@@ -35,12 +36,17 @@
         visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0">
         <Toolbar></Toolbar>
       </ListViewInput>
+      <InputDivider/>
       <Label
         id="mirClaimantDetailHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.clmDtl&quot;)"/>
       <InputSetRef
         def="MirExposureInputSet(anExposure)"
         id="mirExposureRef"/>
+      <InputDivider/>
+      <Label
+        id="mirReportingDetailHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.rptDtl&quot;)"/>
       <InputSetRef
         def="MirClaimantInformationInputSet(anExposure)"
         id="mirClaimantInformationInputSetref"/>
@@ -67,12 +73,60 @@
       </ListViewInput>
     </InputColumn>
     <InputColumn>
+      <Label
+        id="miContacHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.claimContacts&quot;) "/>
+      <ButtonInput
+        action="ClaimContacts.push(anExposure.Claim)"
+        align="left"
+        available="InEditMode == false"
+        boldValue="true"
+        hideIfEditable="true"
+        id="mirEditContacts"
+        value="DisplayKey.get(&quot;Accelerator.mir.heading.editclaimcontacts&quot;) "/>
+      <InputDivider/>
       <ListViewInput
-        def="MirRelationsLV(anExposure)">
-        <Toolbar>
-          <IteratorButtons
-            iterator="MirRelationsLV.MirRelationsLV"/>
-        </Toolbar>
+        def="MirContactLV(anExposure, ContactRole.TC_MIRATTORNEY_ACC)"
+        id="MirAttyLv">
+        <Toolbar
+          id="MirAttyToolbar"
+          visible="false"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIRGUARDIAN_ACC)"
+        id="MirGuardianLV">
+        <Toolbar
+          id="MirGuardianToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIRPOWEROFATTORNEY_ACC)"
+        id="MirPowerOfAttorneyLV">
+        <Toolbar
+          id="MirPowerOfAttorneyToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIROTHERREP_ACC)"
+        id="MirOtherRepLV">
+        <Toolbar
+          id="MirOtherRepToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIRESTATE_ACC)"
+        id="MiEstateLV">
+        <Toolbar
+          id="MirEstateToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIRFAMILYMEMBER_ACC)"
+        id="MirFamilyMemberLV">
+        <Toolbar
+          id="MirFamilyMemberToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIROTHERREL_ACC)"
+        id="MirOtherRelativeLV">
+        <Toolbar
+          id="MirOtherRelativeToolbar"/>
       </ListViewInput>
     </InputColumn>
     <Code><![CDATA[uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue

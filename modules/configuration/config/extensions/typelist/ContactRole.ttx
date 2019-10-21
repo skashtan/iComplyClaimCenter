@@ -317,4 +317,32 @@
     <include
       code="agent"/>
   </typefilter>
+  <typecode
+    code="MirAttorney_Acc"
+    desc="CMS representative (Attorney)"
+    name="iComply Representative (Attorney)"/>
+  <typecode
+    code="MirGuardian_Acc"
+    desc="CMS representative (Guardian/Conservator)"
+    name="iComply Representative (Guardian/Conservator)"/>
+  <typecode
+    code="MirPowerOfAttorney_Acc"
+    desc="CMS representative (Power of Attorney)"
+    name="iComply Representative (Power of Attorney)"/>
+  <typecode
+    code="MirOtherRep_Acc"
+    desc="CMS representative (Other)"
+    name="iComply Representative (Other)"/>
+  <typecode
+    code="MirEstate_Acc"
+    desc="CMS relationship (Estate)"
+    name="iComply Relationship (Estate)"/>
+  <typecode
+    code="MirFamilyMember_Acc"
+    desc="CMS relationship (Family Member)"
+    name="iComply Relationship (Family Member)"/>
+  <typecode
+    code="MirOtherRel_Acc"
+    desc="CMS relationship (Other)"
+    name="iComply Relationship (Other)"/>
 </typelistextension>
