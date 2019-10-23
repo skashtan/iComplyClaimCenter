@@ -49,7 +49,6 @@
           sortOrder="2"
           value="new util.lvwrapper.ClaimContactContactLVWrapper(contactContact, Contact, claim).OtherContact"
           valueRange="claim.RelatedContacts"/>
-        <ClaimContactCell/>
         <RangeCell
           editable="true"
           id="Rel"
