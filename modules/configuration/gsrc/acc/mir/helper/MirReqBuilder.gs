@@ -19,15 +19,10 @@ class MirReqBuilder {
 
   static function buildMirSubmitXML(exposure : Exposure) : SubmitClaim {
 
+    //variables
     var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
     var reqXml = new SubmitClaim()
-
-    //variables
     var claim = exposure.Claim
-    var test1 = exposure.Claimant != null
-    var test2 = exposure.Claim.ClaimantDenorm != null
-    print("********************************************* exposure.Claimant exists: " + test1)
-    print("********************************************* exposure.Claim.ClaimantDenorm exists: " + test2)
     var claimant = (exposure.Claimant != null) ? exposure.Claimant as Person : exposure.Claim.ClaimantDenorm as Person
     var policy = exposure.Claim.Policy
     var mirReportable = exposure.mirReportable_Acc
@@ -40,11 +35,14 @@ class MirReqBuilder {
     //additional claim relations
 
     //TODO sort by most recent
-    var relationships = {"estates" -> exposure.getContactsByRole(ContactRole.TC_MIRESTATE_ACC), "familyMembers" -> exposure.getContactsByRole(ContactRole.TC_MIRFAMILYMEMBER_ACC),
-    "other" -> exposure.getContactsByRole(ContactRole.TC_MIROTHERREL_ACC)}
-    // var representatives = new ContactRole[]{ContactRole.TC_MIROTHERREP_ACC, ContactRole.TC_MIRATTORNEY_ACC, ContactRole.TC_MIRGUARDIAN_ACC, ContactRole.TC_MIRPOWEROFATTORNEY_ACC}
+   // var cc = exposure.getClaimContactsByRole(ContactRole.TC_MIRESTATE_ACC)
+   // cc[1].rol
+    //var relationships = {"estates" -> exposure.getContactsByRole(ContactRole.TC_MIRESTATE_ACC), "familyMembers" -> exposure.getContactsByRole(ContactRole.TC_MIRFAMILYMEMBER_ACC),
+   // "other" -> exposure.getContactsByRole(ContactRole.TC_MIROTHERREL_ACC)}
+    //var representatives = new ContactRole[]{ContactRole.TC_MIROTHERREP_ACC, ContactRole.TC_MIRATTORNEY_ACC, ContactRole.TC_MIRGUARDIAN_ACC, ContactRole.TC_MIRPOWEROFATTORNEY_ACC}
     //var relations = new ContactRole[]{ContactRole.TC_MIRESTATE_ACC, ContactRole.TC_MIRFAMILYMEMBER_ACC, ContactRole.TC_MIROTHERREL_ACC}
-/*
+    var contacts = exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC)
+    /*
     if (relationships.size() > 0) {
       var contact = relationships.get(0) as entity.Contact
       var c1IsPerson = (contact typeis Person) ? true : false
@@ -155,9 +153,9 @@ class MirReqBuilder {
     }
 
     var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
-    // TODO sort by most recent?
     if (diagCodesArray.length > 0) {
-      var diagCodes = Arrays.asList(diagCodesArray)
+      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime)
+
       diagCodes.stream().limit(19).forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
 
@@ -233,8 +231,7 @@ class MirReqBuilder {
     if (exposure.Coverage.ExposureLimit != null) {
       reqXml.Claim.NoFaultLimit = exposure.Coverage.ExposureLimit as Double
     }
-    //TODO ORDER by date oldest to newest
-    var transactions = exposure.TransactionsQuery
+    var transactions = exposure.TransactionsQuery.toList().sortByDescending(\r -> r.CreateTime)
     var transactionSum = new CurrencyAmount(0.00)
     for (transaction in transactions) {
       transactionSum = transactionSum + transaction.Amount
@@ -256,9 +253,6 @@ class MirReqBuilder {
     } else {
       reqXml.Claim.OfficeCode = props.getProperty("ICOMPLY.NO.OFFICE.CODE")
     }
-
-    // TODO verify logic
-    print("exposure type: " + exposure.ExposureType)
 
     var isPip = exposure.Coverage != null && exposure.Coverage.Type.Code.toUpperCase().contains("PIP")
     print("is PIP: " + isPip)
@@ -286,7 +280,7 @@ class MirReqBuilder {
     reqXml.Claim.PolicyHolderLastName = (claim.Insured.Subtype == Contact.TC_PERSON) ? (claim.Insured as Person).LastName : ""
     reqXml.Claim.PolicyNumber = policy.PolicyNumber
 
-    if (mirReportable.Representative != null) {
+/*    if (mirReportable.Representative != null) {
       var rep = getContact(mirReportable.Representative)
       reqXml.Claim.RepAddress1 = rep.PrimaryAddress.AddressLine1
       reqXml.Claim.RepAddress2 = rep.PrimaryAddress.AddressLine2
@@ -300,7 +294,7 @@ class MirReqBuilder {
       reqXml.Claim.RepState = rep.PrimaryAddress.City
       reqXml.Claim.RepTIN = rep.Company.TaxID
       reqXml.Claim.RepZipCode = rep.PrimaryAddress.PostalCode
-    }
+    }*/
 
 
     if (claimant.TaxID != null) {
@@ -322,68 +316,35 @@ class MirReqBuilder {
 
     // TPOCS
     if (mirReportable != null) {
-      var tpocs = exposure.mirReportable_Acc.TPOC.orderBy(\r -> r.TpocDate) //TODO check this is ascending
+      var tpocs = exposure.mirReportable_Acc.TPOC.sortBy(\r -> r.CreateTime)
 
-      if (tpocs.size() >= 1) {
+      if (tpocs.length >= 1) {
         reqXml.Claim.TpocAmount = tpocs[0].TpocAmount as Double
         reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDate)
         reqXml.Claim.TpocDelayedFunding = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDelayedFunding)
       }
-      if (tpocs.size()  >= 2) {
+      if (tpocs.length >= 2) {
         reqXml.Claim.TpocAmount2 = tpocs[1].TpocAmount as Double
         reqXml.Claim.TpocDate2 = MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDate)
         reqXml.Claim.TpocDelayedFunding2 = MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDelayedFunding)
       }
-      if (tpocs.size()  >= 3) {
+      if (tpocs.length >= 3) {
         reqXml.Claim.TpocAmount3 = tpocs[2].TpocAmount as Double
         reqXml.Claim.TpocDate3 = MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDate)
         reqXml.Claim.TpocDelayedFunding3 = MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDelayedFunding)
       }
-      if (tpocs.size()  >= 4) {
+      if (tpocs.length  >= 4) {
         reqXml.Claim.TpocAmount4 = tpocs[3].TpocAmount as Double
         reqXml.Claim.TpocDate4 = MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDate)
         reqXml.Claim.TpocDelayedFunding4 = MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDelayedFunding)
       }
-      if (tpocs.size()  >= 5) {
+      if (tpocs.length  >= 5) {
         reqXml.Claim.TpocAmount5 = tpocs[4].TpocAmount as Double
         reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDate)
         reqXml.Claim.TpocDelayedFunding5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDelayedFunding)
       }
     }
     return reqXml
-  }
-
-
-  static function getRelationshipIndicator(type : MirRelationType_Acc, person : Boolean) : String {
-    var relation = ""
-    // TODO remove hard coding
-    if (type == MirRelationType_Acc.TC_ESTATE && person) {
-      relation = "E"
-    } else if (type == MirRelationType_Acc.TC_ESTATE && !person) {
-      relation = "X"
-    } else if (type == MirRelationType_Acc.TC_FAMILYMEMBER && person) {
-      relation = "F"
-    } else if (type == MirRelationType_Acc.TC_FAMILYMEMBER && !person) {
-      relation = "Y"
-    } else if (type == MirRelationType_Acc.TC_OTHER && !person) {
-      relation = "Z"
-    } else {
-      relation = "O"
-    }
-    return relation
-  }
-
-  static function getRepIndicator(repType : MirRepType_Acc) : String {
-    // TODO remove hard coding
-    if (repType == MirRepType_Acc.TC_ATTORNEY) {
-      return "A"
-    } else if (repType == MirRepType_Acc.TC_GUARDIANCONSERVATOR){
-      return "G"
-    } else if (repType == MirRepType_Acc.TC_POWEROFATTORNEY){
-      return "P"
-    } else {
-      return "O"
-    }
   }
 
   static function getContact(contactID : Long) : entity.Contact {
