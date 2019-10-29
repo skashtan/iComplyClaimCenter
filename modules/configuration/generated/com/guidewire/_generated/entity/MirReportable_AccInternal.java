@@ -10,12 +10,6 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
-   * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
-   */
-  public void addToRelation(entity.MirRelation_Acc element);
-  
-  
-  /**
    * Adds the given element to the TPOC array. This is achieved by setting the parent foreign key to this entity instance.
    */
   public void addToTPOC(entity.MirReportableTPOC_Acc element);
@@ -27,6 +21,13 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    */
   @gw.internal.gosu.parser.ExtendedProperty
   public java.util.Date getCMSDateOfIncident();
+  
+  
+  /**
+   * Gets the value of the ClaimOfficeCode field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.String getClaimOfficeCode();
   
   
   /**
@@ -93,49 +94,6 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
-   * Gets the value of the OfficeCode field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirOfficeCode_Acc getOfficeCode();
-  
-  
-  public gw.pl.persistence.core.Key getOfficeCodeID();
-  
-  
-  /**
-   * Gets the value of the RREID field.
-   * The RRE ID corresponding to the claim
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirRREID_Acc getRREID();
-  
-  
-  public gw.pl.persistence.core.Key getRREIDID();
-  
-  
-  /**
-   * Gets the value of the Relation field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirRelation_Acc[] getRelation();
-  
-  
-  /**
-   * Gets the value of the Representative field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public java.lang.Long getRepresentative();
-  
-  
-  /**
-   * Gets the value of the RepresentativeType field.
-   * type of representative
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public typekey.MirRepType_Acc getRepresentativeType();
-  
-  
-  /**
    * Gets the value of the SettlementStatus field.
    * identifies settlement status
    */
@@ -181,20 +139,6 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
-   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-   */
-  public void removeFromRelation(entity.MirRelation_Acc element);
-  
-  
-  /**
-   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-   * @deprecated Please use the version that takes an entity instead.
-   */
-  @java.lang.Deprecated
-  public void removeFromRelation(gw.pl.persistence.core.Key elementID);
-  
-  
-  /**
    * Removes the given element from the TPOC array. This is achieved by marking the element for removal.
    */
   public void removeFromTPOC(entity.MirReportableTPOC_Acc element);
@@ -212,6 +156,12 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    * Sets the value of the CMSDateOfIncident field.
    */
   public void setCMSDateOfIncident(java.util.Date value);
+  
+  
+  /**
+   * Sets the value of the ClaimOfficeCode field.
+   */
+  public void setClaimOfficeCode(java.lang.String value);
   
   
   /**
@@ -266,42 +216,6 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    * Sets the value of the ORMTermDate field.
    */
   public void setORMTermDate(java.util.Date value);
-  
-  
-  /**
-   * Sets the value of the OfficeCode field.
-   */
-  public void setOfficeCode(entity.MirOfficeCode_Acc value);
-  
-  
-  public void setOfficeCodeID(gw.pl.persistence.core.Key value);
-  
-  
-  /**
-   * Sets the value of the RREID field.
-   */
-  public void setRREID(entity.MirRREID_Acc value);
-  
-  
-  public void setRREIDID(gw.pl.persistence.core.Key value);
-  
-  
-  /**
-   * Sets the value of the Relation field.
-   */
-  public void setRelation(entity.MirRelation_Acc[] value);
-  
-  
-  /**
-   * Sets the value of the Representative field.
-   */
-  public void setRepresentative(java.lang.Long value);
-  
-  
-  /**
-   * Sets the value of the RepresentativeType field.
-   */
-  public void setRepresentativeType(typekey.MirRepType_Acc value);
   
   
   /**

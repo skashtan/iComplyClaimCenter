@@ -7,7 +7,6 @@ uses acc.mir.helper.MirRespProcessor
 uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
 uses gw.api.database.Query
 uses gw.api.database.Relop
-uses gw.api.financials.ClaimFinancialsTransactionsOption
 uses gw.api.financials.CurrencyAmount
 uses gw.api.financials.FinancialsCalculations
 uses gw.api.locale.DisplayKey
@@ -15,7 +14,6 @@ uses gw.api.util.DateUtil
 uses gw.pl.persistence.core.Bundle
 uses gw.processes.WorkQueueBase
 uses gw.util.PropertiesFileAccess
-uses typekey.Contact
 
 /**
  * Created by Sara.Kashtan on 9/30/2019.
@@ -31,9 +29,9 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
 
   override function findTargets() : Iterator<Exposure> {
     // get props as required
-    var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.YYYY"))
-    var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.MM"))
-    var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("ICOMPLY.MIN.SEND.DATE.DD"))
+    var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.YYYY"))
+    var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.MM"))
+    var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.DD"))
     var minReportingDate = DateUtil.createDateInstance(minReportingDay, minReportingYear, minReportingMonth)
 
     // get exposures to process

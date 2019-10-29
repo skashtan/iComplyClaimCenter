@@ -21,12 +21,12 @@ enhancement MirRREIDEnhancement : MirRREID_Acc {
   static function checkOrSetRREID(exposure : Exposure) : Boolean {
 
 
-    var hasRREID = exposure.mirReportable_Acc.RREID != null
+    var hasRREID = exposure.mirReportable_Acc.ClaimRREID != null
     var multiRREIDS = gw.api.database.Query.make(MirRREID_Acc).select().Count > 1
 
       if (!hasRREID && !multiRREIDS) {
         Transaction.runWithNewBundle(\bundle -> {
-        exposure.mirReportable_Acc.RREID.RREID = gw.api.database.Query.make(MirRREID_Acc).select().AtMostOneRow.RREID
+        exposure.mirReportable_Acc.ClaimRREID = gw.api.database.Query.make(MirRREID_Acc).select().AtMostOneRow.RREID
         })
         hasRREID = true
       } else if (!hasRREID && multiRREIDS) {

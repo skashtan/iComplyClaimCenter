@@ -39,7 +39,7 @@
     </Card>
     <Card
       id="ExposureMIRCard"
-      title="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)">
+      title="DisplayKey.get(&quot;Accelerator.mir.card&quot;)">
       <PanelRef
         def="MirClaimDetailsDV(Exposure)"
         id="claimDetailRef"/>

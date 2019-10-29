@@ -140,7 +140,7 @@ class MirReqBuilder {
     reqXml.Claim.HICN = exposure.mirReportable_Acc.HICNOrMBI
     reqXml.Claim.Hold = exposure.mirReportable_Acc.HoldStatus
     reqXml.Claim.ICN = exposure.PublicID
-    reqXml.Claim.IcdIndicator = props.getProperty("ICOMPLY.ICD.IND")
+    reqXml.Claim.IcdIndicator = props.getProperty("MIR.ICD.IND")
     reqXml.Claim.LastName = claimant.LastName
     reqXml.Claim.LegalName = claim.Insured.Name
     if (claimant.MiddleName != null) {
@@ -170,7 +170,7 @@ class MirReqBuilder {
     if (mirReportable.ClaimOfficeCode != null) {
       reqXml.Claim.OfficeCode = mirReportable.ClaimOfficeCode
     } else {
-      reqXml.Claim.OfficeCode = props.getProperty("ICOMPLY.NO.OFFICE.CODE")
+      reqXml.Claim.OfficeCode = props.getProperty("MIR.NO.OFFICE.CODE")
     }
 
     var isPip = exposure.Coverage != null && exposure.Coverage.Type.Code.toUpperCase().contains("PIP")
@@ -178,12 +178,12 @@ class MirReqBuilder {
     if (exposure.ExposureType == ExposureType.TC_MEDPAY ||
         (exposure.ExposureType == ExposureType.TC_GENERALDAMAGE && isPip) ||
         (exposure.ExposureType == ExposureType.TC_BODILYINJURYDAMAGE && isPip)) {
-      reqXml.Claim.PlanType = props.getProperty("ICOMPLY.NOFAULT")
+      reqXml.Claim.PlanType = props.getProperty("MIR.NOFAULT")
     } else if (exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY || exposure.ExposureType == ExposureType.TC_GENERALDAMAGE
         || exposure.ExposureType == ExposureType.TC_BODILYINJURYDAMAGE) {
-      reqXml.Claim.PlanType = props.getProperty("ICOMPLY.LIABILITY")
+      reqXml.Claim.PlanType = props.getProperty("MIR.LIABILITY")
     } else if (exposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE) {
-      reqXml.Claim.PlanType = props.getProperty("ICOMPLY.WC")
+      reqXml.Claim.PlanType = props.getProperty("MIR.WC")
     }
 
     reqXml.Claim.PlanClaimNumber = claim.ClaimNumber

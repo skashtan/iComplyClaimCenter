@@ -9,6 +9,7 @@
       type="Exposure"/>
     <RangeInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.RREID&quot;)"
       id="MirRREIDDropdown"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.rreid&quot;)"
       value="anExposure.mirReportable_Acc.ClaimRREID"
@@ -16,35 +17,42 @@
       valueType="java.lang.String"/>
     <RangeInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.OfficeCode&quot;)"
       id="MirOfficeCodeDropdown"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.officecode&quot;)"
-      value="anExposure.mirReportable_Acc.OfficeCode"
+      value="anExposure.mirReportable_Acc.ClaimOfficeCode"
       valueRange="gw.api.database.Query.make(MirOfficeCode_Acc).select().map(\elt -&gt; elt.OfficeCode).toList()"
-      valueType="entity.MirOfficeCode_Acc"
+      valueType="java.lang.String"
       visible="gw.api.database.Query.make(MirOfficeCode_Acc).select().Count &gt; 0"/>
     <TextInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.ICN&quot;)"
       id="mirICN"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.icn&quot;)"
       value="anExposure.mirReportable_Acc.ICN"/>
     <TextInput
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.HICNMBI&quot;)"
       id="mirHicn"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.hicn&quot;)"
       value="anExposure.mirReportable_Acc.HICNOrMBI"/>
     <BooleanDropdownInput
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.Reportable&quot;)"
       id="mirIsReportable"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.reportable&quot;)"
       value="anExposure.mirReportable_Acc.MirReportingHistorys.last().IsCMSReportable"/>
     <TextInput
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.beneficiarystatus&quot;) "
       id="mirBeneficiaryStatus"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.beneficiarystatus&quot;)"
       value="anExposure.mirReportable_Acc.MirReportingHistorys.last().BeneficiaryStatus"/>
     <DateInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
       id="MirCMSDateOfIncident"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
       value="anExposure.mirReportable_Acc.CMSDateOfIncident"></DateInput>
     <BooleanDropdownInput
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.onhold&quot;)"
       id="mirIHoldStatus"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.holdstatus&quot;) "
       value="anExposure.mirReportable_Acc.HoldStatus"/>

@@ -15,6 +15,8 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CMSDATEOFINCIDENT_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "CMSDateOfIncident");
   
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CLAIMOFFICECODE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "ClaimOfficeCode");
+  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CLAIMRREID_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "ClaimRREID");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> CREATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "CreateTime");
@@ -39,17 +41,7 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> ORMTERMDATE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "ORMTermDate");
   
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> OFFICECODE_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "OfficeCode");
-  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> PUBLICID_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "PublicID");
-  
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> RREID_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "RREID");
-  
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IArrayPropertyInfo> RELATION_PROP = new com.guidewire.commons.metadata.types.ArrayPropertyInfoCache(TYPE, "Relation");
-  
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> REPRESENTATIVE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "Representative");
-  
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ITypekeyPropertyInfo> REPRESENTATIVETYPE_PROP = new com.guidewire.commons.metadata.types.TypekeyPropertyInfoCache(TYPE, "RepresentativeType");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> RETIREDVALUE_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "RetiredValue");
   
@@ -121,13 +113,6 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
-   * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
-   */
-  public void addToRelation(entity.MirRelation_Acc element) {
-    __getInternalInterface().addArrayElement(RELATION_PROP.get(), element);
-  }
-  
-  /**
    * Adds the given element to the TPOC array. This is achieved by setting the parent foreign key to this entity instance.
    */
   public void addToTPOC(entity.MirReportableTPOC_Acc element) {
@@ -155,6 +140,14 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   @gw.internal.gosu.parser.ExtendedProperty
   public java.util.Date getCMSDateOfIncident() {
     return (java.util.Date)__getInternalInterface().getFieldValue(CMSDATEOFINCIDENT_PROP.get());
+  }
+  
+  /**
+   * Gets the value of the ClaimOfficeCode field.
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.String getClaimOfficeCode() {
+    return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(CLAIMOFFICECODE_PROP.get());
   }
   
   /**
@@ -252,52 +245,10 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     return (java.util.Date)__getInternalInterface().getFieldValue(ORMTERMDATE_PROP.get());
   }
   
-  /**
-   * Gets the value of the OfficeCode field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirOfficeCode_Acc getOfficeCode() {
-    return (entity.MirOfficeCode_Acc)__getInternalInterface().getFieldValue(OFFICECODE_PROP.get());
-  }
-  
   @com.guidewire.pl.persistence.codegen.annotation.OverridesAccessor
   @gw.internal.gosu.parser.ExtendedProperty
   public java.lang.String getPublicID() {
     return ((com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods")).getPublicID();
-  }
-  
-  /**
-   * Gets the value of the RREID field.
-   * The RRE ID corresponding to the claim
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirRREID_Acc getRREID() {
-    return (entity.MirRREID_Acc)__getInternalInterface().getFieldValue(RREID_PROP.get());
-  }
-  
-  /**
-   * Gets the value of the Relation field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirRelation_Acc[] getRelation() {
-    return (entity.MirRelation_Acc[])__getInternalInterface().getFieldValue(RELATION_PROP.get());
-  }
-  
-  /**
-   * Gets the value of the Representative field.
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public java.lang.Long getRepresentative() {
-    return (java.lang.Long)__getInternalInterface().getFieldValue(REPRESENTATIVE_PROP.get());
-  }
-  
-  /**
-   * Gets the value of the RepresentativeType field.
-   * type of representative
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public typekey.MirRepType_Acc getRepresentativeType() {
-    return (typekey.MirRepType_Acc)__getInternalInterface().getFieldValue(REPRESENTATIVETYPE_PROP.get());
   }
   
   /**
@@ -432,22 +383,6 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
-   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-   */
-  public void removeFromRelation(entity.MirRelation_Acc element) {
-    __getInternalInterface().removeArrayElement(RELATION_PROP.get(), element);
-  }
-  
-  /**
-   * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-   * @deprecated Please use the version that takes an entity instead.
-   */
-  @java.lang.Deprecated
-  public void removeFromRelation(gw.pl.persistence.core.Key elementID) {
-    __getInternalInterface().removeArrayElement(RELATION_PROP.get(), elementID);
-  }
-  
-  /**
    * Removes the given element from the TPOC array. This is achieved by marking the element for removal.
    */
   public void removeFromTPOC(entity.MirReportableTPOC_Acc element) {
@@ -475,6 +410,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
    */
   public void setCMSDateOfIncident(java.util.Date value) {
     __getInternalInterface().setFieldValue(CMSDATEOFINCIDENT_PROP.get(), value);
+  }
+  
+  /**
+   * Sets the value of the ClaimOfficeCode field.
+   */
+  public void setClaimOfficeCode(java.lang.String value) {
+    __getInternalInterface().setFieldValueForCodegen(CLAIMOFFICECODE_PROP.get(), value);
   }
   
   /**
@@ -570,44 +512,9 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     __getInternalInterface().setFieldValue(ORMTERMDATE_PROP.get(), value);
   }
   
-  /**
-   * Sets the value of the OfficeCode field.
-   */
-  public void setOfficeCode(entity.MirOfficeCode_Acc value) {
-    __getInternalInterface().setFieldValue(OFFICECODE_PROP.get(), value);
-  }
-  
   @com.guidewire.pl.persistence.codegen.annotation.OverridesAccessor
   public void setPublicID(java.lang.String id) {
     ((com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods")).setPublicID(id);
-  }
-  
-  /**
-   * Sets the value of the RREID field.
-   */
-  public void setRREID(entity.MirRREID_Acc value) {
-    __getInternalInterface().setFieldValue(RREID_PROP.get(), value);
-  }
-  
-  /**
-   * Sets the value of the Relation field.
-   */
-  public void setRelation(entity.MirRelation_Acc[] value) {
-    __getInternalInterface().setFieldValue(RELATION_PROP.get(), value);
-  }
-  
-  /**
-   * Sets the value of the Representative field.
-   */
-  public void setRepresentative(java.lang.Long value) {
-    __getInternalInterface().setFieldValue(REPRESENTATIVE_PROP.get(), value);
-  }
-  
-  /**
-   * Sets the value of the RepresentativeType field.
-   */
-  public void setRepresentativeType(typekey.MirRepType_Acc value) {
-    __getInternalInterface().setFieldValue(REPRESENTATIVETYPE_PROP.get(), value);
   }
   
   /**
@@ -677,13 +584,6 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     }
     
     /**
-     * Adds the given element to the Relation array. This is achieved by setting the parent foreign key to this entity instance.
-     */
-    public void addToRelation(entity.MirRelation_Acc element) {
-      __getInternalInterface().addArrayElement(RELATION_PROP.get(), element);
-    }
-    
-    /**
      * Adds the given element to the TPOC array. This is achieved by setting the parent foreign key to this entity instance.
      */
     public void addToTPOC(entity.MirReportableTPOC_Acc element) {
@@ -747,6 +647,14 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     @gw.internal.gosu.parser.ExtendedProperty
     public java.util.Date getCMSDateOfIncident() {
       return (java.util.Date)__getInternalInterface().getFieldValue(CMSDATEOFINCIDENT_PROP.get());
+    }
+    
+    /**
+     * Gets the value of the ClaimOfficeCode field.
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public java.lang.String getClaimOfficeCode() {
+      return (java.lang.String)__getInternalInterface().getFieldValueForCodegen(CLAIMOFFICECODE_PROP.get());
     }
     
     /**
@@ -852,60 +760,10 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
       return (java.util.Date)__getInternalInterface().getFieldValue(ORMTERMDATE_PROP.get());
     }
     
-    /**
-     * Gets the value of the OfficeCode field.
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public entity.MirOfficeCode_Acc getOfficeCode() {
-      return (entity.MirOfficeCode_Acc)__getInternalInterface().getFieldValue(OFFICECODE_PROP.get());
-    }
-    
-    public gw.pl.persistence.core.Key getOfficeCodeID() {
-      return (gw.pl.persistence.core.Key)getRawFieldValue(OFFICECODE_PROP.get());
-    }
-    
     @com.guidewire.pl.persistence.codegen.annotation.OverridesAccessor
     @gw.internal.gosu.parser.ExtendedProperty
     public java.lang.String getPublicID() {
       return ((com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods")).getPublicID();
-    }
-    
-    /**
-     * Gets the value of the RREID field.
-     * The RRE ID corresponding to the claim
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public entity.MirRREID_Acc getRREID() {
-      return (entity.MirRREID_Acc)__getInternalInterface().getFieldValue(RREID_PROP.get());
-    }
-    
-    public gw.pl.persistence.core.Key getRREIDID() {
-      return (gw.pl.persistence.core.Key)getRawFieldValue(RREID_PROP.get());
-    }
-    
-    /**
-     * Gets the value of the Relation field.
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public entity.MirRelation_Acc[] getRelation() {
-      return (entity.MirRelation_Acc[])__getInternalInterface().getFieldValue(RELATION_PROP.get());
-    }
-    
-    /**
-     * Gets the value of the Representative field.
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public java.lang.Long getRepresentative() {
-      return (java.lang.Long)__getInternalInterface().getFieldValue(REPRESENTATIVE_PROP.get());
-    }
-    
-    /**
-     * Gets the value of the RepresentativeType field.
-     * type of representative
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public typekey.MirRepType_Acc getRepresentativeType() {
-      return (typekey.MirRepType_Acc)__getInternalInterface().getFieldValue(REPRESENTATIVETYPE_PROP.get());
     }
     
     @com.guidewire.pl.persistence.codegen.annotation.OverridesAccessor
@@ -1068,22 +926,6 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
     }
     
     /**
-     * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-     */
-    public void removeFromRelation(entity.MirRelation_Acc element) {
-      __getInternalInterface().removeArrayElement(RELATION_PROP.get(), element);
-    }
-    
-    /**
-     * Removes the given element from the Relation array. This is achieved by marking the element for removal.
-     * @deprecated Please use the version that takes an entity instead.
-     */
-    @java.lang.Deprecated
-    public void removeFromRelation(gw.pl.persistence.core.Key elementID) {
-      __getInternalInterface().removeArrayElement(RELATION_PROP.get(), elementID);
-    }
-    
-    /**
      * Removes the given element from the TPOC array. This is achieved by marking the element for removal.
      */
     public void removeFromTPOC(entity.MirReportableTPOC_Acc element) {
@@ -1115,6 +957,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
      */
     public void setCMSDateOfIncident(java.util.Date value) {
       __getInternalInterface().setFieldValue(CMSDATEOFINCIDENT_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the ClaimOfficeCode field.
+     */
+    public void setClaimOfficeCode(java.lang.String value) {
+      __getInternalInterface().setFieldValueForCodegen(CLAIMOFFICECODE_PROP.get(), value);
     }
     
     /**
@@ -1218,52 +1067,9 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
       __getInternalInterface().setFieldValue(ORMTERMDATE_PROP.get(), value);
     }
     
-    /**
-     * Sets the value of the OfficeCode field.
-     */
-    public void setOfficeCode(entity.MirOfficeCode_Acc value) {
-      __getInternalInterface().setFieldValue(OFFICECODE_PROP.get(), value);
-    }
-    
-    public void setOfficeCodeID(gw.pl.persistence.core.Key value) {
-      setFieldValue(OFFICECODE_PROP.get(), value);
-    }
-    
     @com.guidewire.pl.persistence.codegen.annotation.OverridesAccessor
     public void setPublicID(java.lang.String id) {
       ((com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods")).setPublicID(id);
-    }
-    
-    /**
-     * Sets the value of the RREID field.
-     */
-    public void setRREID(entity.MirRREID_Acc value) {
-      __getInternalInterface().setFieldValue(RREID_PROP.get(), value);
-    }
-    
-    public void setRREIDID(gw.pl.persistence.core.Key value) {
-      setFieldValue(RREID_PROP.get(), value);
-    }
-    
-    /**
-     * Sets the value of the Relation field.
-     */
-    public void setRelation(entity.MirRelation_Acc[] value) {
-      __getInternalInterface().setFieldValue(RELATION_PROP.get(), value);
-    }
-    
-    /**
-     * Sets the value of the Representative field.
-     */
-    public void setRepresentative(java.lang.Long value) {
-      __getInternalInterface().setFieldValue(REPRESENTATIVE_PROP.get(), value);
-    }
-    
-    /**
-     * Sets the value of the RepresentativeType field.
-     */
-    public void setRepresentativeType(typekey.MirRepType_Acc value) {
-      __getInternalInterface().setFieldValue(REPRESENTATIVETYPE_PROP.get(), value);
     }
     
     public void setRetired() {

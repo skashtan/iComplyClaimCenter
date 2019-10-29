@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="MirContactHelp_AccPopup"
+    title="DisplayKey.get(&quot;Accelerator.mir.title.mirhelppage&quot;)">
+    <LocationEntryPoint
+      signature="MirContactHelp_AccPopup()"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Acclerator.mir.label.contactrole&quot;)"/>
+          <PreFormattedTextInput
+            id="MirContactHelpInfo"
+            value="DisplayKey.get(&quot;Accelerator.mir.description.mirClaimContactdefinition&quot;)"/>
+          <PreFormattedTextInput
+            id="MirAdditionalContactText"
+            value="DisplayKey.get(&quot;Accelerator.mir.description.mirClaimContact&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

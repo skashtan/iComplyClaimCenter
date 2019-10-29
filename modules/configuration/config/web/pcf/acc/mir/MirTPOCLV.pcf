@@ -22,12 +22,14 @@
         <DateCell
           dateFormat="medium"
           editable="true"
+          helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.TPOCDate&quot;)"
           id="tpocDate"
           label="DisplayKey.get(&quot;Accelerator.mir.labels.TPOCDate&quot;)"
           required="true"
           value="TPOCDetail.TpocDate"/>
         <CurrencyCell
           editable="true"
+          helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.TPOCAmount&quot;)"
           id="tpocAmount"
           label="DisplayKey.get(&quot;Accelerator.mir.labels.TPOCAmount&quot;)"
           required="true"
@@ -35,8 +37,10 @@
         <DateCell
           dateFormat="medium"
           editable="true"
+          helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.TPOCFundingDelay&quot;)"
           id="tpocDelayedDate"
           label="DisplayKey.get(&quot;Accelerator.mir.labels.TPOCDelayedDate&quot;)"
+          required="false"
           value="TPOCDetail.TpocDelayedFunding"/>
       </Row>
     </RowIterator>

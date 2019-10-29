@@ -320,29 +320,29 @@
   <typecode
     code="MirAttorney_Acc"
     desc="CMS representative (Attorney)"
-    name="iComply Representative (Attorney)"/>
+    name="MMSEA Representative (Attorney)"/>
   <typecode
     code="MirGuardian_Acc"
     desc="CMS representative (Guardian/Conservator)"
-    name="iComply Representative (Guardian/Conservator)"/>
+    name="MMSEA Representative (Guardian/Conservator)"/>
   <typecode
     code="MirPowerOfAttorney_Acc"
     desc="CMS representative (Power of Attorney)"
-    name="iComply Representative (Power of Attorney)"/>
+    name="MMSEA Representative (Power of Attorney)"/>
   <typecode
     code="MirOtherRep_Acc"
     desc="CMS representative (Other)"
-    name="iComply Representative (Other)"/>
+    name="MMSEA Representative (Other)"/>
   <typecode
     code="MirEstate_Acc"
     desc="CMS relationship (Estate)"
-    name="iComply Relationship (Estate)"/>
+    name="MMSEA Relationship (Estate)"/>
   <typecode
     code="MirFamilyMember_Acc"
     desc="CMS relationship (Family Member)"
-    name="iComply Relationship (Family Member)"/>
+    name="MMSEA Relationship (Family Member)"/>
   <typecode
     code="MirOtherRel_Acc"
     desc="CMS relationship (Other)"
-    name="iComply Relationship (Other)"/>
+    name="MMSEA Relationship (Other)"/>
 </typelistextension>

@@ -3,6 +3,7 @@ package acc.mir.helper
 uses acc.mir.webservice.mirsubmitfs.dataservice.elements.ResponseCode
 uses acc.mir.webservice.mirsubmitfs.dataservice.elements.SubmitClaimResponse
 uses gw.transaction.Transaction
+uses gw.util.PropertiesFileAccess
 
 uses java.util.stream.Collectors
 
@@ -12,7 +13,7 @@ uses java.util.stream.Collectors
 class MirRespProcessor {
 
   static function processMirSubmitResp(exposure : Exposure, respXml : SubmitClaimResponse) {
-    //var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
     print(respXml.asUTFString())
     var claimStatus = respXml.SubmitClaimResult.StatusObject
     var respCodes = new ArrayList<ResponseCode>()
@@ -53,12 +54,12 @@ class MirRespProcessor {
 
       mirReportable.addToMirReportingHistorys(history)
 
-      if (respCodes.size() > 0) {
-        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
+      var existingActivityCount = exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == props.getProperty("MIR.ACTIVITY.CODE") && elt.Status == ActivityStatus.TC_OPEN)
+      if (respCodes.size() > 0 && existingActivityCount < 1) {
+        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
         activity.Priority = Priority.TC_NORMAL
         activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(","))
         activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
-
       }
 
       for(c in respCodes) {

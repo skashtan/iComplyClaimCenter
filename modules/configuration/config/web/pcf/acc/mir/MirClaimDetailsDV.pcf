@@ -25,11 +25,6 @@
         id="mirResponseHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "
         visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0"/>
-      <PreFormattedTextInput
-        id="MirReadyForCMS"
-        value="DisplayKey.get(&quot;Accelerator.mir.label.ReadyForCMS&quot;) "
-        visible="anMirReportable_Acc.MirReportingHistorys.last().IsReadyForCMS"
-        __disabled="true"/>
       <ListViewInput
         available="anMirReportable_Acc.MirReportingHistorys != null"
         def="MirExposureResponseCodesLV(anMirReportable_Acc)"
@@ -83,7 +78,15 @@
         boldValue="true"
         hideIfEditable="true"
         id="mirEditContacts"
-        value="DisplayKey.get(&quot;Accelerator.mir.heading.editclaimcontacts&quot;) "/>
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.editclaimcontacts&quot;) "
+        value="DisplayKey.get(&quot;Accelerator.mir.heading.gotoclaimcontacts&quot;) "/>
+      <ButtonInput
+        action="MirContactHelp_AccPopup.push()"
+        align="left"
+        boldValue="true"
+        hideIfEditable="true"
+        id="mirEditContactsHelp"
+        value="&quot;Help&quot;"/>
       <InputDivider/>
       <ListViewInput
         def="MirContactLV(anExposure, ContactRole.TC_MIRATTORNEY_ACC)"
@@ -94,13 +97,19 @@
       </ListViewInput>
       <ListViewInput
         def="MirContactLV(anExposure, ContactRole.TC_MIRGUARDIAN_ACC)"
-        id="MirGuardianLV">
+        id="MirHetHelpContacts">
         <Toolbar
           id="MirGuardianToolbar"/>
       </ListViewInput>
       <ListViewInput
         def="MirContactLV(anExposure, ContactRole.TC_MIRPOWEROFATTORNEY_ACC)"
         id="MirPowerOfAttorneyLV">
+        <Toolbar
+          id="MirPowerOfAttorneyToolbar"/>
+      </ListViewInput>
+      <ListViewInput
+        def="MirContactLV(anExposure, ContactRole.TC_MIRGUARDIAN_ACC)"
+        id="MirGuardianLV">
         <Toolbar
           id="MirPowerOfAttorneyToolbar"/>
       </ListViewInput>
@@ -138,8 +147,8 @@ function submitNow(exposure : Exposure) {
     workItem.initialize()
     workQueue.processWorkItem(workItem)
   })
-
 }
+
 ]]></Code>
   </DetailViewPanel>
 </PCF>

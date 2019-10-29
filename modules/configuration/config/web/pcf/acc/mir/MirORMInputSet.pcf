@@ -10,6 +10,7 @@
       type="MirReportable_Acc"/>
     <RangeInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.orm&quot;)"
       id="MirHasORmInput"
       label="DisplayKey.get(&quot;Accelerator.mir.label.orm&quot;)"
       required="anMIRReportable__Acc.ORMTermDate != null"
@@ -18,6 +19,7 @@
       valueType="java.lang.String"/>
     <DateInput
       editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.OrmTerm&quot;)"
       id="OrmTermDate"
       label="DisplayKey.get(&quot;Accelerator.mir.label.ormterm&quot;)"
       value="anMIRReportable__Acc.ORMTermDate"/>

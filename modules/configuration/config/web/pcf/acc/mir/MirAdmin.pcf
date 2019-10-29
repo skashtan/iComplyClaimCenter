@@ -6,7 +6,7 @@
     canEdit="true"
     canVisit="true"
     id="MirAdmin"
-    title="DisplayKey.get(&quot;Accelerator.mir.screen.iComplyAdmin&quot;)">
+    title="DisplayKey.get(&quot;Accelerator.mir.screen.Admin&quot;)">
     <Variable
       initialValue="gw.api.database.Query.make(entity.MirRREID_Acc).select()"
       name="MirRREIDS"

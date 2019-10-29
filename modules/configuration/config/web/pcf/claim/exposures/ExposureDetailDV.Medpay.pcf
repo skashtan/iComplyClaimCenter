@@ -264,7 +264,7 @@
     </Card>
     <Card
       id="mirIcomplyCard"
-      title="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)">
+      title="DisplayKey.get(&quot;Accelerator.mir.card&quot;)">
       <PanelRef
         def="MirClaimDetailsDV(Exposure)"/>
     </Card>
