@@ -28,102 +28,21 @@ class MirReqBuilder {
     var mirReportable = exposure.mirReportable_Acc
     var adjuster = claim.AssignedUser
 
-   if (mirReportable.RREID != null) {
-      reqXml.Claim.RREID = mirReportable.RREID.RREID
+    if (mirReportable.ClaimRREID != null) {
+      reqXml.Claim.RREID = mirReportable.ClaimRREID
     }
 
-    //additional claim relations
+    // CMS only accepts 4... once these are filled up they will not be included
+    exposure.getClaimContactsByRole(ContactRole.TC_MIRESTATE_ACC).toList().forEach(\c -> {
+      reqXml = addNextRelationship(c.Contact, ContactRole.TC_MIRESTATE_ACC, reqXml)
+    })
 
-    //TODO sort by most recent
-   // var cc = exposure.getClaimContactsByRole(ContactRole.TC_MIRESTATE_ACC)
-   // cc[1].rol
-    //var relationships = {"estates" -> exposure.getContactsByRole(ContactRole.TC_MIRESTATE_ACC), "familyMembers" -> exposure.getContactsByRole(ContactRole.TC_MIRFAMILYMEMBER_ACC),
-   // "other" -> exposure.getContactsByRole(ContactRole.TC_MIROTHERREL_ACC)}
-    //var representatives = new ContactRole[]{ContactRole.TC_MIROTHERREP_ACC, ContactRole.TC_MIRATTORNEY_ACC, ContactRole.TC_MIRGUARDIAN_ACC, ContactRole.TC_MIRPOWEROFATTORNEY_ACC}
-    //var relations = new ContactRole[]{ContactRole.TC_MIRESTATE_ACC, ContactRole.TC_MIRFAMILYMEMBER_ACC, ContactRole.TC_MIROTHERREL_ACC}
-    var contacts = exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC)
-    /*
-    if (relationships.size() > 0) {
-      var contact = relationships.get(0) as entity.Contact
-      var c1IsPerson = (contact typeis Person) ? true : false
-      var type = exposure.contac .contactr contact.getContactType()
-      //var c1Relation = getRelationshipIndicator(type, c1IsPerson)
-
-      reqXml.Claim.C1Address1 = contact.PrimaryAddress.AddressLine1
-      reqXml.Claim.C1Address2 = contact.PrimaryAddress.AddressLine2
-      reqXml.Claim.C1City = contact.PrimaryAddress.City
-      reqXml.Claim.C1Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
-      reqXml.Claim.C1FirstName = (c1IsPerson) ? contact.Person.FirstName : null
-      reqXml.Claim.C1LastName = (c1IsPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C1MiddleInitial = (c1IsPerson) ? contact.Person.MiddleName.charAt(0) : null
-      reqXml.Claim.C1Organization = (!c1IsPerson) ? contact.Name : null
-      reqXml.Claim.C1Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
-      reqXml.Claim.C1Relation = c1Relation
-      reqXml.Claim.C1State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C1TIN = contact.TaxID
-      reqXml.Claim.C1ZipCode = contact.PrimaryAddress.PostalCode
-    }
-    if (relationships[2] != null) {
-      var contact = getContact(relationships[2].Contact) as entity.Contact
-      var c4IsPerson = (contact typeis Person) ? true : false
-      var type = relationships[2].RelationType
-      var c2Relation = getRelationshipIndicator(type, c4IsPerson)
-
-      reqXml.Claim.C2Address1 = contact.PrimaryAddress.AddressLine1
-      reqXml.Claim.C2Address2 = contact.PrimaryAddress.AddressLine2
-      reqXml.Claim.C2City = contact.PrimaryAddress.City
-      reqXml.Claim.C2Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
-      reqXml.Claim.C2FirstName = (c4IsPerson) ? contact.Person.FirstName : null
-      reqXml.Claim.C2LastName = (c4IsPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C2MiddleInitial = (c4IsPerson) ? contact.Person.MiddleName.charAt(0) : null
-      reqXml.Claim.C2Organization = (!c4IsPerson) ? contact.Name : null
-      reqXml.Claim.C2Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
-      reqXml.Claim.C2Relation = c2Relation
-      reqXml.Claim.C2State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C2TIN = contact.TaxID
-      reqXml.Claim.C2ZipCode = contact.PrimaryAddress.PostalCode
-    }
-    if (relationships[3] != null) {
-      var contact = getContact(relationships[3].Contact) as entity.Contact
-      var c4IsPerson = (contact typeis Person) ? true : false
-      var type = relationships[3].RelationType
-      var c3Relation = getRelationshipIndicator(type, c4IsPerson)
-
-      reqXml.Claim.C3Address1 = contact.PrimaryAddress.AddressLine1
-      reqXml.Claim.C3Address2 = contact.PrimaryAddress.AddressLine2
-      reqXml.Claim.C3City = contact.PrimaryAddress.City
-      reqXml.Claim.C3Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
-      reqXml.Claim.C3FirstName = (c4IsPerson) ? contact.Person.FirstName : null
-      reqXml.Claim.C3LastName = (c4IsPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C3MiddleInitial = (c4IsPerson) ? contact.Person.MiddleName.charAt(0) : null
-      reqXml.Claim.C3Organization = (!c4IsPerson) ? contact.Name : null
-      reqXml.Claim.C3Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
-      reqXml.Claim.C3Relation = c3Relation
-      reqXml.Claim.C3State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C3TIN = contact.TaxID
-      reqXml.Claim.C3ZipCode = contact.PrimaryAddress.PostalCode
-    }
-    if (relationships[4] != null) {
-      var contact = getContact(relationships[4].Contact) as entity.Contact
-      var c4IsPerson = (contact typeis Person) ? true : false
-      var type = relationships[4].RelationType
-      var c4Relation = getRelationshipIndicator(type, c4IsPerson)
-
-      reqXml.Claim.C4Address1 = contact.PrimaryAddress.AddressLine1
-      reqXml.Claim.C4Address2 = contact.PrimaryAddress.AddressLine2
-      reqXml.Claim.C4City = contact.PrimaryAddress.City
-      reqXml.Claim.C4Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
-      reqXml.Claim.C4FirstName = (c4IsPerson) ? contact.Person.FirstName : null
-      reqXml.Claim.C4LastName = (c4IsPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C4MiddleInitial = (c4IsPerson) ? contact.Person.MiddleName.charAt(0) : null
-      reqXml.Claim.C4Organization = (!c4IsPerson) ? contact.Name : null
-      reqXml.Claim.C4Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
-      reqXml.Claim.C4Relation = c4Relation
-      reqXml.Claim.C4State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C4TIN = contact.TaxID
-      reqXml.Claim.C4ZipCode = contact.PrimaryAddress.PostalCode
-    }*/
-
+    exposure.getClaimContactsByRole(ContactRole.TC_MIRFAMILYMEMBER_ACC).toList().forEach(\c -> {
+      reqXml = addNextRelationship(c.Contact, ContactRole.TC_MIRFAMILYMEMBER_ACC, reqXml)
+    })
+    exposure.getClaimContactsByRole(ContactRole.TC_MIROTHERREL_ACC).toList().forEach(\c -> {
+      reqXml = addNextRelationship(c.Contact, ContactRole.TC_MIROTHERREL_ACC, reqXml)
+    })
 
 
     var claimStatus = (exposure.Claim.Closed) ? ClaimStatusCode.Closed : ClaimStatusCode.Open
@@ -248,8 +167,8 @@ class MirReqBuilder {
       reqXml.Claim.OrmTermDate = MirDateConversionEnhancement.toXmlDateTime(exposure.mirReportable_Acc.ORMTermDate)
     }
 
-    if (mirReportable.OfficeCode != null) {
-      reqXml.Claim.OfficeCode = mirReportable.OfficeCode.OfficeCode
+    if (mirReportable.ClaimOfficeCode != null) {
+      reqXml.Claim.OfficeCode = mirReportable.ClaimOfficeCode
     } else {
       reqXml.Claim.OfficeCode = props.getProperty("ICOMPLY.NO.OFFICE.CODE")
     }
@@ -280,24 +199,26 @@ class MirReqBuilder {
     reqXml.Claim.PolicyHolderLastName = (claim.Insured.Subtype == Contact.TC_PERSON) ? (claim.Insured as Person).LastName : ""
     reqXml.Claim.PolicyNumber = policy.PolicyNumber
 
-/*    if (mirReportable.Representative != null) {
-      var rep = getContact(mirReportable.Representative)
-      reqXml.Claim.RepAddress1 = rep.PrimaryAddress.AddressLine1
-      reqXml.Claim.RepAddress2 = rep.PrimaryAddress.AddressLine2
-      reqXml.Claim.RepCity = rep.PrimaryAddress.City
-      reqXml.Claim.RepExt = rep.WorkPhoneExtension
-      reqXml.Claim.RepFirmName = rep.Company.Name
-      reqXml.Claim.RepFirstName = rep.Person.FirstName
-      reqXml.Claim.RepIndicator = getRepIndicator(mirReportable.RepresentativeType)
-      reqXml.Claim.RepLastName = rep.Person.LastName
-      reqXml.Claim.RepPhone = rep.WorkPhone
-      reqXml.Claim.RepState = rep.PrimaryAddress.City
-      reqXml.Claim.RepTIN = rep.Company.TaxID
-      reqXml.Claim.RepZipCode = rep.PrimaryAddress.PostalCode
-    }*/
 
+    // cms only accepts one representative, once it is filled all others will be ignored
+    var filledRep = false
+    exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC).toList().forEach(\c -> {
+      if (filledRep == false) {
+        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIRATTORNEY_ACC , reqXml)
+      }
+    })
+    exposure.getClaimContactsByRole(ContactRole.TC_MIRGUARDIAN_ACC).toList().forEach(\c -> {
+      if (filledRep == false) {
+        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIRGUARDIAN_ACC , reqXml)
+      }
+    })
+    exposure.getClaimContactsByRole(ContactRole.TC_MIROTHERREP_ACC).toList().forEach(\c -> {
+      if (filledRep == false) {
+        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIROTHERREP_ACC , reqXml)
+      }
+    })
 
-    if (claimant.TaxID != null) {
+   if (claimant.TaxID != null) {
       reqXml.Claim.SSN = claimant.TaxID.remove("-")
     }
 
@@ -321,27 +242,27 @@ class MirReqBuilder {
       if (tpocs.length >= 1) {
         reqXml.Claim.TpocAmount = tpocs[0].TpocAmount as Double
         reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDate)
-        reqXml.Claim.TpocDelayedFunding = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDelayedFunding)
+        reqXml.Claim.TpocDelayedFunding = (tpocs[0].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDelayedFunding) : null
       }
       if (tpocs.length >= 2) {
         reqXml.Claim.TpocAmount2 = tpocs[1].TpocAmount as Double
         reqXml.Claim.TpocDate2 = MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDate)
-        reqXml.Claim.TpocDelayedFunding2 = MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDelayedFunding)
+        reqXml.Claim.TpocDelayedFunding2 = (tpocs[1].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDelayedFunding) : null
       }
       if (tpocs.length >= 3) {
         reqXml.Claim.TpocAmount3 = tpocs[2].TpocAmount as Double
         reqXml.Claim.TpocDate3 = MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDate)
-        reqXml.Claim.TpocDelayedFunding3 = MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDelayedFunding)
+        reqXml.Claim.TpocDelayedFunding3 = (tpocs[2].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDelayedFunding) : null
       }
-      if (tpocs.length  >= 4) {
+      if (tpocs.length >= 4) {
         reqXml.Claim.TpocAmount4 = tpocs[3].TpocAmount as Double
         reqXml.Claim.TpocDate4 = MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDate)
-        reqXml.Claim.TpocDelayedFunding4 = MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDelayedFunding)
+        reqXml.Claim.TpocDelayedFunding4 = (tpocs[3].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDelayedFunding) : null
       }
-      if (tpocs.length  >= 5) {
+      if (tpocs.length >= 5) {
         reqXml.Claim.TpocAmount5 = tpocs[4].TpocAmount as Double
         reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDate)
-        reqXml.Claim.TpocDelayedFunding5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDelayedFunding)
+        reqXml.Claim.TpocDelayedFunding5 = (tpocs[4].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDelayedFunding) : null
       }
     }
     return reqXml
@@ -354,5 +275,88 @@ class MirReqBuilder {
     return contact
   }
 
+  static function addNextRelationship(contact : entity.Contact, type : ContactRole, reqXml : SubmitClaim) : SubmitClaim {
+    var isPerson = (contact typeis Person) ? true : false
+    var relation = MirIndicator.getRelationshipIndicator(type, isPerson)
+
+    if (reqXml.Claim.C1Relation == null) {
+      reqXml.Claim.C1Address1 = contact.PrimaryAddress.AddressLine1
+      reqXml.Claim.C1Address2 = contact.PrimaryAddress.AddressLine2
+      reqXml.Claim.C1City = contact.PrimaryAddress.City
+      reqXml.Claim.C1Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
+      reqXml.Claim.C1FirstName = (isPerson) ? contact.Person.FirstName : null
+      reqXml.Claim.C1LastName = (isPerson) ? contact.Person.LastName : null
+      reqXml.Claim.C1MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C1Organization = (!isPerson) ? contact.DisplayName : null
+      reqXml.Claim.C1Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
+      reqXml.Claim.C1Relation = relation
+      reqXml.Claim.C1State = contact.PrimaryAddress.State.Code
+      reqXml.Claim.C1TIN = contact.TaxID
+      reqXml.Claim.C1ZipCode = contact.PrimaryAddress.PostalCode
+    } else if (reqXml.Claim.C2Relation == null) {
+      reqXml.Claim.C2Address1 = contact.PrimaryAddress.AddressLine1
+      reqXml.Claim.C2Address2 = contact.PrimaryAddress.AddressLine2
+      reqXml.Claim.C2City = contact.PrimaryAddress.City
+      reqXml.Claim.C2Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
+      reqXml.Claim.C2FirstName = (isPerson) ? contact.Person.FirstName : null
+      reqXml.Claim.C2LastName = (isPerson) ? contact.Person.LastName : null
+      reqXml.Claim.C2MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C2Organization = (!isPerson) ? contact.Name : null
+      reqXml.Claim.C2Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
+      reqXml.Claim.C2Relation = relation
+      reqXml.Claim.C2State = contact.PrimaryAddress.State.Code
+      reqXml.Claim.C2TIN = contact.TaxID
+      reqXml.Claim.C2ZipCode = contact.PrimaryAddress.PostalCode
+    }
+    if (reqXml.Claim.C3Relation == null) {
+      reqXml.Claim.C3Address1 = contact.PrimaryAddress.AddressLine1
+      reqXml.Claim.C3Address2 = contact.PrimaryAddress.AddressLine2
+      reqXml.Claim.C3City = contact.PrimaryAddress.City
+      reqXml.Claim.C3Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
+      reqXml.Claim.C3FirstName = (isPerson) ? contact.Person.FirstName : null
+      reqXml.Claim.C3LastName = (isPerson) ? contact.Person.LastName : null
+      reqXml.Claim.C3MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C3Organization = (!isPerson) ? contact.Name : null
+      reqXml.Claim.C3Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
+      reqXml.Claim.C3Relation = relation
+      reqXml.Claim.C3State = contact.PrimaryAddress.State.Code
+      reqXml.Claim.C3TIN = contact.TaxID
+      reqXml.Claim.C3ZipCode = contact.PrimaryAddress.PostalCode
+    }
+    if (reqXml.Claim.C4Relation == null) {
+      reqXml.Claim.C4Address1 = contact.PrimaryAddress.AddressLine1
+      reqXml.Claim.C4Address2 = contact.PrimaryAddress.AddressLine2
+      reqXml.Claim.C4City = contact.PrimaryAddress.City
+      reqXml.Claim.C4Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
+      reqXml.Claim.C4FirstName = (isPerson) ? contact.Person.FirstName : null
+      reqXml.Claim.C4LastName = (isPerson) ? contact.Person.LastName : null
+      reqXml.Claim.C4MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C4Organization = (!isPerson) ? contact.Name : null
+      reqXml.Claim.C4Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
+      reqXml.Claim.C4Relation = relation
+      reqXml.Claim.C4State = contact.PrimaryAddress.State.Code
+      reqXml.Claim.C4TIN = contact.TaxID
+      reqXml.Claim.C4ZipCode = contact.PrimaryAddress.PostalCode
+    }
+    return reqXml
+  }
+
+  static function addRepresentative(rep : entity.Contact, type : ContactRole, reqXml : SubmitClaim) : SubmitClaim {
+    if (reqXml.Claim.RepIndicator == null) {
+      reqXml.Claim.RepAddress1 = rep.PrimaryAddress.AddressLine1
+      reqXml.Claim.RepAddress2 = rep.PrimaryAddress.AddressLine2
+      reqXml.Claim.RepCity = rep.PrimaryAddress.City
+      reqXml.Claim.RepExt = rep.WorkPhoneExtension
+      reqXml.Claim.RepFirmName = rep.Company.Name
+      reqXml.Claim.RepFirstName = rep.Person.FirstName
+      reqXml.Claim.RepIndicator = MirIndicator.getRepIndicator(type)
+      reqXml.Claim.RepLastName = rep.Person.LastName
+      reqXml.Claim.RepPhone = rep.WorkPhone
+      reqXml.Claim.RepState = rep.PrimaryAddress.City
+      reqXml.Claim.RepTIN = rep.Company.TaxID
+      reqXml.Claim.RepZipCode = rep.PrimaryAddress.PostalCode
+    }
+    return reqXml
+  }
 }
 
