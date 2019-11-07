@@ -50,7 +50,7 @@
         id="mirORMHeading"
         label="DisplayKey.get(&quot;Accelerator.mir.heading.orm&quot;)"/>
       <InputSetRef
-        def="MirORMInputSet(anMirReportable_Acc)"
+        def="MirORMInputSet(anExposure)"
         editable="true"
         id="OrmRef"/>
       <InputDivider/>

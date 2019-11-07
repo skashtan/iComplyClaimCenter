@@ -6,11 +6,14 @@ uses acc.mir.webservice.mirsubmitfs.dataservice.enums.Action
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.ClaimStatusCode
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.Gender
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState
+uses entity.Exposure
+uses entity.Person
 uses gw.api.financials.CurrencyAmount
 uses gw.pl.persistence.core.Key
 uses gw.util.PropertiesFileAccess
 uses typekey.Contact
 uses gw.transaction.Transaction
+uses typekey.ContactRole
 
 /**
  * Created by Sara.Kashtan on 9/27/2019.
@@ -73,7 +76,7 @@ class MirReqBuilder {
 
     var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
     if (diagCodesArray.length > 0) {
-      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime)
+      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime) //TODO validate that this is ordered descending
 
       diagCodes.stream().limit(19).forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
@@ -229,7 +232,7 @@ class MirReqBuilder {
     reqXml.Claim.StateOfVenue = claim.JurisdictionState.Code
     reqXml.Claim.SubmitAction = Action.Upsert
     if (policy.policyholder.TaxID != null) {
-      reqXml.Claim.TIN = policy.policyholder.TaxID.remove("-")
+      reqXml.Claim.TIN = policy.policyholder.TaxID.remove("-") //TODO this should be the reporting companies TIN
     }
 
     reqXml.Claim.TotalProposedSettlementAmount = mirReportable.TotalPropsedSettlementAmount as Double

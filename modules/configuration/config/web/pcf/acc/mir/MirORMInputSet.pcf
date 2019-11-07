@@ -6,15 +6,15 @@
     editable="true"
     id="MirORMInputSet">
     <Require
-      name="anMIRReportable__Acc"
-      type="MirReportable_Acc"/>
+      name="anExposure"
+      type="Exposure"/>
     <RangeInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.orm&quot;)"
       id="MirHasORmInput"
       label="DisplayKey.get(&quot;Accelerator.mir.label.orm&quot;)"
-      required="anMIRReportable__Acc.ORMTermDate != null"
-      value="anMIRReportable__Acc.HasORM"
+      required="anExposure.mirReportable_Acc.ORMTermDate != null"
+      value="anExposure.mirReportable_Acc.HasORM"
       valueRange="new String[]{acc.mir.mirsubmitfs.dataservice.enums.TripleState.Yes.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.No.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.Unknown.Code}"
       valueType="java.lang.String"/>
     <DateInput
@@ -22,6 +22,7 @@
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.OrmTerm&quot;)"
       id="OrmTermDate"
       label="DisplayKey.get(&quot;Accelerator.mir.label.ormterm&quot;)"
-      value="anMIRReportable__Acc.ORMTermDate"/>
+      requestValidationExpression="(VALUE.after(anExposure.Claim.LossDate)) ? null : DisplayKey.get(&quot;Accelerator.mir.ormtermdoierror&quot;)"
+      value="anExposure.mirReportable_Acc.ORMTermDate"/>
   </InputSet>
 </PCF>
