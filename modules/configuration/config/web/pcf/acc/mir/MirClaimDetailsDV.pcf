@@ -15,8 +15,7 @@
     <InputColumn>
       <ButtonInput
         action="submitNow(anExposure)"
-        align="left"
-        available="InEditMode == false"
+        available="InEditMode == false &amp;&amp; anExposure.Claimant != null"
         boldValue="true"
         id="mirSubmitNow"
         value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>

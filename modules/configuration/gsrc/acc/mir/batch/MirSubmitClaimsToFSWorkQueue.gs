@@ -32,7 +32,7 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
     var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.YYYY"))
     var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.MM"))
     var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.DD"))
-    var minReportingDate = DateUtil.createDateInstance(minReportingDay, minReportingYear, minReportingMonth)
+    var minReportingDate = DateUtil.createDateInstance(minReportingMonth, minReportingDay, minReportingYear)
 
     // get exposures to process
     var exposureQuery = Query.make(Exposure)

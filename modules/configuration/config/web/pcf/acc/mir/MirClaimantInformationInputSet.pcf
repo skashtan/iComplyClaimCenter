@@ -25,7 +25,6 @@
       valueType="java.lang.String"
       visible="gw.api.database.Query.make(MirOfficeCode_Acc).select().Count &gt; 0"/>
     <TextInput
-      editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.ICN&quot;)"
       id="mirICN"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.icn&quot;)"

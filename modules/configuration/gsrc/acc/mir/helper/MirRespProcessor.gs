@@ -27,6 +27,7 @@ class MirRespProcessor {
     Transaction.runWithNewBundle(\bundle -> {
 
       var history = new MirReportableHist_Acc()
+      bundle.add(history)
       if (claimStatus.ICN != null) {
         exposure.mirReportable_Acc.ICN = claimStatus.ICN
       }
@@ -65,6 +66,7 @@ class MirRespProcessor {
       for(c in respCodes) {
         var respCode = new MirReportableRespCode_Acc()
         bundle.add(respCode)
+
         if (c.CmsCode != null) {
           respCode.CMSCode = c.CmsCode
         }

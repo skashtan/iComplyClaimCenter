@@ -1,10 +1,10 @@
 package pcf
 
 uses gw.api.locale.DisplayKey
-@javax.annotation.Generated("config/web/pcf/acc/mir/MirDashboardiComply.pcf", "", "com.guidewire.pcfgen.PCFClassGenerator")
-public class MirDashboardiComply extends com.guidewire.pl.web.codegen.LocationBase {
+@javax.annotation.Generated("config/web/pcf/acc/mir/MirGroupDashboard.pcf", "", "com.guidewire.pcfgen.PCFClassGenerator")
+public class MirGroupDashboard extends com.guidewire.pl.web.codegen.LocationBase {
   private static function config () : com.guidewire.pl.web.navigation.LocationConfig {
-    return __configOf(pcf.MirDashboardiComply, LOCATION_CONFIG_CLASS)
+    return __configOf(pcf.MirGroupDashboard, LOCATION_CONFIG_CLASS)
   }
   
   static function createDestination (GroupInfo :  gw.api.dashboard.DashboardTreeGroupInfo) : pcf.api.Destination {

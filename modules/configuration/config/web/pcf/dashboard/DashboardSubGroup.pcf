@@ -27,7 +27,7 @@
       location="DashboardPeriodFinancials(GroupInfo)"
       shortcut="R"/>
     <LocationRef
-      label="DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;)"
-      location="MirDashboardiComply(GroupInfo)"/>
+      label="DisplayKey.get(&quot;Accelerator.mir.card&quot;)"
+      location="MirGroupDashboard(GroupInfo)"/>
   </LocationGroup>
 </PCF>

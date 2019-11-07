@@ -9,6 +9,10 @@
     <Require
       name="CloseExposureInfo"
       type="CloseExposureInfo"/>
+    <Variable
+      initialValue="CloseExposureInfo.Exposure"
+      name="anExposure"
+      type="Exposure"/>
     <InputColumn>
       <TextAreaInput
         editable="true"
@@ -23,6 +27,11 @@
         label="DisplayKey.get(&quot;NVV.Exposure.CloseExposure.Outcome&quot;)"
         value="CloseExposureInfo.outcome"
         valueType="typekey.ExposureClosedOutcomeType"/>
+      <InputSetRef
+        def="MirORMInputSet(anExposure)"
+        editable="true"
+        id="OrmRef"
+        visible="anExposure.ExposureType == ExposureType.TC_GENERALDAMAGE || anExposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY || anExposure.ExposureType == ExposureType.TC_BODILYINJURYDAMAGE || anExposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE  || anExposure.ExposureType == ExposureType.TC_MEDPAY"/>
     </InputColumn>
   </DetailViewPanel>
 </PCF>

@@ -4,10 +4,10 @@
   xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
   <Page
     canVisit="true"
-    id="MirDashboardiComply"
-    title="DisplayKey.get(&quot;Java.Dashboard.Title&quot;, DisplayKey.get(&quot;Accelerator.mir.card.iComply&quot;))">
+    id="MirGroupDashboard"
+    title="DisplayKey.get(&quot;Java.Dashboard.Title&quot;, DisplayKey.get(&quot;Accelerator.mir.card&quot;))">
     <LocationEntryPoint
-      signature="MirDashboardiComply(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
+      signature="MirGroupDashboard(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
     <Variable
       name="GroupInfo"
       type="gw.api.dashboard.DashboardTreeGroupInfo"/>

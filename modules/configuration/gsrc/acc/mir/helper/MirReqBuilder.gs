@@ -1,6 +1,7 @@
 package acc.mir.helper
 
-uses acc.mir.clientspecific.MirClientSpecificEnhancement
+uses acc.mir.clientspecific.MirClientSpecificICDEnhancement
+uses acc.mir.clientspecific.MirClientSpecificPolicyEnhancement
 uses acc.mir.webservice.mirsubmitfs.dataservice.elements.SubmitClaim
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.Action
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.ClaimStatusCode
@@ -76,7 +77,7 @@ class MirReqBuilder {
 
     var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
     if (diagCodesArray.length > 0) {
-      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime) //TODO validate that this is ordered descending
+      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortDescending()
 
       diagCodes.stream().limit(19).forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
@@ -85,10 +86,8 @@ class MirReqBuilder {
         if (reqXml.Claim.CauseCode == null && icdCode.toUpperCase().startsWith("S") || icdCode.toUpperCase().startsWith("T") ||
             icdCode.toUpperCase().startsWith("U") || icdCode.toUpperCase().startsWith("V") || icdCode.toUpperCase().startsWith("W") ||
             icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y") || icdCode.toUpperCase().startsWith("Z")) {
-          reqXml.Claim.CauseCode = icdCode
-        }
-
-        if (reqXml.Claim.DiagCode01 == null) {
+          reqXml.Claim.CauseCode = (reqXml.Claim.CauseCode == null || reqXml.Claim.CauseCode.length > 0) ? icdCode : reqXml.Claim.CauseCode
+        } else if (reqXml.Claim.DiagCode01 == null) {
           reqXml.Claim.DiagCode01 = icdCode
         } else if (reqXml.Claim.DiagCode02 == null) {
           reqXml.Claim.DiagCode02 = icdCode
@@ -143,7 +142,7 @@ class MirReqBuilder {
     reqXml.Claim.HICN = exposure.mirReportable_Acc.HICNOrMBI
     reqXml.Claim.Hold = exposure.mirReportable_Acc.HoldStatus
     reqXml.Claim.ICN = exposure.PublicID
-    reqXml.Claim.IcdIndicator = props.getProperty("MIR.ICD.IND")
+    reqXml.Claim.IcdIndicator = MirClientSpecificICDEnhancement.getICDIndicator(claim)
     reqXml.Claim.LastName = claimant.LastName
     reqXml.Claim.LegalName = claim.Insured.Name
     if (claimant.MiddleName != null) {
@@ -225,8 +224,8 @@ class MirReqBuilder {
       reqXml.Claim.SSN = claimant.TaxID.remove("-")
     }
 
-    reqXml.Claim.SelfInsured = MirClientSpecificEnhancement.isSelfInsured(exposure)
-    reqXml.Claim.SelfInsuredType = MirClientSpecificEnhancement.getSelfInsuredType(exposure)
+    reqXml.Claim.SelfInsured = MirClientSpecificPolicyEnhancement.isSelfInsured(exposure)
+    reqXml.Claim.SelfInsuredType = MirClientSpecificPolicyEnhancement.getSelfInsuredType(exposure)
 
 
     reqXml.Claim.StateOfVenue = claim.JurisdictionState.Code
@@ -240,9 +239,37 @@ class MirReqBuilder {
 
     // TPOCS
     if (mirReportable != null) {
-      var tpocs = exposure.mirReportable_Acc.TPOC.sortBy(\r -> r.CreateTime)
+      var tpocs = Arrays.asList(exposure.mirReportable_Acc.TPOC).sortBy(\r -> r.CreateTime)
 
-      if (tpocs.length >= 1) {
+      tpocs.forEach(\tpoc -> {
+        if (reqXml.Claim.TpocAmount == null) {
+          reqXml.Claim.TpocAmount = tpoc.TpocAmount as Double
+          reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        } else if (reqXml.Claim.TpocAmount2 == null) {
+          reqXml.Claim.TpocAmount2 = tpoc.TpocAmount as Double
+          reqXml.Claim.TpocDate2 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding2 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        } else if (reqXml.Claim.TpocAmount3 == null) {
+          reqXml.Claim.TpocAmount3 = tpoc.TpocAmount as Double
+          reqXml.Claim.TpocDate3 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding3 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        } else if (reqXml.Claim.TpocAmount4 == null) {
+          reqXml.Claim.TpocAmount4 = tpoc.TpocAmount as Double
+          reqXml.Claim.TpocDate4 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding4 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        } else if (reqXml.Claim.TpocAmount5 == null) {
+          reqXml.Claim.TpocAmount5 = tpoc.TpocAmount as Double
+          reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        } else {
+          reqXml.Claim.TpocAmount5 = reqXml.Claim.TpocAmount5 + (tpoc.TpocAmount as Double)
+          reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+        }
+      })
+
+      /*if (tpocs.length >= 1) {
         reqXml.Claim.TpocAmount = tpocs[0].TpocAmount as Double
         reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDate)
         reqXml.Claim.TpocDelayedFunding = (tpocs[0].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDelayedFunding) : null
@@ -266,8 +293,9 @@ class MirReqBuilder {
         reqXml.Claim.TpocAmount5 = tpocs[4].TpocAmount as Double
         reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDate)
         reqXml.Claim.TpocDelayedFunding5 = (tpocs[4].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDelayedFunding) : null
-      }
+      }*/
     }
+    print(reqXml.asUTFString())
     return reqXml
   }
 
