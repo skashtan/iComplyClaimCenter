@@ -7,6 +7,10 @@
     <Require
       name="anExposure"
       type="Exposure"/>
+    <Variable
+      initialValue="(anExposure.Claimant != null) ? (anExposure.Claimant as Person) : (anExposure.Claim.ClaimantDenorm as Person)"
+      name="aClaimant"
+      type="entity.Person"/>
     <TextInput
       available="true"
       editable="true"
@@ -14,6 +18,15 @@
       label="DisplayKey.get(&quot;Web.ContactDetail.Name.FirstName&quot;)"
       required="true"
       value="(anExposure.Claimant as Person).FirstName"
+      visible="true"
+      __disabled="true"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="mirFirstName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.FirstName&quot;)"
+      required="true"
+      value="aClaimant.FirstName"
       visible="true"/>
     <TextInput
       available="true"
@@ -22,6 +35,15 @@
       label="DisplayKey.get(&quot;Web.ContactDetail.Name.MiddleName&quot;)"
       required="false"
       value="(anExposure.Claimant as Person).MiddleName"
+      visible="true"
+      __disabled="true"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="MiddleName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.MiddleName&quot;)"
+      required="false"
+      value="aClaimant.MiddleName"
       visible="true"/>
     <TextInput
       available="true"
@@ -30,6 +52,15 @@
       label="DisplayKey.get(&quot;Web.ContactDetail.Name.LastName&quot;)"
       required="true"
       value="(anExposure.Claimant as Person).LastName"
+      visible="true"
+      __disabled="true"/>
+    <TextInput
+      available="true"
+      editable="true"
+      id="LastName"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.LastName&quot;)"
+      required="true"
+      value="aClaimant.LastName"
       visible="true"/>
     <DateInput
       editable="true"
@@ -37,20 +68,44 @@
       label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth&quot;)"
       required="true"
       validationExpression="((anExposure.Claimant as Person).DateOfBirth == null or (anExposure.Claimant as Person).DateOfBirth &lt;= gw.api.upgrade.Coercions.makeDateFrom(&quot;today&quot;)) ? null : DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth.FutureError&quot;)"
-      value="(anExposure.Claimant as Person).DateOfBirth"/>
+      value="(anExposure.Claimant as Person).DateOfBirth"
+      __disabled="true"/>
+    <DateInput
+      editable="true"
+      id="mirDateOfBirth"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth&quot;)"
+      required="true"
+      validationExpression="((anExposure.Claimant as Person).DateOfBirth == null or (anExposure.Claimant as Person).DateOfBirth &lt;= gw.api.upgrade.Coercions.makeDateFrom(&quot;today&quot;)) ? null : DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth.FutureError&quot;)"
+      value="aClaimant.DateOfBirth"/>
     <PrivacyInput
       editable="true"
       encryptionExpression="(anExposure.Claimant as Person).maskTaxId(VALUE)"
       id="mirTaxID"
       label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
       required="true"
-      value="(anExposure.Claimant as Person).Person.TaxID"/>
+      value="(anExposure.Claimant as Person).Person.TaxID"
+      __disabled="true"/>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="(anExposure.Claimant as Person).maskTaxId(VALUE)"
+      id="mirTaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
+      required="true"
+      value="aClaimant.TaxID"/>
     <TypeKeyInput
       editable="true"
       id="mirGender"
       label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.Gender&quot;)"
       required="true"
       value="(anExposure.Claimant as Person).Gender"
+      valueType="typekey.GenderType"
+      __disabled="true"/>
+    <TypeKeyInput
+      editable="true"
+      id="mirGender"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.Gender&quot;)"
+      required="true"
+      value="aClaimant.Gender"
       valueType="typekey.GenderType"/>
   </InputSet>
 </PCF>

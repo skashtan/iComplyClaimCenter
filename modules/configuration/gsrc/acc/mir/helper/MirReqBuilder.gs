@@ -2,6 +2,7 @@ package acc.mir.helper
 
 uses acc.mir.clientspecific.MirClientSpecificICDEnhancement
 uses acc.mir.clientspecific.MirClientSpecificPolicyEnhancement
+uses acc.mir.clientspecific.MirClientSpecificTinEnhacement
 uses acc.mir.webservice.mirsubmitfs.dataservice.elements.SubmitClaim
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.Action
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.ClaimStatusCode
@@ -230,9 +231,8 @@ class MirReqBuilder {
 
     reqXml.Claim.StateOfVenue = claim.JurisdictionState.Code
     reqXml.Claim.SubmitAction = Action.Upsert
-    if (policy.policyholder.TaxID != null) {
-      reqXml.Claim.TIN = policy.policyholder.TaxID.remove("-") //TODO this should be the reporting companies TIN
-    }
+    reqXml.Claim.TIN = MirClientSpecificTinEnhacement.getTin(exposure)
+
 
     reqXml.Claim.TotalProposedSettlementAmount = mirReportable.TotalPropsedSettlementAmount as Double
     reqXml.Claim.SettlementStatus = mirReportable.SettlementStatus.Code
