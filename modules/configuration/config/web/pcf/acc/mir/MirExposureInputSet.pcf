@@ -87,7 +87,7 @@
       __disabled="true"/>
     <PrivacyInput
       editable="true"
-      encryptionExpression="(anExposure.Claimant as Person).maskTaxId(VALUE)"
+      encryptionExpression="aClaimant.maskTaxId(VALUE)"
       id="mirTaxID"
       label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
       required="true"
