@@ -227,8 +227,8 @@
       typelist="ContactRole"/>
   </typecode>
   <typecode
-    code="iComplyReperesenative"
-    name="iComply Representative"
+    code="MirReperesenative"
+    name="Mir Representative"
     priority="60">
     <category
       code="MirAttorney_Acc"
@@ -244,8 +244,8 @@
       typelist="ContactRole"/>
   </typecode>
   <typecode
-    code="iComplyRelationship"
-    name="iComply Relationship"
+    code="MirRelationship"
+    name="Mir Relationship"
     priority="70">
     <category
       code="MirFamilyMember_Acc"

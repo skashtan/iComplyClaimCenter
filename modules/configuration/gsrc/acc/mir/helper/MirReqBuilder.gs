@@ -25,7 +25,7 @@ class MirReqBuilder {
   static function buildMirSubmitXML(exposure : Exposure) : SubmitClaim {
 
     //variables
-    var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
     var reqXml = new SubmitClaim()
     var claim = exposure.Claim
     var claimant = (exposure.Claimant != null) ? exposure.Claimant as Person : exposure.Claim.ClaimantDenorm as Person
@@ -83,12 +83,14 @@ class MirReqBuilder {
       diagCodes.stream().limit(19).forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
 
-        // should be an icd code
+        // cause code
         if (reqXml.Claim.CauseCode == null && icdCode.toUpperCase().startsWith("S") || icdCode.toUpperCase().startsWith("T") ||
             icdCode.toUpperCase().startsWith("U") || icdCode.toUpperCase().startsWith("V") || icdCode.toUpperCase().startsWith("W") ||
             icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y") || icdCode.toUpperCase().startsWith("Z")) {
           reqXml.Claim.CauseCode = (reqXml.Claim.CauseCode == null || reqXml.Claim.CauseCode.length > 0) ? icdCode : reqXml.Claim.CauseCode
-        } else if (reqXml.Claim.DiagCode01 == null) {
+        }
+        // diagnoses codes
+        else if (reqXml.Claim.DiagCode01 == null) {
           reqXml.Claim.DiagCode01 = icdCode
         } else if (reqXml.Claim.DiagCode02 == null) {
           reqXml.Claim.DiagCode02 = icdCode
@@ -177,7 +179,6 @@ class MirReqBuilder {
     }
 
     var isPip = exposure.Coverage != null && exposure.Coverage.Type.Code.toUpperCase().contains("PIP")
-    print("is PIP: " + isPip)
     if (exposure.ExposureType == ExposureType.TC_MEDPAY ||
         (exposure.ExposureType == ExposureType.TC_GENERALDAMAGE && isPip) ||
         (exposure.ExposureType == ExposureType.TC_BODILYINJURYDAMAGE && isPip)) {
@@ -207,21 +208,21 @@ class MirReqBuilder {
     var filledRep = false
     exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
-        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIRATTORNEY_ACC , reqXml)
+        reqXml = addRepresentative(c.Contact, ContactRole.TC_MIRATTORNEY_ACC, reqXml)
       }
     })
     exposure.getClaimContactsByRole(ContactRole.TC_MIRGUARDIAN_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
-        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIRGUARDIAN_ACC , reqXml)
+        reqXml = addRepresentative(c.Contact, ContactRole.TC_MIRGUARDIAN_ACC, reqXml)
       }
     })
     exposure.getClaimContactsByRole(ContactRole.TC_MIROTHERREP_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
-        reqXml = addRepresentative( c.Contact, ContactRole.TC_MIROTHERREP_ACC , reqXml)
+        reqXml = addRepresentative(c.Contact, ContactRole.TC_MIROTHERREP_ACC, reqXml)
       }
     })
 
-   if (claimant.TaxID != null) {
+    if (claimant.TaxID != null) {
       reqXml.Claim.SSN = claimant.TaxID.remove("-")
     }
 
@@ -238,8 +239,8 @@ class MirReqBuilder {
     reqXml.Claim.SettlementStatus = mirReportable.SettlementStatus.Code
 
     // TPOCS
-    if (mirReportable != null) {
-      var tpocs = Arrays.asList(exposure.mirReportable_Acc.TPOC).sortBy(\r -> r.CreateTime)
+    if (mirReportable.TPOC != null) {
+      var tpocs = Arrays.asList(mirReportable.TPOC).sortBy(\r -> r.CreateTime)
 
       tpocs.forEach(\tpoc -> {
         if (reqXml.Claim.TpocAmount == null) {
@@ -268,32 +269,6 @@ class MirReqBuilder {
           reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         }
       })
-
-      /*if (tpocs.length >= 1) {
-        reqXml.Claim.TpocAmount = tpocs[0].TpocAmount as Double
-        reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDate)
-        reqXml.Claim.TpocDelayedFunding = (tpocs[0].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[0].TpocDelayedFunding) : null
-      }
-      if (tpocs.length >= 2) {
-        reqXml.Claim.TpocAmount2 = tpocs[1].TpocAmount as Double
-        reqXml.Claim.TpocDate2 = MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDate)
-        reqXml.Claim.TpocDelayedFunding2 = (tpocs[1].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[1].TpocDelayedFunding) : null
-      }
-      if (tpocs.length >= 3) {
-        reqXml.Claim.TpocAmount3 = tpocs[2].TpocAmount as Double
-        reqXml.Claim.TpocDate3 = MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDate)
-        reqXml.Claim.TpocDelayedFunding3 = (tpocs[2].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[2].TpocDelayedFunding) : null
-      }
-      if (tpocs.length >= 4) {
-        reqXml.Claim.TpocAmount4 = tpocs[3].TpocAmount as Double
-        reqXml.Claim.TpocDate4 = MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDate)
-        reqXml.Claim.TpocDelayedFunding4 = (tpocs[3].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[3].TpocDelayedFunding) : null
-      }
-      if (tpocs.length >= 5) {
-        reqXml.Claim.TpocAmount5 = tpocs[4].TpocAmount as Double
-        reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDate)
-        reqXml.Claim.TpocDelayedFunding5 = (tpocs[4].TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpocs[4].TpocDelayedFunding) : null
-      }*/
     }
     print(reqXml.asUTFString())
     return reqXml

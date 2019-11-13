@@ -493,7 +493,7 @@
   <typecode
     code="MirSubmitClaimsToFS"
     desc="Submit claim data to Franco Signor"
-    name="Submit Claims To iComply">
+    name="Submit Claims To Franco Signor">
     <category
       code="Schedulable"
       typelist="BatchProcessTypeUsage"/>

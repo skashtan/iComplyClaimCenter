@@ -55,7 +55,7 @@
         action="MirClaimDetailsPopup.push(Exposure)"
         available="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"
         hideIfEditable="true"
-        id="ExposureDetailScreen_iComplyScreenButton"
+        id="ExposureDetailScreen_MirScreenButton"
         label="DisplayKey.get(&quot;Accelerator.mir.card&quot;)"
         showConfirmMessage="false"
         visible="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"/>

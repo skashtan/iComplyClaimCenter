@@ -263,7 +263,7 @@
         def="ISODetailsDV(Exposure)"/>
     </Card>
     <Card
-      id="mirIcomplyCard"
+      id="mirCard"
       title="DisplayKey.get(&quot;Accelerator.mir.card&quot;)">
       <PanelRef
         def="MirClaimDetailsDV(Exposure)"/>

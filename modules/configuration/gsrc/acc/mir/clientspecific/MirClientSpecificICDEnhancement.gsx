@@ -20,7 +20,7 @@ enhancement MirClientSpecificICDEnhancement : MirReportable_Acc {
      *  This method may be updated as required to handle ICD indicators
      *  differently.
      */
-    var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
     var year = Integer.valueOf(props.getProperty("MIR.ICD.CONV.DATE.YYYY"))
     var month = Integer.valueOf(props.getProperty("MIR.ICD.CONV.DATE.MM"))
     var day = Integer.valueOf(props.getProperty("MIR.ICD.CONV.DATE.DD"))

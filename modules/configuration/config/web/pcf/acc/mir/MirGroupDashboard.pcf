@@ -19,7 +19,7 @@
       <DetailViewPanel>
         <InputColumn>
           <ListViewInput
-            def="MirGroupWorkplanLV(GroupInfo.Group.OpenActivities.where(\a -&gt; a.Subject.contains(&quot;iComply&quot;)))">
+            def="MirGroupWorkplanLV(GroupInfo.Group.OpenActivities.where(\a -&gt; a.Subject.contains(&quot;Franco Signor MMSEA&quot;)))">
             <Toolbar>
               <CheckedValuesToolbarButton
                 allCheckedRowsAction="pushAssignmentPopup(CheckedValues)"

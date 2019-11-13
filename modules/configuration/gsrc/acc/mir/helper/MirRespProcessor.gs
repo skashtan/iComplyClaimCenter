@@ -13,7 +13,7 @@ uses java.util.stream.Collectors
 class MirRespProcessor {
 
   static function processMirSubmitResp(exposure : Exposure, respXml : SubmitClaimResponse) {
-    var props = PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties")
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
     print(respXml.asUTFString())
     var claimStatus = respXml.SubmitClaimResult.StatusObject
     var respCodes = new ArrayList<ResponseCode>()

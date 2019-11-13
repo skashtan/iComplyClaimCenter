@@ -29,9 +29,9 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
 
   override function findTargets() : Iterator<Exposure> {
     // get props as required
-    var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.YYYY"))
-    var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.MM"))
-    var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/iComply.properties").getProperty("MIR.MIN.SEND.DATE.DD"))
+    var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.YYYY"))
+    var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.MM"))
+    var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.DD"))
     var minReportingDate = DateUtil.createDateInstance(minReportingMonth, minReportingDay, minReportingYear)
 
     // get exposures to process
