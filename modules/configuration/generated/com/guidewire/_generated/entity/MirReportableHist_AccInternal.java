@@ -4,12 +4,6 @@ package com.guidewire._generated.entity;
 @java.lang.SuppressWarnings(value = {"deprecation", "unchecked"})
 public interface MirReportableHist_AccInternal extends com.guidewire._generated.entity.RetireableInternal {
   /**
-   * Adds the given element to the MIRResponseCodes array. This is achieved by setting the parent foreign key to this entity instance.
-   */
-  public void addToMIRResponseCodes(entity.MirReportableRespCode_Acc element);
-  
-  
-  /**
    * Gets the value of the BeneficiaryStatus field.
    * Returns the beneficiary status
    */
@@ -42,14 +36,6 @@ public interface MirReportableHist_AccInternal extends com.guidewire._generated.
   
   
   public gw.pl.persistence.core.Key getMIRReportableID();
-  
-  
-  /**
-   * Gets the value of the MIRResponseCodes field.
-   * Array of MIRReportableResponseCodes
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirReportableRespCode_Acc[] getMIRResponseCodes();
   
   
   /**
@@ -109,20 +95,6 @@ public interface MirReportableHist_AccInternal extends com.guidewire._generated.
   
   
   /**
-   * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-   */
-  public void removeFromMIRResponseCodes(entity.MirReportableRespCode_Acc element);
-  
-  
-  /**
-   * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-   * @deprecated Please use the version that takes an entity instead.
-   */
-  @java.lang.Deprecated
-  public void removeFromMIRResponseCodes(gw.pl.persistence.core.Key elementID);
-  
-  
-  /**
    * Sets the value of the BeneficiaryStatus field.
    */
   public void setBeneficiaryStatus(java.lang.String value);
@@ -165,12 +137,6 @@ public interface MirReportableHist_AccInternal extends com.guidewire._generated.
   
   
   public void setMIRReportableID(gw.pl.persistence.core.Key value);
-  
-  
-  /**
-   * Sets the value of the MIRResponseCodes field.
-   */
-  public void setMIRResponseCodes(entity.MirReportableRespCode_Acc[] value);
   
   
   /**

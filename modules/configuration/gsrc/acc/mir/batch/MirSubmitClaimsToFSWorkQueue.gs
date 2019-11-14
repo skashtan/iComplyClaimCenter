@@ -20,18 +20,18 @@ uses gw.util.PropertiesFileAccess
  */
 //TODO change to BulkInsertWorkQueueBase **********************************************************************
 class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWorkItem_Acc> {
+  var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
 
   construct() {
     super(BatchProcessType.TC_MIRSUBMITCLAIMSTOFS, MirSubmitWorkItem_Acc, Exposure)
-
   }
 
 
   override function findTargets() : Iterator<Exposure> {
     // get props as required
-    var minReportingYear = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.YYYY"))
-    var minReportingMonth = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.MM"))
-    var minReportingDay = Integer.valueOf(PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.MIN.SEND.DATE.DD"))
+    var minReportingYear = Integer.valueOf(props.getProperty("MIR.MIN.SEND.DATE.YYYY"))
+    var minReportingMonth = Integer.valueOf(props.getProperty("MIR.MIN.SEND.DATE.MM"))
+    var minReportingDay = Integer.valueOf(props.getProperty("MIR.MIN.SEND.DATE.DD"))
     var minReportingDate = DateUtil.createDateInstance(minReportingMonth, minReportingDay, minReportingYear)
 
     // get exposures to process
@@ -72,9 +72,10 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
 
     var hasRREID = MirRREIDEnhancement.checkOrSetRREID(mirSubmitWorkItem_Acc.Exposure)
     if (!hasRREID) {
-  //     if (mirSubmitWorkItem_Acc.Exposure.Activities.countWhere(\elt -> elt.Status == ActivityStatus.TC_OPEN && elt.Description.contains("RREID") && elt.Subject.contains("iComply")) < 1){
+      var existingActivityCount = mirSubmitWorkItem_Acc.Exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == props.getProperty("MIR.ACTIVITY.CODE") && elt.Status == ActivityStatus.TC_OPEN)
+      if (existingActivityCount < 1){
         var activity = MirActivityEnhancement.createActivityWithBundle(mirSubmitWorkItem_Acc.Exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
-  //    }
+      }
       return
     }
 

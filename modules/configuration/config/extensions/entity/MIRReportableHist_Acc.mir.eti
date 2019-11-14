@@ -49,10 +49,6 @@
     fkentity="MirReportable_Acc"
     name="MIRReportable"
     nullok="true"/>
-  <array
-    arrayentity="MirReportableRespCode_Acc"
-    desc="Array of MIRReportableResponseCodes"
-    name="MIRResponseCodes"/>
   <column
     desc="Yes/No flag indicating the reportable status of the "
     name="IsCMSReportable"

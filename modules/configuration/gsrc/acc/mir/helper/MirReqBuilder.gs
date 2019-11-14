@@ -297,7 +297,7 @@ class MirReqBuilder {
       reqXml.Claim.C1Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C1Relation = relation
       reqXml.Claim.C1State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C1TIN = contact.TaxID
+      reqXml.Claim.C1TIN = contact.TaxID.remove("-")
       reqXml.Claim.C1ZipCode = contact.PrimaryAddress.PostalCode
     } else if (reqXml.Claim.C2Relation == null) {
       reqXml.Claim.C2Address1 = contact.PrimaryAddress.AddressLine1
@@ -311,7 +311,7 @@ class MirReqBuilder {
       reqXml.Claim.C2Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C2Relation = relation
       reqXml.Claim.C2State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C2TIN = contact.TaxID
+      reqXml.Claim.C2TIN = contact.TaxID.remove("-")
       reqXml.Claim.C2ZipCode = contact.PrimaryAddress.PostalCode
     }
     if (reqXml.Claim.C3Relation == null) {
@@ -326,7 +326,7 @@ class MirReqBuilder {
       reqXml.Claim.C3Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C3Relation = relation
       reqXml.Claim.C3State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C3TIN = contact.TaxID
+      reqXml.Claim.C3TIN = contact.TaxID.remove("-")
       reqXml.Claim.C3ZipCode = contact.PrimaryAddress.PostalCode
     }
     if (reqXml.Claim.C4Relation == null) {
@@ -341,7 +341,7 @@ class MirReqBuilder {
       reqXml.Claim.C4Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C4Relation = relation
       reqXml.Claim.C4State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C4TIN = contact.TaxID
+      reqXml.Claim.C4TIN = contact.TaxID.remove("-")
       reqXml.Claim.C4ZipCode = contact.PrimaryAddress.PostalCode
     }
     return reqXml
@@ -358,8 +358,8 @@ class MirReqBuilder {
       reqXml.Claim.RepIndicator = MirIndicator.getRepIndicator(type)
       reqXml.Claim.RepLastName = rep.Person.LastName
       reqXml.Claim.RepPhone = rep.WorkPhone
-      reqXml.Claim.RepState = rep.PrimaryAddress.City
-      reqXml.Claim.RepTIN = rep.Company.TaxID
+      reqXml.Claim.RepState = rep.PrimaryAddress.State.Code
+      reqXml.Claim.RepTIN = rep.Company.TaxID.remove("-")
       reqXml.Claim.RepZipCode = rep.PrimaryAddress.PostalCode
     }
     return reqXml

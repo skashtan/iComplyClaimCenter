@@ -22,10 +22,10 @@ class MirRespProcessor {
     }
 
     var mirReportable = exposure.mirReportable_Acc
-    var lastHist = (mirReportable.MirReportingHistorys != null) ? mirReportable.MirReportingHistorys.last() : null
+
 
     Transaction.runWithNewBundle(\bundle -> {
-
+      var lastHist = (mirReportable.MirReportingHistorys != null) ? mirReportable.MirReportingHistorys.last() : null
       var history = new MirReportableHist_Acc()
       bundle.add(history)
       if (claimStatus.ICN != null) {
@@ -59,40 +59,25 @@ class MirRespProcessor {
       if (respCodes.size() > 0 && existingActivityCount < 1) {
         var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
         activity.Priority = Priority.TC_NORMAL
-        activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(","))
+        activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
         activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
+        bundle.add(activity)
       }
 
-      for(c in respCodes) {
-        var respCode = new MirReportableRespCode_Acc()
-        bundle.add(respCode)
-
-        if (c.CmsCode != null) {
-          respCode.CMSCode = c.CmsCode
-        }
-        if (c.CodeType != null) {
-          respCode.CodeType = c.CodeType
-        }
-        if (c.Description != null) {
-          print(c.Description)
-          respCode.ResponseDescription = c.Description
-        }
-        if (c.Origin != null) {
-          respCode.CodeOrigin = c.Origin
-        }
-
-        history.addToMIRResponseCodes(respCode)
-
-      }
-
-     // history.setMIRResponseCodes(array)
-      //TODO does this equality work? - does it just use my fields or does it use the createtime etc?
-      // TODO add and lastHist is not null
-      // if(history.equals(lastHist)){
-      //   return
-      // }
-
-      bundle.add(history)
+      if (isEqual(history, lastHist)) {
+        return
+       }
     })
+  }
+
+  static function isEqual(hist1 : MirReportableHist_Acc, hist2 : MirReportableHist_Acc) : boolean{
+    var isEqual = false
+
+    if(hist1.BeneficiaryStatus == hist2.BeneficiaryStatus && hist1.IsReadyForCMS == hist2.IsReadyForCMS && hist1.LastCMSSubmit == hist2.LastCMSSubmit
+        && hist1.NextCMSSubmit == hist2.NextCMSSubmit){
+      isEqual = true
+    }
+    return isEqual
+
   }
 }

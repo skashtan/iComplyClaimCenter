@@ -33,8 +33,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.ILinkPropertyInfo> MIRREPORTABLE_PROP = new com.guidewire.commons.metadata.types.LinkPropertyInfoCache(TYPE, "MIRReportable");
   
-  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IArrayPropertyInfo> MIRRESPONSECODES_PROP = new com.guidewire.commons.metadata.types.ArrayPropertyInfoCache(TYPE, "MIRResponseCodes");
-  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> NEXTCMSQUERY_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "NextCMSQuery");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> NEXTCMSSUBMIT_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "NextCMSSubmit");
@@ -99,13 +97,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
       _internal  =  __createInternalInterface();
     };
     return _internal;
-  }
-  
-  /**
-   * Adds the given element to the MIRResponseCodes array. This is achieved by setting the parent foreign key to this entity instance.
-   */
-  public void addToMIRResponseCodes(entity.MirReportableRespCode_Acc element) {
-    __getInternalInterface().addArrayElement(MIRRESPONSECODES_PROP.get(), element);
   }
   
   /**
@@ -180,15 +171,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   @gw.internal.gosu.parser.ExtendedProperty
   public entity.MirReportable_Acc getMIRReportable() {
     return (entity.MirReportable_Acc)__getInternalInterface().getFieldValue(MIRREPORTABLE_PROP.get());
-  }
-  
-  /**
-   * Gets the value of the MIRResponseCodes field.
-   * Array of MIRReportableResponseCodes
-   */
-  @gw.internal.gosu.parser.ExtendedProperty
-  public entity.MirReportableRespCode_Acc[] getMIRResponseCodes() {
-    return (entity.MirReportableRespCode_Acc[])__getInternalInterface().getFieldValue(MIRRESPONSECODES_PROP.get());
   }
   
   /**
@@ -341,22 +323,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   }
   
   /**
-   * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-   */
-  public void removeFromMIRResponseCodes(entity.MirReportableRespCode_Acc element) {
-    __getInternalInterface().removeArrayElement(MIRRESPONSECODES_PROP.get(), element);
-  }
-  
-  /**
-   * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-   * @deprecated Please use the version that takes an entity instead.
-   */
-  @java.lang.Deprecated
-  public void removeFromMIRResponseCodes(gw.pl.persistence.core.Key elementID) {
-    __getInternalInterface().removeArrayElement(MIRRESPONSECODES_PROP.get(), elementID);
-  }
-  
-  /**
    * Sets the value of the BeanVersion field.
    */
   private void setBeanVersion(java.lang.Integer value) {
@@ -431,13 +397,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
    */
   public void setMIRReportable(entity.MirReportable_Acc value) {
     __getInternalInterface().setFieldValue(MIRREPORTABLE_PROP.get(), value);
-  }
-  
-  /**
-   * Sets the value of the MIRResponseCodes field.
-   */
-  public void setMIRResponseCodes(entity.MirReportableRespCode_Acc[] value) {
-    __getInternalInterface().setFieldValue(MIRRESPONSECODES_PROP.get(), value);
   }
   
   /**
@@ -518,13 +477,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
   private class _Internal extends com.guidewire.pl.persistence.code.BeanInternalBase implements com.guidewire._generated.entity.MirReportableHist_AccInternal {
     protected com.guidewire.pl.persistence.code.DelegateLoader __getDelegateManager() {
       return entity.MirReportableHist_Acc.this.__getDelegateManager();
-    }
-    
-    /**
-     * Adds the given element to the MIRResponseCodes array. This is achieved by setting the parent foreign key to this entity instance.
-     */
-    public void addToMIRResponseCodes(entity.MirReportableRespCode_Acc element) {
-      __getInternalInterface().addArrayElement(MIRRESPONSECODES_PROP.get(), element);
     }
     
     public boolean alwaysReserveID() {
@@ -647,15 +599,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
     
     public gw.pl.persistence.core.Key getMIRReportableID() {
       return (gw.pl.persistence.core.Key)getRawFieldValue(MIRREPORTABLE_PROP.get());
-    }
-    
-    /**
-     * Gets the value of the MIRResponseCodes field.
-     * Array of MIRReportableResponseCodes
-     */
-    @gw.internal.gosu.parser.ExtendedProperty
-    public entity.MirReportableRespCode_Acc[] getMIRResponseCodes() {
-      return (entity.MirReportableRespCode_Acc[])__getInternalInterface().getFieldValue(MIRRESPONSECODES_PROP.get());
     }
     
     /**
@@ -835,22 +778,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
       ((com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods")).remove();
     }
     
-    /**
-     * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-     */
-    public void removeFromMIRResponseCodes(entity.MirReportableRespCode_Acc element) {
-      __getInternalInterface().removeArrayElement(MIRRESPONSECODES_PROP.get(), element);
-    }
-    
-    /**
-     * Removes the given element from the MIRResponseCodes array. This is achieved by marking the element for removal.
-     * @deprecated Please use the version that takes an entity instead.
-     */
-    @java.lang.Deprecated
-    public void removeFromMIRResponseCodes(gw.pl.persistence.core.Key elementID) {
-      __getInternalInterface().removeArrayElement(MIRRESPONSECODES_PROP.get(), elementID);
-    }
-    
     public void removed() {
       ((com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods")).removed();
     }
@@ -942,13 +869,6 @@ public class MirReportableHist_Acc extends com.guidewire.pl.persistence.code.Bea
     
     public void setMIRReportableID(gw.pl.persistence.core.Key value) {
       setFieldValue(MIRREPORTABLE_PROP.get(), value);
-    }
-    
-    /**
-     * Sets the value of the MIRResponseCodes field.
-     */
-    public void setMIRResponseCodes(entity.MirReportableRespCode_Acc[] value) {
-      __getInternalInterface().setFieldValue(MIRRESPONSECODES_PROP.get(), value);
     }
     
     /**

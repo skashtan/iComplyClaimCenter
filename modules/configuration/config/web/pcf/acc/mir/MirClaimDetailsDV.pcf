@@ -15,19 +15,19 @@
     <InputColumn>
       <ButtonInput
         action="submitNow(anExposure)"
-        available="InEditMode == false &amp;&amp; anExposure.Claimant != null"
+        available="acc.mir.helper.MirReportableEnhancement.isBigFiveReady(anExposure)"
         boldValue="true"
+        hideIfEditable="true"
         id="mirSubmitNow"
+        label="DisplayKey.get(&quot;Accelerator.mir.label.submit&quot;)"
         value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>
-      <InputDivider/>
+      <InputDivider
+        __disabled="true"/>
       <Label
         id="mirResponseHeading"
-        label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "
-        visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0"/>
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.LatestRespCodes&quot;) "/>
       <ListViewInput
-        available="anMirReportable_Acc.MirReportingHistorys != null"
-        def="MirExposureResponseCodesLV(anMirReportable_Acc)"
-        visible="anMirReportable_Acc.MirReportingHistorys.last().MIRResponseCodes.length &gt;= 0">
+        def="MirExposureActivityLV(anExposure.Activities.where(\elt -&gt; elt.ActivityPattern.Code == gw.util.PropertiesFileAccess.getProperties(&quot;acc/mir/properties/MMSEA.properties&quot;).getProperty(&quot;MIR.ACTIVITY.CODE&quot;) &amp;&amp; elt.Status == ActivityStatus.TC_OPEN))">
         <Toolbar></Toolbar>
       </ListViewInput>
       <InputDivider/>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirExposureActivityLV">
+    <Require
+      name="activityList"
+      type="Activity[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Activity"
+      value="activityList"
+      valueType="entity.Activity[]">
+      <ToolbarFlag
+        condition="Activity.canAssign() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanAssignActivity"/>
+      <ToolbarFlag
+        condition="Activity.canSkip() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanSkipActivity"/>
+      <ToolbarFlag
+        condition="Activity.canComplete() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanCompleteActivity"/>
+      <ToolbarFlag
+        condition="Activity.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanApproveActivity"/>
+      <Row>
+        <TextCell
+          action="if(not gw.api.activity.ActivityUtil.isWorksheetOpen(Activity.ID)) ActivityDetailForward.goInWorkspace(Activity.Claim, Activity)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Subject&quot;)"
+          printWidth="0.18"
+          sortBy="Activity.Subject"
+          value="Activity.Subject"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.Description&quot;)"
+          printWidth="0.18"
+          sortBy="Activity.Subject"
+          value="Activity.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

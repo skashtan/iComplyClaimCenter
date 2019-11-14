@@ -15,7 +15,7 @@ enhancement MirClientSpecificTinEnhacement : MirReportable_Acc {
     //TODO
     /**
      *  Return the Federal Tax Identification Number of the "applicable plan" used the RRE
-     *  This must be a 9 digit numeric value
+     *  This must be a 9 digit numeric value without any special characters
      *
      */
 
