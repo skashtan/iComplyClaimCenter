@@ -25,14 +25,14 @@
     <LocationRef
       location="KeyMetrics()"/>
     <LocationRef
-      label="DisplayKey.get(&quot;Accelerator.mir.screen.Admin&quot;)"
-      location="MirAdmin()"/>
-    <LocationRef
       location="ReinsuranceThresholds()"/>
     <LocationRef
       location="WCParms()"/>
     <LocationRef
       location="WorkloadClassifications()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.mir.screen.Admin&quot;)"
+      location="MirAdmin()"/>
     <Code><![CDATA[static function canViewAnyBusinessSettings() : boolean {
   return perm.ActivityPattern.view 
       or perm.BusinessWeek.view 
