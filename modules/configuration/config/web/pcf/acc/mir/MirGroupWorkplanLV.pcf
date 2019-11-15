@@ -148,7 +148,6 @@
     return activityList
   } else if (GroupInfo.SubGroups.size() > 0) {
     GroupInfo.SubGroups.forEach(\g -> {
-      print(g.Name)
       activityList = activityList.concat(g.OpenActivities.where(\a -> a.ActivityPattern.Code == gw.util.PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.ACTIVITY.CODE")))
     })
   } else {
