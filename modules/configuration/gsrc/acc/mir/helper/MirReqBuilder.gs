@@ -209,16 +209,19 @@ class MirReqBuilder {
     exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
         reqXml = addRepresentative(c.Contact, ContactRole.TC_MIRATTORNEY_ACC, reqXml)
+        filledRep = true
       }
     })
     exposure.getClaimContactsByRole(ContactRole.TC_MIRGUARDIAN_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
         reqXml = addRepresentative(c.Contact, ContactRole.TC_MIRGUARDIAN_ACC, reqXml)
+        filledRep = true
       }
     })
     exposure.getClaimContactsByRole(ContactRole.TC_MIROTHERREP_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
         reqXml = addRepresentative(c.Contact, ContactRole.TC_MIROTHERREP_ACC, reqXml)
+        filledRep = true
       }
     })
 
@@ -292,12 +295,12 @@ class MirReqBuilder {
       reqXml.Claim.C1Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
       reqXml.Claim.C1FirstName = (isPerson) ? contact.Person.FirstName : null
       reqXml.Claim.C1LastName = (isPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C1MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C1MiddleInitial = (isPerson && contact.Person.MiddleName != null) ? contact.Person.MiddleName.charAt(0) : null
       reqXml.Claim.C1Organization = (!isPerson) ? contact.DisplayName : null
       reqXml.Claim.C1Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C1Relation = relation
       reqXml.Claim.C1State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C1TIN = contact.TaxID.remove("-")
+      reqXml.Claim.C1TIN = (contact.TaxID != null)? contact.TaxID.remove("-") : ""
       reqXml.Claim.C1ZipCode = contact.PrimaryAddress.PostalCode
     } else if (reqXml.Claim.C2Relation == null) {
       reqXml.Claim.C2Address1 = contact.PrimaryAddress.AddressLine1
@@ -306,42 +309,40 @@ class MirReqBuilder {
       reqXml.Claim.C2Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
       reqXml.Claim.C2FirstName = (isPerson) ? contact.Person.FirstName : null
       reqXml.Claim.C2LastName = (isPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C2MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C2MiddleInitial = (isPerson && contact.Person.MiddleName != null) ? contact.Person.MiddleName.charAt(0) : null
       reqXml.Claim.C2Organization = (!isPerson) ? contact.Name : null
       reqXml.Claim.C2Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C2Relation = relation
       reqXml.Claim.C2State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C2TIN = contact.TaxID.remove("-")
+      reqXml.Claim.C2TIN = (contact.TaxID != null)? contact.TaxID.remove("-") : ""
       reqXml.Claim.C2ZipCode = contact.PrimaryAddress.PostalCode
-    }
-    if (reqXml.Claim.C3Relation == null) {
+    } else if (reqXml.Claim.C3Relation == null) {
       reqXml.Claim.C3Address1 = contact.PrimaryAddress.AddressLine1
       reqXml.Claim.C3Address2 = contact.PrimaryAddress.AddressLine2
       reqXml.Claim.C3City = contact.PrimaryAddress.City
       reqXml.Claim.C3Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
       reqXml.Claim.C3FirstName = (isPerson) ? contact.Person.FirstName : null
       reqXml.Claim.C3LastName = (isPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C3MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C3MiddleInitial = (isPerson && contact.Person.MiddleName != null) ? contact.Person.MiddleName.charAt(0) : null
       reqXml.Claim.C3Organization = (!isPerson) ? contact.Name : null
       reqXml.Claim.C3Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C3Relation = relation
       reqXml.Claim.C3State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C3TIN = contact.TaxID.remove("-")
+      reqXml.Claim.C3TIN = (contact.TaxID != null)? contact.TaxID.remove("-") : ""
       reqXml.Claim.C3ZipCode = contact.PrimaryAddress.PostalCode
-    }
-    if (reqXml.Claim.C4Relation == null) {
+    } else if (reqXml.Claim.C4Relation == null) {
       reqXml.Claim.C4Address1 = contact.PrimaryAddress.AddressLine1
       reqXml.Claim.C4Address2 = contact.PrimaryAddress.AddressLine2
       reqXml.Claim.C4City = contact.PrimaryAddress.City
       reqXml.Claim.C4Ext = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhoneExtension : null
       reqXml.Claim.C4FirstName = (isPerson) ? contact.Person.FirstName : null
       reqXml.Claim.C4LastName = (isPerson) ? contact.Person.LastName : null
-      reqXml.Claim.C4MiddleInitial = (isPerson) ? contact.Person.MiddleName.charAt(0) : null
+      reqXml.Claim.C4MiddleInitial = (isPerson && contact.Person.MiddleName != null) ? contact.Person.MiddleName.charAt(0) : null
       reqXml.Claim.C4Organization = (!isPerson) ? contact.Name : null
       reqXml.Claim.C4Phone = (contact.PrimaryPhone == PrimaryPhoneType.TC_WORK) ? contact.WorkPhone : contact.HomePhone
       reqXml.Claim.C4Relation = relation
       reqXml.Claim.C4State = contact.PrimaryAddress.State.Code
-      reqXml.Claim.C4TIN = contact.TaxID.remove("-")
+      reqXml.Claim.C4TIN = (contact.TaxID != null)? contact.TaxID.remove("-") : ""
       reqXml.Claim.C4ZipCode = contact.PrimaryAddress.PostalCode
     }
     return reqXml
@@ -359,7 +360,7 @@ class MirReqBuilder {
       reqXml.Claim.RepLastName = rep.Person.LastName
       reqXml.Claim.RepPhone = rep.WorkPhone
       reqXml.Claim.RepState = rep.PrimaryAddress.State.Code
-      reqXml.Claim.RepTIN = rep.Company.TaxID.remove("-")
+      reqXml.Claim.RepTIN = (rep.Company.TaxID != null) ? rep.Company.TaxID.remove("-") : ""
       reqXml.Claim.RepZipCode = rep.PrimaryAddress.PostalCode
     }
     return reqXml
