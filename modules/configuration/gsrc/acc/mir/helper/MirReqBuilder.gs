@@ -1,8 +1,8 @@
 package acc.mir.helper
 
-uses acc.mir.clientspecific.MirClientSpecificICDEnhancement
-uses acc.mir.clientspecific.MirClientSpecificPolicyEnhancement
-uses acc.mir.clientspecific.MirClientSpecificTinEnhacement
+uses acc.mir.clientimplementation.MirClientSpecificICDImpl
+uses acc.mir.clientimplementation.MirClientSpecificPolicyImpl
+uses acc.mir.clientimplementation.MirClientSpecificTinImpl
 uses acc.mir.webservice.mirsubmitfs.dataservice.elements.SubmitClaim
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.Action
 uses acc.mir.webservice.mirsubmitfs.dataservice.enums.ClaimStatusCode
@@ -57,19 +57,19 @@ class MirReqBuilder {
     reqXml.Claim.ClaimStatus = claimStatus
 
     if (exposure.mirReportable_Acc.CMSDateOfIncident != null) {
-      reqXml.Claim.CmsDateOfIncident = MirDateConversionEnhancement.toXmlDateTime(exposure.mirReportable_Acc.CMSDateOfIncident)
+      reqXml.Claim.CmsDateOfIncident = MirDateConversionUtil.toXmlDateTime(exposure.mirReportable_Acc.CMSDateOfIncident)
     }
 
     if (claimant.DateOfBirth != null) {
-      reqXml.Claim.DOB = MirDateConversionEnhancement.toXmlDateTime(claimant.DateOfBirth)
+      reqXml.Claim.DOB = MirDateConversionUtil.toXmlDateTime(claimant.DateOfBirth)
     }
 
     if (exposure.Claim.CloseDate != null) {
-      reqXml.Claim.DateClosed = MirDateConversionEnhancement.toXmlDateTime(exposure.Claim.CloseDate)
+      reqXml.Claim.DateClosed = MirDateConversionUtil.toXmlDateTime(exposure.Claim.CloseDate)
     }
 
     if (claim.LossDate != null) {
-      reqXml.Claim.DateOfIncident = MirDateConversionEnhancement.toXmlDateTime(claim.LossDate)
+      reqXml.Claim.DateOfIncident = MirDateConversionUtil.toXmlDateTime(claim.LossDate)
     }
 
     if (policy.doingbusinessas.Name != null) {
@@ -145,7 +145,7 @@ class MirReqBuilder {
     reqXml.Claim.HICN = exposure.mirReportable_Acc.HICNOrMBI
     reqXml.Claim.Hold = exposure.mirReportable_Acc.HoldStatus
     reqXml.Claim.ICN = exposure.PublicID
-    reqXml.Claim.IcdIndicator = MirClientSpecificICDEnhancement.getICDIndicator(claim)
+    reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
     reqXml.Claim.LastName = claimant.LastName
     reqXml.Claim.LegalName = claim.Insured.Name
     if (claimant.MiddleName != null) {
@@ -160,7 +160,7 @@ class MirReqBuilder {
     for (transaction in transactions) {
       transactionSum = transactionSum + transaction.Amount
       if (transactionSum >= exposure.Coverage.ExposureLimit) {
-        reqXml.Claim.NoFaultExhaust = MirDateConversionEnhancement.toXmlDateTime(transaction.CreateTime)
+        reqXml.Claim.NoFaultExhaust = MirDateConversionUtil.toXmlDateTime(transaction.CreateTime)
         break
       }
     }
@@ -169,7 +169,7 @@ class MirReqBuilder {
       reqXml.Claim.ORM = TripleState.valueOf(exposure.mirReportable_Acc.HasORM)
     }
     if (exposure.mirReportable_Acc.ORMTermDate != null) {
-      reqXml.Claim.OrmTermDate = MirDateConversionEnhancement.toXmlDateTime(exposure.mirReportable_Acc.ORMTermDate)
+      reqXml.Claim.OrmTermDate = MirDateConversionUtil.toXmlDateTime(exposure.mirReportable_Acc.ORMTermDate)
     }
 
     if (mirReportable.ClaimOfficeCode != null) {
@@ -226,13 +226,13 @@ class MirReqBuilder {
       reqXml.Claim.SSN = claimant.TaxID.remove("-")
     }
 
-    reqXml.Claim.SelfInsured = MirClientSpecificPolicyEnhancement.isSelfInsured(exposure)
-    reqXml.Claim.SelfInsuredType = MirClientSpecificPolicyEnhancement.getSelfInsuredType(exposure)
+    reqXml.Claim.SelfInsured = MirClientSpecificPolicyImpl.isSelfInsured(exposure)
+    reqXml.Claim.SelfInsuredType = MirClientSpecificPolicyImpl.getSelfInsuredType(exposure)
 
 
     reqXml.Claim.StateOfVenue = claim.JurisdictionState.Code
     reqXml.Claim.SubmitAction = Action.Upsert
-    reqXml.Claim.TIN = MirClientSpecificTinEnhacement.getTin(exposure)
+    reqXml.Claim.TIN = MirClientSpecificTinImpl.getTin(exposure)
 
 
     reqXml.Claim.TotalProposedSettlementAmount = mirReportable.TotalPropsedSettlementAmount as Double
@@ -245,28 +245,28 @@ class MirReqBuilder {
       tpocs.forEach(\tpoc -> {
         if (reqXml.Claim.TpocAmount == null) {
           reqXml.Claim.TpocAmount = tpoc.TpocAmount as Double
-          reqXml.Claim.TpocDate = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         } else if (reqXml.Claim.TpocAmount2 == null) {
           reqXml.Claim.TpocAmount2 = tpoc.TpocAmount as Double
-          reqXml.Claim.TpocDate2 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding2 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate2 = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding2 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         } else if (reqXml.Claim.TpocAmount3 == null) {
           reqXml.Claim.TpocAmount3 = tpoc.TpocAmount as Double
-          reqXml.Claim.TpocDate3 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding3 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate3 = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding3 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         } else if (reqXml.Claim.TpocAmount4 == null) {
           reqXml.Claim.TpocAmount4 = tpoc.TpocAmount as Double
-          reqXml.Claim.TpocDate4 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding4 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate4 = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding4 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         } else if (reqXml.Claim.TpocAmount5 == null) {
           reqXml.Claim.TpocAmount5 = tpoc.TpocAmount as Double
-          reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate5 = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         } else {
           reqXml.Claim.TpocAmount5 = reqXml.Claim.TpocAmount5 + (tpoc.TpocAmount as Double)
-          reqXml.Claim.TpocDate5 = MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDate)
-          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionEnhancement.toXmlDateTime(tpoc.TpocDelayedFunding) : null
+          reqXml.Claim.TpocDate5 = MirDateConversionUtil.toXmlDateTime(tpoc.TpocDate)
+          reqXml.Claim.TpocDelayedFunding5 = (tpoc.TpocDelayedFunding != null) ? MirDateConversionUtil.toXmlDateTime(tpoc.TpocDelayedFunding) : null
         }
       })
     }
@@ -283,7 +283,7 @@ class MirReqBuilder {
 
   static function addNextRelationship(contact : entity.Contact, type : ContactRole, reqXml : SubmitClaim) : SubmitClaim {
     var isPerson = (contact typeis Person) ? true : false
-    var relation = MirIndicator.getRelationshipIndicator(type, isPerson)
+    var relation = MirIndicatorUtil.getRelationshipIndicator(type, isPerson)
 
     if (reqXml.Claim.C1Relation == null) {
       reqXml.Claim.C1Address1 = contact.PrimaryAddress.AddressLine1
@@ -355,7 +355,7 @@ class MirReqBuilder {
       reqXml.Claim.RepExt = rep.WorkPhoneExtension
       reqXml.Claim.RepFirmName = rep.Company.Name
       reqXml.Claim.RepFirstName = rep.Person.FirstName
-      reqXml.Claim.RepIndicator = MirIndicator.getRepIndicator(type)
+      reqXml.Claim.RepIndicator = MirIndicatorUtil.getRepIndicator(type)
       reqXml.Claim.RepLastName = rep.Person.LastName
       reqXml.Claim.RepPhone = rep.WorkPhone
       reqXml.Claim.RepState = rep.PrimaryAddress.State.Code

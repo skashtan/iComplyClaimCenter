@@ -1,7 +1,7 @@
 package acc.mir.batch
 
-uses acc.mir.helper.MirActivityEnhancement
-uses acc.mir.helper.MirRREIDEnhancement
+uses acc.mir.helper.MirActivityUtil
+uses acc.mir.helper.MirReportableUtil
 uses acc.mir.helper.MirReqBuilder
 uses acc.mir.helper.MirRespProcessor
 uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
@@ -26,7 +26,6 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
     super(BatchProcessType.TC_MIRSUBMITCLAIMSTOFS, MirSubmitWorkItem_Acc, Exposure)
   }
 
-
   override function findTargets() : Iterator<Exposure> {
     // get props as required
     var minReportingYear = Integer.valueOf(props.getProperty("MIR.MIN.SEND.DATE.YYYY"))
@@ -48,7 +47,7 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_MEDPAY)
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_WCINJURYDAMAGE)
     })
-    //exposureQuery.compare(Exposure#Claimant#Type, Relop.Equals, Contact.TC_PERSON) //TODO test this
+
     return exposureQuery.select().iterator()
   }
 
@@ -70,11 +69,11 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
       return
     }
 
-    var hasRREID = MirRREIDEnhancement.checkOrSetRREID(mirSubmitWorkItem_Acc.Exposure)
-    if (!hasRREID) {
-      var existingActivityCount = mirSubmitWorkItem_Acc.Exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == props.getProperty("MIR.ACTIVITY.CODE") && elt.Status == ActivityStatus.TC_OPEN)
+    var hasRREID = MirReportableUtil.checkOrSetRREID(mirSubmitWorkItem_Acc.Exposure)
+      if (!hasRREID) {
+      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(mirSubmitWorkItem_Acc.Exposure)
       if (existingActivityCount < 1){
-        var activity = MirActivityEnhancement.createActivityWithBundle(mirSubmitWorkItem_Acc.Exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
+        var activity = MirActivityUtil.createMirActivityWithBundle(mirSubmitWorkItem_Acc.Exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
       }
       return
     }

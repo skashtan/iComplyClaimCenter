@@ -1,13 +1,14 @@
 package acc.mir.helper
 
 uses gw.transaction.Transaction
+uses gw.util.PropertiesFileAccess
 
 /**
  * Created by sara.kashtan on 10/12/2019.
  */
-enhancement MirActivityEnhancement : Activity {
+class MirActivityUtil {
 
-  static function createActivityWithBundle(exposure : Exposure, addMessage : String) : Activity {
+  static function createMirActivityWithBundle(exposure : Exposure, addMessage : String) : Activity {
     var activity : Activity
     Transaction.runWithNewBundle(\bundle -> {
       activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
@@ -19,14 +20,20 @@ enhancement MirActivityEnhancement : Activity {
   }
 
 
-  static function createActivity(exposure : Exposure, addMessage : String) : Activity {
+  static function createMirActivity(exposure : Exposure, addMessage : String) : Activity {
     var activity = new Activity()
     activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
-    activity.Priority = Priority.TC_NORMAL
     activity.Description = activity.Description + "\n\n" + addMessage
     activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
 
     return activity
+  }
+
+  static function getOpenMirActivityCount(exposure : Exposure) : int {
+    var activityCode = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.ACTIVITY.CODE")
+    var count = exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == activityCode && elt.Status == ActivityStatus.TC_OPEN)
+
+    return count
   }
 
 }

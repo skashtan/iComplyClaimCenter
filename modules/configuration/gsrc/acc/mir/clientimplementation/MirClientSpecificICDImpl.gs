@@ -1,4 +1,4 @@
-package acc.mir.clientspecific
+package acc.mir.clientimplementation
 
 uses gw.api.util.DateUtil
 uses gw.util.PropertiesFileAccess
@@ -6,7 +6,7 @@ uses gw.util.PropertiesFileAccess
 /**
  * Created by sara.kashtan on 11/7/2019.
  */
-enhancement MirClientSpecificICDEnhancement : MirReportable_Acc {
+class MirClientSpecificICDImpl {
 
   /**
    *

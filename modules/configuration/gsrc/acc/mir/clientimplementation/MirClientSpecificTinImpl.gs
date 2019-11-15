@@ -1,9 +1,9 @@
-package acc.mir.clientspecific
+package acc.mir.clientimplementation
 
 /**
  * Created by sara.kashtan on 11/12/2019.
  */
-enhancement MirClientSpecificTinEnhacement : MirReportable_Acc {
+class MirClientSpecificTinImpl {
 
   /**
    * @param exposure

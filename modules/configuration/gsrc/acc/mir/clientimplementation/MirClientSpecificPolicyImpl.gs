@@ -1,9 +1,9 @@
-package acc.mir.clientspecific
+package acc.mir.clientimplementation
 
 /**
  * Created by sara.kashtan on 10/11/2019.
  */
-enhancement MirClientSpecificPolicyEnhancement : Policy {
+class MirClientSpecificPolicyImpl {
 
   static function isSelfInsured(exposure : Exposure) : String {
     var isSelfInsured = "N"

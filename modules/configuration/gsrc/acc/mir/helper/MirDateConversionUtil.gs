@@ -5,12 +5,12 @@ uses gw.xml.date.XmlDateTime
 /**
  * Created by Sara.Kashtan on 10/5/2019.
  */
-enhancement MirDateConversionEnhancement : XmlDateTime {
+class MirDateConversionUtil {
 
   /**
    * Converts java.util.date into XmlDateTime
    */
-  static  function toXmlDateTime(date : java.util.Date) : XmlDateTime {
+  static function toXmlDateTime(date : java.util.Date) : XmlDateTime {
 
     var _year = date.YearOfDate
     var _month = date.MonthOfYear
@@ -29,10 +29,11 @@ enhancement MirDateConversionEnhancement : XmlDateTime {
 
     return xmlDateTime
   }
+
   /**
    * Converts XmlDateTime into java.util.date
    */
-  static  function toJavaDate(date : XmlDateTime) : java.util.Date {
+  static function toJavaDate(date : XmlDateTime) : java.util.Date {
 
     var javaDate = date.toCalendar().getInstance().getTime()
 

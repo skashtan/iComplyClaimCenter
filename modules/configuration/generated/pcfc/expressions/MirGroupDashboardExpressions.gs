@@ -25,14 +25,14 @@ class MirGroupDashboardExpressions {
       pushAssignmentPopup(CheckedValues)
     }
     
-    // 'def' attribute on ListViewInput at MirGroupDashboard.pcf: line 22, column 138
+    // 'def' attribute on ListViewInput at MirGroupDashboard.pcf: line 22, column 49
     function def_onEnter_2 (def :  pcf.MirGroupWorkplanLV) : void {
-      def.onEnter(GroupInfo.Group.OpenActivities.where(\a -> a.Subject.contains("Franco Signor MMSEA")))
+      def.onEnter(GroupInfo)
     }
     
-    // 'def' attribute on ListViewInput at MirGroupDashboard.pcf: line 22, column 138
+    // 'def' attribute on ListViewInput at MirGroupDashboard.pcf: line 22, column 49
     function def_refreshVariables_3 (def :  pcf.MirGroupWorkplanLV) : void {
-      def.refreshVariables(GroupInfo.Group.OpenActivities.where(\a -> a.Subject.contains("Franco Signor MMSEA")))
+      def.refreshVariables(GroupInfo)
     }
     
     // 'initialValue' attribute on Variable at MirGroupDashboard.pcf: line 17, column 22

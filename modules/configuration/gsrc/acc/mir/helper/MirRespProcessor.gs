@@ -44,23 +44,25 @@ class MirRespProcessor {
         history.IsReadyForCMS = claimStatus.IsReady
       }
       if (claimStatus.LastCmsSubmitDate != null) {
-        history.LastCMSSubmit = MirDateConversionEnhancement.toJavaDate(claimStatus.LastCmsSubmitDate)
+        history.LastCMSSubmit = MirDateConversionUtil.toJavaDate(claimStatus.LastCmsSubmitDate)
       }
       if (claimStatus.NextReportDate != null) {
-        history.NextCMSSubmit = MirDateConversionEnhancement.toJavaDate(claimStatus.NextReportDate)
+        history.NextCMSSubmit = MirDateConversionUtil.toJavaDate(claimStatus.NextReportDate)
       }
       if (claimStatus.NextQueryDate != null) {
-        history.NextCMSQuery = MirDateConversionEnhancement.toJavaDate(claimStatus.NextQueryDate)
+        history.NextCMSQuery = MirDateConversionUtil.toJavaDate(claimStatus.NextQueryDate)
       }
 
       mirReportable.addToMirReportingHistorys(history)
 
-      var existingActivityCount = exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == props.getProperty("MIR.ACTIVITY.CODE") && elt.Status == ActivityStatus.TC_OPEN)
+      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
       if (respCodes.size() > 0 && existingActivityCount < 1) {
-        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
+        var message = "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
+        var activity = MirActivityUtil.createMirActivity(exposure, message)
+/*        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
         activity.Priority = Priority.TC_NORMAL
         activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
-        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
+        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)*/
         bundle.add(activity)
       }
 
@@ -70,7 +72,8 @@ class MirRespProcessor {
     })
   }
 
-  static function isEqual(hist1 : MirReportableHist_Acc, hist2 : MirReportableHist_Acc) : boolean{
+  //TODO
+  static function isEqual(hist1 : MirReportableHist_Acc, hist2 : MirReportableHist_Acc) : boolean {
     var isEqual = false
 
     if(hist1.BeneficiaryStatus == hist2.BeneficiaryStatus && hist1.IsReadyForCMS == hist2.IsReadyForCMS && hist1.LastCMSSubmit == hist2.LastCMSSubmit

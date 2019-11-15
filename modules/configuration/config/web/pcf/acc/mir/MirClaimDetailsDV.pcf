@@ -9,13 +9,13 @@
       name="anExposure"
       type="Exposure"/>
     <Variable
-      initialValue="anExposure.mirReportable_Acc != null ? anExposure.mirReportable_Acc : acc.mir.helper.MirReportableEnhancement.initMirReportable(anExposure)"
+      initialValue="anExposure.mirReportable_Acc != null ? anExposure.mirReportable_Acc : acc.mir.helper.MirReportableUtil.initMirReportable(anExposure)"
       name="anMirReportable_Acc"
       type="MirReportable_Acc"/>
     <InputColumn>
       <ButtonInput
         action="submitNow(anExposure)"
-        available="acc.mir.helper.MirReportableEnhancement.isBigFiveReady(anExposure)"
+        available="acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure)"
         boldValue="true"
         hideIfEditable="true"
         id="mirSubmitNow"

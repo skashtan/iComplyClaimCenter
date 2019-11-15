@@ -10,6 +10,14 @@
       valueType="entity.Activity"
       widget="MirGroupWorkplanLV"/>
     <Require
+      name="GroupInfo"
+      type="gw.api.dashboard.DashboardTreeGroupInfo"/>
+    <Variable
+      initialValue="gw.api.activity.WorkplanFilterSet.INSTANCE"
+      name="FilterSet"
+      type="gw.api.activity.WorkplanFilterSet"/>
+    <Variable
+      initialValue="getGroupActivities()"
       name="ActivityList"
       type="Activity[]"/>
     <RowIterator
@@ -30,6 +38,37 @@
       <ToolbarFlag
         condition="Activity.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
         name="CanApproveActivity"/>
+      <ToolbarFilter
+        name="WorkplanFilter">
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllOpenActivities&quot;)"
+          selectOnEnter="true"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewNotExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewNotExternalFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(7)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 7)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(14)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 14)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(30)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 30)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllOpenExternalActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenExternalActivities&quot;)"/>
+      </ToolbarFilter>
       <Row>
         <BooleanRadioCell
           enableSort="false"
@@ -103,5 +142,21 @@
           value="Activity.AssigneeDisplayString"/>
       </Row>
     </RowIterator>
+    <Code><![CDATA[function getGroupActivities() : Activity[] {
+  var activityList = new Activity[0]
+  if (GroupInfo.Group == null) {
+    return activityList
+  } else if (GroupInfo.SubGroups.size() > 0) {
+    GroupInfo.SubGroups.forEach(\g -> {
+      print(g.Name)
+      activityList = activityList.concat(g.OpenActivities.where(\a -> a.ActivityPattern.Code == gw.util.PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.ACTIVITY.CODE")))
+    })
+  } else {
+    activityList = GroupInfo.Group.OpenActivities.where(\a -> a.ActivityPattern.Code == gw.util.PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.ACTIVITY.CODE"))
+  }
+
+  return activityList
+}
+]]></Code>
   </ListViewPanel>
 </PCF>
