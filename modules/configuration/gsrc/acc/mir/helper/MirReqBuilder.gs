@@ -76,6 +76,8 @@ class MirReqBuilder {
       reqXml.Claim.DbaName = policy.doingbusinessas.Name
     }
 
+    //ICD Codes
+    reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
     var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
     if (diagCodesArray.length > 0) {
       var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortDescending()
@@ -83,13 +85,18 @@ class MirReqBuilder {
       diagCodes.stream().limit(19).forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
 
-        // cause code
-        if (reqXml.Claim.CauseCode == null && icdCode.toUpperCase().startsWith("S") || icdCode.toUpperCase().startsWith("T") ||
-            icdCode.toUpperCase().startsWith("U") || icdCode.toUpperCase().startsWith("V") || icdCode.toUpperCase().startsWith("W") ||
-            icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y") || icdCode.toUpperCase().startsWith("Z")) {
+        /**
+         * Alleged Cause of Injury, Incident or Illness
+         *   IF ICD Indicator is set to ‘9' Must begin with an ‘E’
+         *   If ICD Indicator is set to ‘0’ Must begin with V, W, X, or Y
+        */
+        if ((reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD9.IND") && icdCode.startsWith("E")) || (reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD10.IND") && (icdCode.toUpperCase().startsWith("V")
+            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")))) {
           reqXml.Claim.CauseCode = (reqXml.Claim.CauseCode == null || reqXml.Claim.CauseCode.length > 0) ? icdCode : reqXml.Claim.CauseCode
         }
-        // diagnoses codes
+        /**
+         * ICD diagnoses codes
+         */
         else if (reqXml.Claim.DiagCode01 == null) {
           reqXml.Claim.DiagCode01 = icdCode
         } else if (reqXml.Claim.DiagCode02 == null) {
@@ -145,7 +152,6 @@ class MirReqBuilder {
     reqXml.Claim.HICN = exposure.mirReportable_Acc.HICNOrMBI
     reqXml.Claim.Hold = exposure.mirReportable_Acc.HoldStatus
     reqXml.Claim.ICN = exposure.PublicID
-    reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
     reqXml.Claim.LastName = claimant.LastName
     reqXml.Claim.LegalName = claim.Insured.Name
     if (claimant.MiddleName != null) {
@@ -204,7 +210,7 @@ class MirReqBuilder {
     reqXml.Claim.PolicyNumber = policy.PolicyNumber
 
 
-    // cms only accepts one representative, once it is filled all others will be ignored
+    // CMS only accepts one representative, once it is filled all others will be ignored
     var filledRep = false
     exposure.getClaimContactsByRole(ContactRole.TC_MIRATTORNEY_ACC).toList().forEach(\c -> {
       if (filledRep == false) {
