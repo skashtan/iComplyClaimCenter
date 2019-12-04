@@ -30,6 +30,7 @@
       label="DisplayKey.get(&quot;Accelerator.mir.labels.icn&quot;)"
       value="anExposure.mirReportable_Acc.ICN"/>
     <TextInput
+      editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.HICNMBI&quot;)"
       id="mirHicn"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.hicn&quot;)"
