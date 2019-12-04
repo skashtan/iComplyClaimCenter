@@ -15,7 +15,7 @@
       label="DisplayKey.get(&quot;Accelerator.mir.label.orm&quot;)"
       required="anExposure.mirReportable_Acc.ORMTermDate != null"
       value="anExposure.mirReportable_Acc.HasORM"
-      valueRange="new String[]{acc.mir.mirsubmitfs.dataservice.enums.TripleState.Yes.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.No.Code, acc.mir.mirsubmitfs.dataservice.enums.TripleState.Unknown.Code}"
+      valueRange="new String[]{acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState.Yes.Code, acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState.No.Code, acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState.Unknown.Code}"
       valueType="java.lang.String"/>
     <DateInput
       editable="true"
