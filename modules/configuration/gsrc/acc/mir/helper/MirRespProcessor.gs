@@ -58,11 +58,10 @@ class MirRespProcessor {
       var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
       if (respCodes.size() > 0 && existingActivityCount < 1) {
         var message = "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
-        var activity = MirActivityUtil.createMirActivity(exposure, message)
-/*        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
+        var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
         activity.Priority = Priority.TC_NORMAL
         activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
-        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)*/
+        activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
         bundle.add(activity)
       }
 
