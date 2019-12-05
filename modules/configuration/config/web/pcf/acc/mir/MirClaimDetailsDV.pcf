@@ -15,7 +15,7 @@
     <InputColumn>
       <ButtonInput
         action="submitNow(anExposure)"
-        available="acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure)"
+        available="acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure) &amp;&amp; !anExposure.Claim.IncidentReport &amp;&amp; anExposure.Claim.Policy.Status == PolicyStatus.TC_INFORCE"
         boldValue="true"
         hideIfEditable="true"
         id="mirSubmitNow"
@@ -137,14 +137,16 @@
           id="MirOtherRelativeToolbar"/>
       </ListViewInput>
     </InputColumn>
-    <Code><![CDATA[uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue
+    <Code><![CDATA[uses java.time.Instant
+
+uses org.joda.time.DateTime
+
+uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue
 
 function submitNow(exposure : Exposure) {
   gw.transaction.Transaction.runWithNewBundle(\bundle -> {
     var workQueue = new MirSubmitClaimsToFSWorkQueue()
-    var workItem = workQueue.createWorkItem(exposure, bundle)
-    workItem.initialize()
-    workQueue.processWorkItem(workItem)
+    workQueue.processExposure(exposure)
   })
 }
 

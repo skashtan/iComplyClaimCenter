@@ -2,7 +2,7 @@
 <webservice-collection xmlns="http://guidewire.com/config/webservicecollection">
   <resources>
     <resource>
-      <url>file:/ClaimCenter2/DataService.xml</url>
+      <url>file:/C:/ClaimCenterTestInstall/DataService.xml</url>
     </resource>
   </resources>
   <settings>

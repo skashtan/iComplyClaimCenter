@@ -60,28 +60,32 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
 
   override function processWorkItem(mirSubmitWorkItem_Acc : MirSubmitWorkItem_Acc) {
     print("processing work item")
-    if (mirSubmitWorkItem_Acc.Exposure.Claim.IncidentReport || mirSubmitWorkItem_Acc.Exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
+    processExposure(mirSubmitWorkItem_Acc.Exposure)
+  }
+
+  function processExposure(exposure : Exposure) {
+    if (exposure.Claim.IncidentReport || exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
       return
     }
-    if (mirSubmitWorkItem_Acc.Exposure.Segment == ClaimSegment.TC_WC_MED_ONLY &&
-        FinancialsCalculations.getTotalIncurredGross().withExposure(mirSubmitWorkItem_Acc.Exposure).withCostCategory(CostCategory.TC_MEDICAL).Amount
-        < new CurrencyAmount(750)){
+    if (exposure.Segment == ClaimSegment.TC_WC_MED_ONLY &&
+        FinancialsCalculations.getTotalIncurredGross().withExposure(exposure).withCostCategory(CostCategory.TC_MEDICAL).Amount
+            < new CurrencyAmount(props.getProperty("MIR.TOTAL.INCURRED.MIN"))){
       return
     }
 
-    var hasRREID = MirReportableUtil.checkOrSetRREID(mirSubmitWorkItem_Acc.Exposure)
-      if (!hasRREID) {
-      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(mirSubmitWorkItem_Acc.Exposure)
+    var hasRREID = MirReportableUtil.checkOrSetRREID(exposure)
+    if (!hasRREID) {
+      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
       if (existingActivityCount < 1){
-        var activity = MirActivityUtil.createMirActivityWithBundle(mirSubmitWorkItem_Acc.Exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
+        var activity = MirActivityUtil.createMirActivityWithBundle(exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
       }
       return
     }
 
     var service = new DataService()
-    var reqXml = MirReqBuilder.buildMirSubmitXML(mirSubmitWorkItem_Acc.Exposure)
+    var reqXml = MirReqBuilder.buildMirSubmitXML(exposure)
     var resp = service.SubmitClaim(reqXml)
-    MirRespProcessor.processMirSubmitResp(mirSubmitWorkItem_Acc.Exposure, resp)
+    MirRespProcessor.processMirSubmitResp(exposure, resp)
     return
   }
 }
