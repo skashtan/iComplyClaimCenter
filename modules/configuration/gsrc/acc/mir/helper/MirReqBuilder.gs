@@ -144,7 +144,7 @@ class MirReqBuilder {
     var claimantGender = Gender.Unknown
     if (claimant.Gender == GenderType.TC_F) {
       claimantGender = Gender.Female
-    } else if (claimant.Gender == GenderType.TC_F) {
+    } else if (claimant.Gender == GenderType.TC_M) {
       claimantGender = Gender.Male
     }
     reqXml.Claim.Gender = claimantGender
