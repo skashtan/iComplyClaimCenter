@@ -78,7 +78,12 @@ class MirReqBuilder {
 
     //ICD Codes
     reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
+
     var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
+    if (exposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE){
+      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses)
+    }
+
     if (diagCodesArray.length > 0) {
       var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortDescending()
 
