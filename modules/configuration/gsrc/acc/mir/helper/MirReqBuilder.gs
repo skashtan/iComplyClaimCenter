@@ -87,7 +87,7 @@ class MirReqBuilder {
     if (diagCodesArray.length > 0) {
       var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortDescending()
 
-      diagCodes.stream().limit(19).forEach(\dc -> {
+      diagCodes.stream().forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
 
         /**
