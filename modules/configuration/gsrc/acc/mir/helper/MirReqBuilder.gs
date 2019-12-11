@@ -79,9 +79,9 @@ class MirReqBuilder {
     //ICD Codes
     reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
 
-    var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses().where(\elt -> elt.Compensable == true)
+    var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
     if (exposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE){
-      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses).where(\elt -> elt.Compensable == true)
+      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses)
     }
 
     if (diagCodesArray.length > 0) {
@@ -91,7 +91,7 @@ class MirReqBuilder {
         var icdCode = dc.ICDCode.Code.remove(".")
 
         if ((reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD9.IND") && icdCode.startsWith("E") || icdCode.startsWith("V")) || (reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD10.IND") && (icdCode.toUpperCase().startsWith("V")
-            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")|| icdCode.toUpperCase().startsWith("Z")))) {
+            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")|| icdCode.toUpperCase().startsWith("Z"))) || dc.Compensable != Boolean.TRUE) {
             //ignore these codes
         }
         /**
