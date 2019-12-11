@@ -79,30 +79,25 @@ class MirReqBuilder {
     //ICD Codes
     reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
 
-    var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
+    var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses().where(\elt -> elt.Compensable == true)
     if (exposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE){
-      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses)
+      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses).where(\elt -> elt.Compensable == true)
     }
 
     if (diagCodesArray.length > 0) {
-      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortDescending()
+      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortBy(\c -> c.CreateTime)
 
       diagCodes.stream().forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
 
-        /**
-         * Alleged Cause of Injury, Incident or Illness
-         *   IF ICD Indicator is set to ‘9' Must begin with an ‘E’
-         *   If ICD Indicator is set to ‘0’ Must begin with V, W, X, or Y
-        */
-        if ((reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD9.IND") && icdCode.startsWith("E")) || (reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD10.IND") && (icdCode.toUpperCase().startsWith("V")
-            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")))) {
-          reqXml.Claim.CauseCode = (reqXml.Claim.CauseCode == null || reqXml.Claim.CauseCode.length > 0) ? icdCode : reqXml.Claim.CauseCode
+        if ((reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD9.IND") && icdCode.startsWith("E") || icdCode.startsWith("V")) || (reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD10.IND") && (icdCode.toUpperCase().startsWith("V")
+            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")|| icdCode.toUpperCase().startsWith("Z")))) {
+            //ignore these codes
         }
         /**
          * ICD diagnoses codes
          */
-        else if (reqXml.Claim.DiagCode01 == null) {
+        else if (dc.IsPrimary) {
           reqXml.Claim.DiagCode01 = icdCode
         } else if (reqXml.Claim.DiagCode02 == null) {
           reqXml.Claim.DiagCode02 = icdCode
