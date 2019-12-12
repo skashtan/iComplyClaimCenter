@@ -27,7 +27,6 @@ class MirRespProcessor {
     Transaction.runWithNewBundle(\bundle -> {
       var lastHist = (mirReportable.MirReportingHistorys != null) ? mirReportable.MirReportingHistorys.last() : null
       var history = new MirReportableHist_Acc()
-      bundle.add(history)
       if (claimStatus.ICN != null) {
         exposure.mirReportable_Acc.ICN = claimStatus.ICN
       }
@@ -68,6 +67,9 @@ class MirRespProcessor {
       if (isEqual(history, lastHist)) {
         return
        }
+      bundle.add(exposure.mirReportable_Acc)
+      bundle.add(mirReportable.MirReportingHistorys.last())
+      //bundle.add(history)
     })
   }
 
