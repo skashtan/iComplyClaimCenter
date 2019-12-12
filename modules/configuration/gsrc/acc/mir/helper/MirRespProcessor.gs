@@ -69,7 +69,6 @@ class MirRespProcessor {
        }
       bundle.add(exposure.mirReportable_Acc)
       bundle.add(mirReportable.MirReportingHistorys.last())
-      //bundle.add(history)
     })
   }
 
