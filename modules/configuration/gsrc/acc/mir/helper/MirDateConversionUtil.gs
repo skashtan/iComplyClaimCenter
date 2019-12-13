@@ -27,6 +27,7 @@ class MirDateConversionUtil {
     xmlDateTime.Minute = _minute
     xmlDateTime.Second = _second
 
+    xmlDateTime.setTimeZone(TimeZone.getTimeZone("UTC"))
     return xmlDateTime
   }
 
