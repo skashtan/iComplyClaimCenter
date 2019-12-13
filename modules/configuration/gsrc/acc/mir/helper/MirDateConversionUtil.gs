@@ -20,6 +20,7 @@ class MirDateConversionUtil {
     var _second = date.Second
 
     var xmlDateTime = new XmlDateTime()
+    xmlDateTime.setTimeZone(null)
     xmlDateTime.Year = _year
     xmlDateTime.Month = _month
     xmlDateTime.Day = _day
@@ -27,7 +28,6 @@ class MirDateConversionUtil {
     xmlDateTime.Minute = _minute
     xmlDateTime.Second = _second
 
-    xmlDateTime.setTimeZone(null)
     return xmlDateTime
   }
 
