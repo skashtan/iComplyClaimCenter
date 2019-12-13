@@ -53,12 +53,12 @@
         visible="Exposure.ISOButtonsVisible"/>
       <ToolbarButton
         action="MirClaimDetailsPopup.push(Exposure)"
-        available="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"
+        available="(Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY) &amp;&amp; Exposure.Claimant typeis Person"
         hideIfEditable="true"
         id="ExposureDetailScreen_MirScreenButton"
         label="DisplayKey.get(&quot;Accelerator.mir.card&quot;)"
         showConfirmMessage="false"
-        visible="Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY"/>
+        visible="(Exposure.ExposureType == ExposureType.TC_GENERALDAMAGE || Exposure.ExposureType == ExposureType.TC_EMPLOYERLIABILITY) &amp;&amp; Exposure.Claimant typeis Person"/>
     </Toolbar>
     <PanelRef
       def="ExposureDetailDV(Exposure, unusedServiceRequests)"
