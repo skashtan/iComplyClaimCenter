@@ -67,6 +67,7 @@ class MirRespProcessor {
       if (isEqual(history, lastHist)) {
         return
        }
+      bundle.add(exposure)
       bundle.add(exposure.mirReportable_Acc)
       bundle.add(mirReportable.MirReportingHistorys.last())
     })
