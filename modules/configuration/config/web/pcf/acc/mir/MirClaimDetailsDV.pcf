@@ -136,6 +136,15 @@
         <Toolbar
           id="MirOtherRelativeToolbar"/>
       </ListViewInput>
+      <Label
+        id="mirICDHeading"
+        label="DisplayKey.get(&quot;Accelerator.mir.heading.icd&quot;) "/>
+      <ListViewInput
+        def="MirIcdLV(anExposure)">
+        <Toolbar
+          id="MirIcdToolbar"
+          visible="false"/>
+      </ListViewInput>
     </InputColumn>
     <Code><![CDATA[uses java.time.Instant
 

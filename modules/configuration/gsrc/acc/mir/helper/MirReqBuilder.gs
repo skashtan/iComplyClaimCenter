@@ -78,26 +78,14 @@ class MirReqBuilder {
 
     //ICD Codes
     reqXml.Claim.IcdIndicator = MirClientSpecificICDImpl.getICDIndicator(claim)
-
-    var diagCodesArray = exposure.InjuryIncident.getInjuryDiagnoses()
-    if (exposure.ExposureType == ExposureType.TC_WCINJURYDAMAGE){
-      diagCodesArray = diagCodesArray.concat(claim.Claim.ensureClaimInjuryIncident().InjuryDiagnoses)
-    }
-
-    if (diagCodesArray.length > 0) {
-      var diagCodes = Arrays.asList(diagCodesArray).sortBy(\r -> r.CreateTime).sortBy(\c -> c.CreateTime)
+    var diagCodes = MirReportableUtil.getMirICDCodes(exposure, reqXml.Claim.IcdIndicator)
 
       diagCodes.stream().forEach(\dc -> {
         var icdCode = dc.ICDCode.Code.remove(".")
-
-        if ((reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD9.IND") && icdCode.startsWith("E") || icdCode.startsWith("V")) || (reqXml.Claim.IcdIndicator == props.getProperty("MIR.ICD10.IND") && (icdCode.toUpperCase().startsWith("V")
-            || icdCode.toUpperCase().startsWith("W") || icdCode.toUpperCase().startsWith("X") || icdCode.toUpperCase().startsWith("Y")|| icdCode.toUpperCase().startsWith("Z"))) || dc.Compensable != Boolean.TRUE) {
-            //ignore these codes
-        }
         /**
          * ICD diagnoses codes
          */
-        else if (dc.IsPrimary) {
+        if (dc.IsPrimary) {
           reqXml.Claim.DiagCode01 = icdCode
         } else if (reqXml.Claim.DiagCode02 == null) {
           reqXml.Claim.DiagCode02 = icdCode
@@ -137,7 +125,7 @@ class MirReqBuilder {
           reqXml.Claim.DiagCode19 = icdCode
         }
       })
-    }
+   // }
 
     reqXml.Claim.FirstName = claimant.FirstName
 

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MirIcdLV">
+    <Require
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="acc.mir.helper.MirReportableUtil.getMirICDCodes(exposure, acc.mir.clientimplementation.MirClientSpecificICDImpl.getICDIndicator(exposure.Claim))"
+      name="icdList"
+      recalculateOnRefresh="true"
+      type="java.util.List&lt;entity.InjuryDiagnosis&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="MirICD"
+      value="icdList"
+      valueType="java.util.List&lt;entity.InjuryDiagnosis&gt;">
+      <Row>
+        <TextCell
+          id="MirICDPosition"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.icdPosition&quot;)"
+          value="String.valueOf(icdList.indexOf(MirICD) + 1)"/>
+        <TextCell
+          id="MirICDCode"
+          label="DisplayKey.get(&quot;Accelerator.mir.labels.ICD&quot;)"
+          value="MirICD.ICDCode.Code"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>
