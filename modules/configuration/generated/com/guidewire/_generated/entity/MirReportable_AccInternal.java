@@ -125,6 +125,14 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
   
   
   /**
+   * Gets the value of the TotalIncurredReached field.
+   * has the total incurred minimum amount been reached
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Boolean isTotalIncurredReached();
+  
+  
+  /**
    * Removes the given element from the MirReportingHistorys array. This is achieved by marking the element for removal.
    */
   public void removeFromMirReportingHistorys(entity.MirReportableHist_Acc element);
@@ -228,6 +236,12 @@ public interface MirReportable_AccInternal extends com.guidewire._generated.enti
    * Sets the value of the TPOC field.
    */
   public void setTPOC(entity.MirReportableTPOC_Acc[] value);
+  
+  
+  /**
+   * Sets the value of the TotalIncurredReached field.
+   */
+  public void setTotalIncurredReached(java.lang.Boolean value);
   
   
   /**

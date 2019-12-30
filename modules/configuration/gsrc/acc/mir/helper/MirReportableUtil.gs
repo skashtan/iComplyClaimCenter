@@ -1,5 +1,9 @@
 package acc.mir.helper
 
+uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
+uses gw.api.financials.CurrencyAmount
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.locale.DisplayKey
 uses gw.transaction.Transaction
 uses gw.util.PropertiesFileAccess
 
@@ -39,14 +43,15 @@ class MirReportableUtil {
    * processing without RREID
    */
   static function checkOrSetRREID(exposure : Exposure) : Boolean {
-
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
+    var intUsername = props.getProperty("INTEGRATION.USERNAME")
     var hasRREID = exposure.mirReportable_Acc.ClaimRREID != null
     var multiRREIDS = gw.api.database.Query.make(MirRREID_Acc).select().Count > 1
 
     if (!hasRREID && !multiRREIDS) {
       Transaction.runWithNewBundle(\bundle -> {
         exposure.mirReportable_Acc.ClaimRREID = gw.api.database.Query.make(MirRREID_Acc).select().AtMostOneRow.RREID
-      })
+      }, intUsername)
       hasRREID = true
     } else if (!hasRREID && multiRREIDS) {
       hasRREID = false
@@ -80,8 +85,32 @@ class MirReportableUtil {
     } else if (icdIndicator == props.getProperty("MIR.ICD10.IND")) {
       diagCodes.removeWhere(\elt -> elt.ICDCode.Code.toUpperCase().startsWith("V") || elt.ICDCode.Code.toUpperCase().startsWith("W") || elt.ICDCode.Code.toUpperCase().startsWith("X") || elt.ICDCode.Code.toUpperCase().startsWith("Y") || elt.ICDCode.Code.toUpperCase().startsWith("Z"))
     }
-    //diagCodes.rem.removeWhere(\elt -> elt.Compensable != Boolean.TRUE)
-
     return diagCodes
+  }
+
+  function processExposure(exposure : Exposure) {
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
+
+    if (exposure.Segment == ClaimSegment.TC_WC_MED_ONLY &&
+        FinancialsCalculations.getTotalIncurredGross().withExposure(exposure).withCostCategory(CostCategory.TC_MEDICAL).Amount
+            < new CurrencyAmount(props.getProperty("MIR.TOTAL.INCURRED.MIN"))) {
+      exposure.mirReportable_Acc.TotalIncurredReached = false
+      return
+    }
+
+    var hasRREID = MirReportableUtil.checkOrSetRREID(exposure)
+    if (!hasRREID) {
+      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
+      if (existingActivityCount < 1) {
+        var activity = MirActivityUtil.createMirActivityWithBundle(exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
+      }
+      return
+    }
+
+    var service = new DataService()
+    var reqXml = MirReqBuilder.buildMirSubmitXML(exposure)
+    var resp = service.SubmitClaim(reqXml)
+    MirRespProcessor.processMirSubmitResp(exposure, resp)
+    return
   }
 }

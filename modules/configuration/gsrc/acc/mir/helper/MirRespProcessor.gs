@@ -14,7 +14,7 @@ class MirRespProcessor {
 
   static function processMirSubmitResp(exposure : Exposure, respXml : SubmitClaimResponse) {
     var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
-    print(respXml.asUTFString())
+    var intUsername = props.getProperty("INTEGRATION.USERNAME")
     var claimStatus = respXml.SubmitClaimResult.StatusObject
     var respCodes = new ArrayList<ResponseCode>()
     if (claimStatus.ResponseCodes.ResponseCode != null) {
@@ -25,6 +25,10 @@ class MirRespProcessor {
 
 
     Transaction.runWithNewBundle(\bundle -> {
+      exposure = bundle.add(exposure)
+      exposure.mirReportable_Acc =  bundle.add(exposure.mirReportable_Acc)
+      //var historys = bundle.add(mirReportable.MirReportingHistorys)
+
       var lastHist = (mirReportable.MirReportingHistorys != null) ? mirReportable.MirReportingHistorys.last() : null
       var history = new MirReportableHist_Acc()
       if (claimStatus.ICN != null) {
@@ -58,22 +62,19 @@ class MirRespProcessor {
       if (respCodes.size() > 0 && existingActivityCount < 1) {
         var message = "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
         var activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(props.getProperty("MIR.ACTIVITY.CODE")))
+        bundle.add(activity)
         activity.Priority = Priority.TC_NORMAL
         activity.Description = activity.Description + "\n\n" + respCodes.stream().map(\elt -> elt.Description).collect(Collectors.joining(", "))
         activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
-        bundle.add(activity)
       }
 
       if (isEqual(history, lastHist)) {
         return
-       }
-      bundle.add(exposure)
-      bundle.add(exposure.mirReportable_Acc)
-      bundle.add(mirReportable.MirReportingHistorys.last())
-    })
+      }
+
+    }, intUsername)
   }
 
-  //TODO
   static function isEqual(hist1 : MirReportableHist_Acc, hist2 : MirReportableHist_Acc) : boolean {
     var isEqual = false
 

@@ -49,6 +49,8 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IArrayPropertyInfo> TPOC_PROP = new com.guidewire.commons.metadata.types.ArrayPropertyInfoCache(TYPE, "TPOC");
   
+  public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> TOTALINCURREDREACHED_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "TotalIncurredReached");
+  
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> TOTALPROPSEDSETTLEMENTAMOUNT_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "TotalPropsedSettlementAmount");
   
   public static final gw.pl.persistence.type.EntityPropertyInfoReference<gw.entity.IColumnPropertyInfo> UPDATETIME_PROP = new com.guidewire.commons.metadata.types.ColumnPropertyInfoCache(TYPE, "UpdateTime");
@@ -344,6 +346,15 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
   }
   
   /**
+   * Gets the value of the TotalIncurredReached field.
+   * has the total incurred minimum amount been reached
+   */
+  @gw.internal.gosu.parser.ExtendedProperty
+  public java.lang.Boolean isTotalIncurredReached() {
+    return (java.lang.Boolean)__getInternalInterface().getFieldValue(TOTALINCURREDREACHED_PROP.get());
+  }
+  
+  /**
    * Refreshes this bean with the latest database version.
    * <p/>
    * This method does nothing if the bean is edited or inserted in its current bundle. If the bean
@@ -536,6 +547,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
    */
   public void setTPOC(entity.MirReportableTPOC_Acc[] value) {
     __getInternalInterface().setFieldValue(TPOC_PROP.get(), value);
+  }
+  
+  /**
+   * Sets the value of the TotalIncurredReached field.
+   */
+  public void setTotalIncurredReached(java.lang.Boolean value) {
+    __getInternalInterface().setFieldValue(TOTALINCURREDREACHED_PROP.get(), value);
   }
   
   /**
@@ -870,6 +888,15 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
       return ((com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods")).isTemporary();
     }
     
+    /**
+     * Gets the value of the TotalIncurredReached field.
+     * has the total incurred minimum amount been reached
+     */
+    @gw.internal.gosu.parser.ExtendedProperty
+    public java.lang.Boolean isTotalIncurredReached() {
+      return (java.lang.Boolean)__getInternalInterface().getFieldValue(TOTALINCURREDREACHED_PROP.get());
+    }
+    
     public entity.KeyableBean overrideBundleAdd(gw.pl.persistence.core.Bundle bundle) {
       return ((com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods)__getDelegateManager().getImplementation("com.guidewire.pl.domain.persistence.core.impl.KeyableBeanInternalMethods")).overrideBundleAdd(bundle);
     }
@@ -1095,6 +1122,13 @@ public class MirReportable_Acc extends com.guidewire.pl.persistence.code.BeanBas
      */
     public void setTPOC(entity.MirReportableTPOC_Acc[] value) {
       __getInternalInterface().setFieldValue(TPOC_PROP.get(), value);
+    }
+    
+    /**
+     * Sets the value of the TotalIncurredReached field.
+     */
+    public void setTotalIncurredReached(java.lang.Boolean value) {
+      __getInternalInterface().setFieldValue(TOTALINCURREDREACHED_PROP.get(), value);
     }
     
     /**

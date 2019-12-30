@@ -7,6 +7,7 @@ uses acc.mir.helper.MirRespProcessor
 uses acc.mir.webservice.mirsubmitfs.dataservice.DataService
 uses gw.api.database.Query
 uses gw.api.database.Relop
+uses gw.api.filters.StandardQueryFilter
 uses gw.api.financials.CurrencyAmount
 uses gw.api.financials.FinancialsCalculations
 uses gw.api.locale.DisplayKey
@@ -14,6 +15,7 @@ uses gw.api.util.DateUtil
 uses gw.pl.persistence.core.Bundle
 uses gw.processes.WorkQueueBase
 uses gw.util.PropertiesFileAccess
+uses typekey.Contact
 
 /**
  * Created by Sara.Kashtan on 9/30/2019.
@@ -48,44 +50,24 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_WCINJURYDAMAGE)
     })
 
+    var claimant = exposureQuery.join(Exposure#ClaimantDenorm).compare(entity.Contact#Subtype, Relop.Equals, Contact.TC_PERSON)
+
+
+    var claim = exposureQuery.join(Exposure#Claim).compare(Claim#IncidentReport, Relop.Equals, false)
+    var policy = claim.join(Claim#Policy).compare(Policy#Status, Relop.Equals, PolicyStatus.TC_INFORCE)
+
     return exposureQuery.select().iterator()
   }
 
   override function createWorkItem(exposure : Exposure, safeBundle : Bundle) : MirSubmitWorkItem_Acc {
-    print("creating work item")
     var mirSubmitWorkItem_Acc = new MirSubmitWorkItem_Acc(safeBundle)
     mirSubmitWorkItem_Acc.Exposure = exposure
     return mirSubmitWorkItem_Acc
   }
 
   override function processWorkItem(mirSubmitWorkItem_Acc : MirSubmitWorkItem_Acc) {
-    print("processing work item")
-    processExposure(mirSubmitWorkItem_Acc.Exposure)
+    var util = new MirReportableUtil()
+    util.processExposure(mirSubmitWorkItem_Acc.Exposure)
   }
 
-  function processExposure(exposure : Exposure) {
-    if (exposure.Claim.IncidentReport || exposure.Claim.Policy.Status != PolicyStatus.TC_INFORCE) {
-      return
-    }
-    if (exposure.Segment == ClaimSegment.TC_WC_MED_ONLY &&
-        FinancialsCalculations.getTotalIncurredGross().withExposure(exposure).withCostCategory(CostCategory.TC_MEDICAL).Amount
-            < new CurrencyAmount(props.getProperty("MIR.TOTAL.INCURRED.MIN"))){
-      return
-    }
-
-    var hasRREID = MirReportableUtil.checkOrSetRREID(exposure)
-    if (!hasRREID) {
-      var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
-      if (existingActivityCount < 1){
-        var activity = MirActivityUtil.createMirActivityWithBundle(exposure, DisplayKey.get("Accelerator.mir.messages.RREID"))
-      }
-      return
-    }
-
-    var service = new DataService()
-    var reqXml = MirReqBuilder.buildMirSubmitXML(exposure)
-    var resp = service.SubmitClaim(reqXml)
-    MirRespProcessor.processMirSubmitResp(exposure, resp)
-    return
-  }
 }

@@ -226,35 +226,4 @@
       code="formerunderwriter"
       typelist="ContactRole"/>
   </typecode>
-  <typecode
-    code="MirReperesenative"
-    name="Mir Representative"
-    priority="60">
-    <category
-      code="MirAttorney_Acc"
-      typelist="ContactRole"/>
-    <category
-      code="MirGuardian_Acc"
-      typelist="ContactRole"/>
-    <category
-      code="MirPowerOfAttorney_Acc"
-      typelist="ContactRole"/>
-    <category
-      code="MirOtherRep_Acc"
-      typelist="ContactRole"/>
-  </typecode>
-  <typecode
-    code="MirRelationship"
-    name="Mir Relationship"
-    priority="70">
-    <category
-      code="MirFamilyMember_Acc"
-      typelist="ContactRole"/>
-    <category
-      code="MirEstate_Acc"
-      typelist="ContactRole"/>
-    <category
-      code="MirOtherRel_Acc"
-      typelist="ContactRole"/>
-  </typecode>
 </typelistextension>

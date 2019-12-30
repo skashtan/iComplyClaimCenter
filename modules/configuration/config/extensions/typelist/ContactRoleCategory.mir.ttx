@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- Special typelist used for categorizing ContactRoles -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  name="ContactRoleCategory">
+  <typecode
+    code="MirReperesenative_Acc"
+    name="Mir Representative"
+    priority="60">
+    <category
+      code="MirAttorney_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirGuardian_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirPowerOfAttorney_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirOtherRep_Acc"
+      typelist="ContactRole"/>
+  </typecode>
+  <typecode
+    code="MirRelationship_Acc"
+    name="Mir Relationship"
+    priority="70">
+    <category
+      code="MirFamilyMember_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirEstate_Acc"
+      typelist="ContactRole"/>
+    <category
+      code="MirOtherRel_Acc"
+      typelist="ContactRole"/>
+  </typecode>
+</typelistextension>

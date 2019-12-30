@@ -86,4 +86,9 @@
       name="size"
       value="9"/>
   </column>
+  <column
+    desc="has the total incurred minimum amount been reached"
+    name="TotalIncurredReached"
+    nullok="true"
+    type="bit"/>
 </entity>

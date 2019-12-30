@@ -9,28 +9,25 @@ uses gw.util.PropertiesFileAccess
 class MirActivityUtil {
 
   static function createMirActivityWithBundle(exposure : Exposure, addMessage : String) : Activity {
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
+
     var activity : Activity
+    var activityCode = props.getProperty("MIR.ACTIVITY.CODE")
+    var intUsername = props.getProperty("INTEGRATION.USERNAME")
+
     Transaction.runWithNewBundle(\bundle -> {
-      activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
+      activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(activityCode))
       activity.Description = activity.Description + "\n\n" + addMessage
       activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
       activity = bundle.add(activity)
-    })
-    return activity
-  }
-
-
-  static function createMirActivity(exposure : Exposure, addMessage : String) : Activity {
-    var activity = new Activity()
-    activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode("MirInfoRequestActivity"))
-    activity.Description = activity.Description + "\n\n" + addMessage
-    activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
-
+    }, intUsername)
     return activity
   }
 
   static function getOpenMirActivityCount(exposure : Exposure) : int {
-    var activityCode = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties").getProperty("MIR.ACTIVITY.CODE")
+    var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
+
+    var activityCode = props.getProperty("MIR.ACTIVITY.CODE")
     var count = exposure.Activities.countWhere(\elt -> elt.ActivityPattern.Code == activityCode && elt.Status == ActivityStatus.TC_OPEN)
 
     return count

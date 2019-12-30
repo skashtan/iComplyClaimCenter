@@ -50,24 +50,18 @@
       id="mirBeneficiaryStatus"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.beneficiarystatus&quot;)"
       value="anExposure.mirReportable_Acc.MirReportingHistorys.last().BeneficiaryStatus"/>
+    <BooleanDropdownInput
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.Reportable&quot;)"
+      id="mirMinMedIncurredStatus"
+      label="DisplayKey.get(&quot;Accelerator.mir.labels.minMedicalIncurred&quot;)"
+      value="anExposure.mirReportable_Acc.TotalIncurredReached"
+      visible="anExposure.mirReportable_Acc.TotalIncurredReached != null"/>
     <DateInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
       id="MirCMSDateOfIncident"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
       value="anExposure.mirReportable_Acc.CMSDateOfIncident"></DateInput>
-    <DateInput
-      editable="true"
-      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
-      id="MirNextQuery"
-      label="DisplayKey.get(&quot;Accelerator.mir.labels.NextQuery&quot;)"
-      value="anExposure.mirReportable_Acc.MirReportingHistorys.last().NextCMSQuery"></DateInput>
-    <DateInput
-      editable="true"
-      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
-      id="MirNextSubmit"
-      label="DisplayKey.get(&quot;Accelerator.mir.labels.NextSubmit&quot;)"
-      value="anExposure.mirReportable_Acc.MirReportingHistorys.last().NextCMSSubmit"></DateInput>
     <DateInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"

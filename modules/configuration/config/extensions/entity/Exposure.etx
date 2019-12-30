@@ -29,9 +29,4 @@
     arrayentity="ServiceRequest"
     desc="Service requests associated with this exposure."
     name="ServiceRequests"/>
-  <foreignkey
-    columnName="ICN"
-    fkentity="MIRReportable_Acc"
-    name="mirReportable_Acc"
-    nullok="true"/>
 </extension>

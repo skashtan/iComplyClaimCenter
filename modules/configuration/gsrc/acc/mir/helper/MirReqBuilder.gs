@@ -11,6 +11,7 @@ uses acc.mir.webservice.mirsubmitfs.dataservice.enums.TripleState
 uses entity.Exposure
 uses entity.Person
 uses gw.api.financials.CurrencyAmount
+uses gw.api.financials.FinancialsCalculations
 uses gw.pl.persistence.core.Key
 uses gw.util.PropertiesFileAccess
 uses typekey.Contact
@@ -23,7 +24,6 @@ uses typekey.ContactRole
 class MirReqBuilder {
 
   static function buildMirSubmitXML(exposure : Exposure) : SubmitClaim {
-
     //variables
     var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
     var reqXml = new SubmitClaim()
@@ -269,13 +269,6 @@ class MirReqBuilder {
     }
     print(reqXml.asUTFString())
     return reqXml
-  }
-
-  static function getContact(contactID : Long) : entity.Contact {
-    var bundle = Transaction.newBundle()
-    var key = new Key(entity.Contact, contactID)
-    var contact = bundle.loadBean(key) as entity.Contact
-    return contact
   }
 
   static function addNextRelationship(contact : entity.Contact, type : ContactRole, reqXml : SubmitClaim) : SubmitClaim {

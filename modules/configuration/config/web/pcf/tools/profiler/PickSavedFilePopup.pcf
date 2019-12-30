@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<PCF>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
   <!-- WARNING: Internal Guidewire file. DO NOT EDIT. -->
   <Popup
     alwaysInEditMode="true"

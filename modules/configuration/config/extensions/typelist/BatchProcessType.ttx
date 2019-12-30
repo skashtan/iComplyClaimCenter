@@ -490,15 +490,4 @@
       code="UIRunnable"
       typelist="BatchProcessTypeUsage"/>
   </typecode>
-  <typecode
-    code="MirSubmitClaimsToFS"
-    desc="Submit claim data to Franco Signor"
-    name="Submit Claims To Franco Signor">
-    <category
-      code="Schedulable"
-      typelist="BatchProcessTypeUsage"/>
-    <category
-      code="UIRunnable"
-      typelist="BatchProcessTypeUsage"/>
-  </typecode>
 </typelistextension>

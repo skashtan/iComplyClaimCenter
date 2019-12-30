@@ -146,7 +146,9 @@
           visible="false"/>
       </ListViewInput>
     </InputColumn>
-    <Code><![CDATA[uses java.time.Instant
+    <Code><![CDATA[uses acc.mir.helper.MirReportableUtil
+
+uses java.time.Instant
 
 uses org.joda.time.DateTime
 
@@ -154,8 +156,8 @@ uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue
 
 function submitNow(exposure : Exposure) {
   gw.transaction.Transaction.runWithNewBundle(\bundle -> {
-    var workQueue = new MirSubmitClaimsToFSWorkQueue()
-    workQueue.processExposure(exposure)
+    var util = new MirReportableUtil()
+    util.processExposure(exposure)
   })
 }
 
