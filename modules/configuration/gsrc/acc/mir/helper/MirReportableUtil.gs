@@ -44,14 +44,13 @@ class MirReportableUtil {
    */
   static function checkOrSetRREID(exposure : Exposure) : Boolean {
     var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
-    var intUsername = props.getProperty("INTEGRATION.USERNAME")
     var hasRREID = exposure.mirReportable_Acc.ClaimRREID != null
     var multiRREIDS = gw.api.database.Query.make(MirRREID_Acc).select().Count > 1
 
     if (!hasRREID && !multiRREIDS) {
       Transaction.runWithNewBundle(\bundle -> {
         exposure.mirReportable_Acc.ClaimRREID = gw.api.database.Query.make(MirRREID_Acc).select().AtMostOneRow.RREID
-      }, intUsername)
+      })
       hasRREID = true
     } else if (!hasRREID && multiRREIDS) {
       hasRREID = false

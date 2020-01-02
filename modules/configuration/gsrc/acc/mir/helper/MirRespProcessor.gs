@@ -14,7 +14,6 @@ class MirRespProcessor {
 
   static function processMirSubmitResp(exposure : Exposure, respXml : SubmitClaimResponse) {
     var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
-    var intUsername = props.getProperty("INTEGRATION.USERNAME")
     var claimStatus = respXml.SubmitClaimResult.StatusObject
     var respCodes = new ArrayList<ResponseCode>()
     if (claimStatus.ResponseCodes.ResponseCode != null) {
@@ -72,7 +71,7 @@ class MirRespProcessor {
         return
       }
 
-    }, intUsername)
+    })
   }
 
   static function isEqual(hist1 : MirReportableHist_Acc, hist2 : MirReportableHist_Acc) : boolean {

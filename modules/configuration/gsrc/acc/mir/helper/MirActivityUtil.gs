@@ -13,14 +13,13 @@ class MirActivityUtil {
 
     var activity : Activity
     var activityCode = props.getProperty("MIR.ACTIVITY.CODE")
-    var intUsername = props.getProperty("INTEGRATION.USERNAME")
 
     Transaction.runWithNewBundle(\bundle -> {
       activity = exposure.Claim.createActivityFromPattern(exposure, ActivityPattern.finder.getActivityPatternByCode(activityCode))
       activity.Description = activity.Description + "\n\n" + addMessage
       activity.assign(exposure.AssignedGroup, exposure.AssignedUser)
       activity = bundle.add(activity)
-    }, intUsername)
+    })
     return activity
   }
 
