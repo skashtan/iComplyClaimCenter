@@ -24,12 +24,10 @@ class MirRespProcessor {
 
 
     Transaction.runWithNewBundle(\bundle -> {
-      exposure = bundle.add(exposure)
-      exposure.mirReportable_Acc =  bundle.add(exposure.mirReportable_Acc)
-      //var historys = bundle.add(mirReportable.MirReportingHistorys)
+      var history = new MirReportableHist_Acc()
 
       var lastHist = (mirReportable.MirReportingHistorys != null) ? mirReportable.MirReportingHistorys.last() : null
-      var history = new MirReportableHist_Acc()
+
       if (claimStatus.ICN != null) {
         exposure.mirReportable_Acc.ICN = claimStatus.ICN
       }
@@ -55,7 +53,7 @@ class MirRespProcessor {
         history.NextCMSQuery = MirDateConversionUtil.toJavaDate(claimStatus.NextQueryDate)
       }
 
-      mirReportable.addToMirReportingHistorys(history)
+
 
       var existingActivityCount = MirActivityUtil.getOpenMirActivityCount(exposure)
       if (respCodes.size() > 0 && existingActivityCount < 1) {
@@ -71,6 +69,13 @@ class MirRespProcessor {
         return
       }
 
+      mirReportable.addToMirReportingHistorys(history)
+
+
+      bundle.add(exposure)
+      bundle.add(mirReportable)
+      bundle.add(mirReportable.MirReportingHistorys.last())
+     // bundle.add(history)
     })
   }
 
