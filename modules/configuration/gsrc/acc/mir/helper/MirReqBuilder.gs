@@ -267,7 +267,6 @@ class MirReqBuilder {
         }
       })
     }
-    print(reqXml.asUTFString())
     return reqXml
   }
 
