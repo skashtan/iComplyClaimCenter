@@ -16,9 +16,8 @@
       id="inputColumn">
       <ButtonInput
         action="submitNow(anExposure)"
-        available="acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure) &amp;&amp; !anExposure.Claim.IncidentReport &amp;&amp; anExposure.Claim.Policy.Status == PolicyStatus.TC_INFORCE"
+        available="InEditMode == true &amp;&amp; acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure) &amp;&amp; !anExposure.Claim.IncidentReport &amp;&amp; anExposure.Claim.Policy.Status == PolicyStatus.TC_INFORCE"
         boldValue="true"
-        hideIfEditable="true"
         id="mirSubmitNow"
         label="DisplayKey.get(&quot;Accelerator.mir.label.submit&quot;)"
         value="DisplayKey.get(&quot;Accelerator.mir.heading.SubmitNow&quot;) "/>
@@ -150,11 +149,8 @@
     <Code><![CDATA[uses acc.mir.helper.MirReportableUtil
 
 function submitNow(exposure : Exposure) {
-  gw.transaction.Transaction.runWithNewBundle(\bundle -> {
     var util = new MirReportableUtil()
     util.processExposure(exposure)
-    bundle.add(exposure)
-  })
 }
 
 ]]></Code>

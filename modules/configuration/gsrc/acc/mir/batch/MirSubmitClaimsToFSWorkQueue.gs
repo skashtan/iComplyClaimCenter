@@ -16,6 +16,8 @@ uses gw.pl.persistence.core.Bundle
 uses gw.processes.WorkQueueBase
 uses gw.util.PropertiesFileAccess
 uses typekey.Contact
+uses gw.transaction.Transaction
+
 
 /**
  * Created by Sara.Kashtan on 9/30/2019.
@@ -67,7 +69,10 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
 
   override function processWorkItem(mirSubmitWorkItem_Acc : MirSubmitWorkItem_Acc) {
     var util = new MirReportableUtil()
-    util.processExposure(mirSubmitWorkItem_Acc.Exposure)
+    Transaction.runWithNewBundle(\bundle -> {
+      var exposure = bundle.add(mirSubmitWorkItem_Acc.Exposure)
+      util.processExposure(exposure)
+    })
   }
 
 }
