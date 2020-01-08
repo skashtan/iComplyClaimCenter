@@ -12,7 +12,8 @@
       initialValue="anExposure.mirReportable_Acc != null ? anExposure.mirReportable_Acc : acc.mir.helper.MirReportableUtil.initMirReportable(anExposure)"
       name="anMirReportable_Acc"
       type="MirReportable_Acc"/>
-    <InputColumn>
+    <InputColumn
+      id="inputColumn">
       <ButtonInput
         action="submitNow(anExposure)"
         available="acc.mir.helper.MirReportableUtil.isBigFiveReady(anExposure) &amp;&amp; !anExposure.Claim.IncidentReport &amp;&amp; anExposure.Claim.Policy.Status == PolicyStatus.TC_INFORCE"
@@ -148,16 +149,11 @@
     </InputColumn>
     <Code><![CDATA[uses acc.mir.helper.MirReportableUtil
 
-uses java.time.Instant
-
-uses org.joda.time.DateTime
-
-uses acc.mir.batch.MirSubmitClaimsToFSWorkQueue
-
 function submitNow(exposure : Exposure) {
   gw.transaction.Transaction.runWithNewBundle(\bundle -> {
     var util = new MirReportableUtil()
     util.processExposure(exposure)
+    bundle.add(exposure)
   })
 }
 

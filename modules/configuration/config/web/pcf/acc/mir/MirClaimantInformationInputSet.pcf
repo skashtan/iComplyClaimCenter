@@ -14,7 +14,7 @@
       label="DisplayKey.get(&quot;Accelerator.mir.labels.rreid&quot;)"
       value="anExposure.mirReportable_Acc.ClaimRREID"
       valueRange="gw.api.database.Query.make(MirRREID_Acc).select().map(\elt -&gt; elt.RREID).toList()"
-      valueType="java.lang.String"/>
+      valueType="java.lang.String"></RangeInput>
     <RangeInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.OfficeCode&quot;)"
@@ -23,12 +23,12 @@
       value="anExposure.mirReportable_Acc.ClaimOfficeCode"
       valueRange="gw.api.database.Query.make(MirOfficeCode_Acc).select().map(\elt -&gt; elt.OfficeCode).toList()"
       valueType="java.lang.String"
-      visible="gw.api.database.Query.make(MirOfficeCode_Acc).select().Count &gt; 0"/>
+      visible="gw.api.database.Query.make(MirOfficeCode_Acc).select().Count &gt; 0"></RangeInput>
     <TextInput
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.ICN&quot;)"
       id="mirICN"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.icn&quot;)"
-      value="anExposure.mirReportable_Acc.ICN"/>
+      value="anExposure.mirReportable_Acc.ICN"></TextInput>
     <TextInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.HICNMBI&quot;)"
@@ -50,12 +50,6 @@
       id="mirBeneficiaryStatus"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.beneficiarystatus&quot;)"
       value="anExposure.mirReportable_Acc.MirReportingHistorys.last().BeneficiaryStatus"/>
-    <BooleanDropdownInput
-      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.Reportable&quot;)"
-      id="mirMinMedIncurredStatus"
-      label="DisplayKey.get(&quot;Accelerator.mir.labels.minMedicalIncurred&quot;)"
-      value="anExposure.mirReportable_Acc.TotalIncurredReached"
-      visible="anExposure.mirReportable_Acc.TotalIncurredReached != null"/>
     <DateInput
       editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
@@ -63,7 +57,6 @@
       label="DisplayKey.get(&quot;Accelerator.mir.labels.cmsDoi&quot;)"
       value="anExposure.mirReportable_Acc.CMSDateOfIncident"></DateInput>
     <DateInput
-      editable="true"
       helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.CMSDOI&quot;)"
       id="MirLastSubmit"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.LastSubmit&quot;)"
@@ -73,6 +66,21 @@
       id="mirIHoldStatus"
       label="DisplayKey.get(&quot;Accelerator.mir.labels.holdstatus&quot;) "
       value="anExposure.mirReportable_Acc.HoldStatus"/>
+    <RangeInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Accelerator.mir.definitions.orm&quot;)"
+      id="MirSettlementStatusInput"
+      label="DisplayKey.get(&quot;Accelerator.mir.label.settlementstatus&quot;)"
+      required="false"
+      value="anExposure.mirReportable_Acc.SettlementStatus"
+      valueRange="typekey.MirSettlementStatus_Acc.AllTypeKeys"
+      valueType="typekey.MirSettlementStatus_Acc"/>
+    <CurrencyInput
+      editable="true"
+      id="MirProposedSettlementAmountInput"
+      label="DisplayKey.get(&quot;Accelerator.mir.label.proposedsettlement&quot;)"
+      required="false"
+      value="anExposure.mirReportable_Acc.TotalPropsedSettlementAmount"/>
   </InputSet>
 </PCF>
 
