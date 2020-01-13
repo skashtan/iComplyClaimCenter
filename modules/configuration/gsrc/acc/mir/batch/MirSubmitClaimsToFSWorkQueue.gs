@@ -22,7 +22,6 @@ uses gw.transaction.Transaction
 /**
  * Created by Sara.Kashtan on 9/30/2019.
  */
-//TODO change to BulkInsertWorkQueueBase **********************************************************************
 class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWorkItem_Acc> {
   var props = PropertiesFileAccess.getProperties("acc/mir/properties/MMSEA.properties")
 
