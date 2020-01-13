@@ -71,7 +71,7 @@ class MirRespProcessor {
     var isEqual = false
 
     if (hist1.BeneficiaryStatus == hist2.BeneficiaryStatus && hist1.IsReadyForCMS == hist2.IsReadyForCMS && hist1.LastCMSSubmit == hist2.LastCMSSubmit
-        && hist1.NextCMSSubmit == hist2.NextCMSSubmit) {
+        && hist1.NextCMSSubmit == hist2.NextCMSSubmit && hist1.IsCMSReportable == hist2.IsCMSReportable && hist1.NextCMSQuery == hist2.NextCMSQuery) {
       isEqual = true
     }
     return isEqual
