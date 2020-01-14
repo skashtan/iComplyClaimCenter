@@ -51,8 +51,10 @@ class MirSubmitClaimsToFSWorkQueue extends WorkQueueBase<Exposure, MirSubmitWork
       criteria.compare(Exposure#ExposureType, Relop.Equals, ExposureType.TC_WCINJURYDAMAGE)
     })
 
-    var claimant = exposureQuery.join(Exposure#ClaimantDenorm).compare(entity.Contact#Subtype, Relop.Equals, Contact.TC_PERSON)
-
+    var claimantDenorm = exposureQuery.outerJoin(Exposure#ClaimantDenorm).or(\criteria -> {
+      criteria.compare(entity.Contact#Subtype, Relop.Equals, Contact.TC_PERSON)
+      criteria.compare(entity.Contact#Subtype, Relop.Equals, null)
+    })
 
     var claim = exposureQuery.join(Exposure#Claim).compare(Claim#IncidentReport, Relop.Equals, false)
     var policy = claim.join(Claim#Policy).compare(Policy#Status, Relop.Equals, PolicyStatus.TC_INFORCE)
